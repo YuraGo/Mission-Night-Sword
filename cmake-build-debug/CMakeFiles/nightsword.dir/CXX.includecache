@@ -7,9 +7,9 @@
 #IncludeRegexTransform: 
 
 /home/dartmoor/Desktop/C++/nightsword/Graphics/graphics.h
-SFML/Window.hpp
--
 SFML/Graphics.hpp
+-
+vector
 -
 
 /home/dartmoor/Desktop/C++/nightsword/characters/characters.h
@@ -52,5 +52,15 @@ iostream
 characters/characters.h
 /home/dartmoor/Desktop/C++/nightsword/characters/characters.h
 stdio.h
+-
+cstdlib
+-
+vector
+-
+algorithm
+-
+sstream
+-
+random
 -
 

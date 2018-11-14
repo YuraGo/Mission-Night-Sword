@@ -21,15 +21,23 @@ int main() {
     overview.setCenter(320,240);
 
     sf::RectangleShape cursor(sf::Vector2f(32.f, 32.f));
-    cursor.setFillColor(sf::Color(0,255,0,60));
+    cursor.setFillColor(sf::Color(0,255,0,40));
     sf::CircleShape radiusOfMove(0);
-
 
     sf::Font font;
     font.loadFromFile("CyrilicOld.TTF");
 
     sf::Text message("",font,20);
     message.setFillColor(sf::Color::Red);
+
+    sf::Text roundOver("",font,45);
+    roundOver.setFillColor(sf::Color::Blue);
+
+    sf::RectangleShape tableInfo(sf::Vector2f(200,128));
+    tableInfo.setFillColor(sf::Color::Black);
+    sf::Text heroInfo1("", font, 18);
+    sf::Text heroInfo2("", font, 18);
+    sf::Text heroInfo3("", font, 18);
 
     sf::Image mapImage;
     mapImage.loadFromFile("mapTexture.png");
@@ -44,9 +52,10 @@ int main() {
     Hero player1("warrior1.png",32,32,55,55);
     Hero player2("warrior1.png",64,64,55,55);
     player1.setHero("Bob",20,50,5,8,80);
-    player2.setHero("Silver",20,50,10,10,80);
+    player2.setHero("Silver",20,50,6,10,40);
 
-
+    int choiseMan=0;
+    int doorOpen =0;
 
     mans.push_back(player1);
     mans.push_back(player2);
@@ -58,6 +67,10 @@ int main() {
         time /= 800;
         // Обрабатываем события в цикле
         sf::Event event;
+
+
+
+
         while(window.pollEvent(event)) {
 
             switch (event.type) {
@@ -69,16 +82,22 @@ int main() {
                         window.close();
 
 
-                    if (event.key.code == sf::Keyboard::Num1) {
+                    if (event.key.code == sf::Keyboard::Num1 && mans[0].getHP() > 0) {
+                        choiseMan=0;
                         overview.setCenter(mans[0].sprite.getPosition().x, mans[0].sprite.getPosition().y);
                         cursor.setPosition(mans[0].sprite.getPosition().x, mans[0].sprite.getPosition().y);
                         whereGo(radiusOfMove, mans[0].getSpeed(),mans[0].sprite.getPosition().x, mans[0].sprite.getPosition().y);
+                        tableInfodraw(tableInfo, heroInfo1,heroInfo2,heroInfo3, overview.getCenter().x,overview.getCenter().y , &mans[choiseMan]);
                     }
-                    if (event.key.code == sf::Keyboard::Num2) {
+                    if (event.key.code == sf::Keyboard::Num2 && mans[1].getHP() > 0) {
+                        choiseMan=1;
                         overview.setCenter(mans[1].sprite.getPosition().x, mans[1].sprite.getPosition().y);
                         cursor.setPosition(mans[1].sprite.getPosition().x, mans[1].sprite.getPosition().y);
                         whereGo(radiusOfMove, mans[1].getSpeed(), mans[1].sprite.getPosition().x, mans[1].sprite.getPosition().y);
+                        tableInfodraw(tableInfo, heroInfo1,heroInfo2,heroInfo3, overview.getCenter().x,overview.getCenter().y , &mans[choiseMan]);
                     }
+
+
 
 //                    if (event.key.code == sf::Keyboard::Space) {
 //                        if( pathIsCorrect( mans[0].sprite.getPosition().x,mans[0].sprite.getPosition().y,
@@ -116,35 +135,62 @@ int main() {
 
 
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right){
-            //sf::Vector2f pos = cursor.getPosition();
+            if( tileInfo(cursor.getPosition().x+32,cursor.getPosition().y, nullptr) )
             cursorMove(cursor, 'r');
         }
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left){
-            //sf::Vector2f pos = cursor.getPosition();
+            if( tileInfo(cursor.getPosition().x-32,cursor.getPosition().y, nullptr) )
             cursorMove(cursor, 'l');
         }
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up){
-            //sf::Vector2f pos = cursor.getPosition();
+            if( tileInfo(cursor.getPosition().x,cursor.getPosition().y-32, nullptr) )
             cursorMove(cursor, 'u');
         }
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down){
-            //sf::Vector2f pos = cursor.getPosition();
+            if( tileInfo(cursor.getPosition().x,cursor.getPosition().y+32, nullptr) )
             cursorMove(cursor, 'd');
         }
 
+        if (event.key.code == sf::Keyboard::F && mans[choiseMan].getStep() > 0) {
+            bool damageCheck = damageCorrect(cursor.getPosition().x, cursor.getPosition().y, mans, mans[choiseMan].getAccuracy());
+            //mans[1].setHP(5);
+            if(damageCheck){
+            message.setString("Damage is" + std::to_string(10));
+            message.setPosition(cursor.getPosition().x, cursor.getPosition().y-20);
+            }else message.setString("Miss...");
+            mans[choiseMan].setStep(-1);
+        }
+        if (event.key.code == sf::Keyboard::D ) {
+
+            doorOpen++;
+            if(openDoor(cursor.getPosition().x,cursor.getPosition().y,
+            mans[choiseMan].sprite.getPosition().x,mans[choiseMan].sprite.getPosition().y)){
+                mans[choiseMan].setStep(-1);
+            }
+
+        }
+
+
+
         if (event.key.code == sf::Keyboard::Space) {
 
-           // bool YouCan = pathIsCorrect(mans[0].sprite.getPosition().x,mans[0].sprite.getPosition().y,
-                                //cursor.getPosition().x , cursor.getPosition().y);
+            //bool YouCan = pathIsCorrect(mans[0].sprite.getPosition().x,mans[0].sprite.getPosition().y,
+            //                    cursor.getPosition().x , cursor.getPosition().y, mans[0].getSpeed());
+            bool tileFree = tileInfo(cursor.getPosition().x,cursor.getPosition().y, &mans);
+            bool lenghOfMove = mans[choiseMan].characterMove(cursor.getPosition().x,cursor.getPosition().y);
+//            if(YouCan)
+//            std::cout<<"true: " << std::endl;
+//            else std::cout<<"false: " << std::endl;
 
-            if(cursor.getPosition().x == mans[1].sprite.getPosition().x  && cursor.getPosition().y == mans[1].sprite.getPosition().y ){
-                std::cout<<"I cant"<<std::endl;
+            if( !tileFree || !lenghOfMove || mans[choiseMan].getStep() <= 0){
                 message.setString("I cant");
-                message.setPosition( mans[0].sprite.getPosition().x , mans[0].sprite.getPosition().y-20 );
-            }else {
+                message.setPosition( mans[choiseMan].sprite.getPosition().x , mans[choiseMan].sprite.getPosition().y-20 );
+            }else{
                 message.setString("");
-                mans[0].characterMove(cursor.getPosition().x, cursor.getPosition().y);
-                mans[0].setPlayerCordinate(cursor.getPosition().x, cursor.getPosition().y);
+                //mans[0].characterMove(cursor.getPosition().x, cursor.getPosition().y);
+                mans[choiseMan].sprite.setPosition(cursor.getPosition().x, cursor.getPosition().y);
+                mans[choiseMan].setPlayerCordinate(cursor.getPosition().x, cursor.getPosition().y);
+                mans[choiseMan].setStep(-1);
             }
 
 
@@ -153,22 +199,43 @@ int main() {
         // Очистка
         window.clear(sf::Color(176, 147, 60));
 
-        for(int i=0;i<H;i++){
-            for(int j=0;j<W;j++) {
+//        if(doorOpen==0) {
+//            for (int i = 0; i < H; i++) {
+//                for (int j = 0; j < W; j++) {
+//
+//                    if (TileMap[i][j] == '0') s_map.setTextureRect(sf::IntRect(384, 128, 416, 160)); // 8W 5H
+//                    if (TileMap[i][j] == 'D') s_map.setTextureRect(sf::IntRect(160, 96, 192, 128));
+//                    if (TileMap[i][j] == ' ') s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
+//                    //if(MapHelper[i][j] == 'F') s_map.setTextureRect(sf::IntRect(128,160,160,192));
+//
+//                    s_map.setPosition(j * 32, i * 32);
+//                    window.draw(s_map);
+//                }
+//            }
+//        }
 
-                if(TileMap[i][j] == 'W') s_map.setTextureRect(sf::IntRect(384,128,416,160)); // 8W 5H
-                if(TileMap[i][j] == 'D') s_map.setTextureRect(sf::IntRect(160,96,192,128));
-                if(TileMap[i][j] == ' ') s_map.setTextureRect(sf::IntRect(128,224,160,256));
-                if(TileMap[i][j] == 'F') s_map.setTextureRect(sf::IntRect(128,160,160,192));
+            for (int i = 0; i < H; i++) {
+                for (int j = 0; j < W; j++) {
 
-                s_map.setPosition(j*32,i*32);
-                window.draw(s_map);
+                    if (TileMap[i][j] == '0') s_map.setTextureRect(sf::IntRect(384, 128, 416, 160)); // 8W 5H
+                    if (TileMap[i][j] == 'D'){
+                        if(doorOpen == 1) s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
+                        else s_map.setTextureRect(sf::IntRect(160, 96, 192, 128));
+                    }
+                    if (TileMap[i][j] == ' ') s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
+                    //if(MapHelper[i][j] == 'F') s_map.setTextureRect(sf::IntRect(128,160,160,192));
+
+                    s_map.setPosition(j * 32, i * 32);
+                    window.draw(s_map);
+                }
             }
-        }
-//        std::cout<<"X: " << player1.sprite.getPosition().x << "   "<< player1.cordX<<std::endl;
-//        std::cout<<"Y: " << player1.sprite.getPosition().y << std::endl;
 
-        mans[0].update(time);
+
+
+        //std::cout<<"X: " << player1.sprite.getPosition().x << "   "<< player1.cordX<<std::endl;
+        //std::cout<<"Y: " << player1.sprite.getPosition().y << std::endl;
+        bool endOfRound;
+        //mans[0].update(time);
         clock.restart();
         // Тут будут вызываться функции обновления и отрисовки объектов
         // Отрисовка
@@ -178,6 +245,18 @@ int main() {
         window.draw(i.sprite);
 
 
+        if(mans[0].getStep() <= 0 && mans[1].getStep() <= 0) {
+            roundOver.setString("Round Over");
+            roundOver.setPosition(overview.getCenter());
+            mans[0].setStep(2);
+            mans[1].setStep(2);
+        }else roundOver.setString("");
+
+        window.draw(tableInfo);
+        window.draw(heroInfo1);
+        window.draw(heroInfo2);
+        window.draw(heroInfo3);
+        window.draw(roundOver);
         window.draw(message);
         window.draw(cursor);
         window.setView(overview);

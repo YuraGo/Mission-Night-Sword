@@ -43,13 +43,21 @@ public:
 
     void setHero(std::string ,int ,int ,int ,int ,int );
 
-    void setHP(int damage){this->HP -= damage;};
+    void setHP(int damage){ this->HP -= damage; };
 
     int getView() { return  this->view;};
 
     int getSpeed() { return this->speed;};
 
-    int setStep(){return this->step-=1;};
+    void setStep(int P){this->step+=P;};
+
+    int getStep(){return this->step;};
+
+    int getHP() { return  this->HP;};
+
+    int getMass() { return  this->mass;};
+
+    int getAccuracy() { return  this->accuracy;};
 
     bool isReload();
 
@@ -63,7 +71,8 @@ public:
 
     void update(float);
 
-    void characterMove(float  , float );
+
+    bool characterMove(float  , float );
 };
 
 class SmartEnemy: public Hero {
