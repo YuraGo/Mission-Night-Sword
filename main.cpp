@@ -4,12 +4,13 @@
 #include <iostream>
 #include "characters/characters.h"
 #include "preload.h"
+#include "AI.h"
 
 
 
 int main() {
     // Создаем главное окно приложения
-    sf::RenderWindow window(sf::VideoMode(640, 480), "Test");
+    sf::RenderWindow window(sf::VideoMode(640, 480), "Test"); // 640 480
     sf::Clock clock;
 
     float CurrentFrame = 0;
@@ -17,7 +18,7 @@ int main() {
     window.setVerticalSyncEnabled(true);
 
     sf::View overview;
-    overview.setSize(sf::Vector2f(540.f, 380.f));
+    overview.setSize(sf::Vector2f(1000.f, 1000.f));//540 380
     overview.setCenter(320,240);
 
     sf::RectangleShape cursor(sf::Vector2f(32.f, 32.f));
@@ -47,18 +48,31 @@ int main() {
     s_map.setTexture(map);
 
     std::vector<Hero> mans;
+    std::vector<Enemy> evils;
+
+    Hero player1("solder.png",32,32,50,70);
+    Hero player2("solder.png",64,64,55,55);
+    player1.setHero("Bob",100,50,5,8,80);
+    player2.setHero("Silver",100,50,6,10,40);
+    mans.push_back(player1);
+    mans.push_back(player2);
 
 
-    Hero player1("warrior1.png",32,32,55,55);
-    Hero player2("warrior1.png",64,64,55,55);
-    player1.setHero("Bob",20,50,5,8,80);
-    player2.setHero("Silver",20,50,6,10,40);
 
     int choiseMan=0;
     int doorOpen =0;
+    int countOfMove =1;
 
-    mans.push_back(player1);
-    mans.push_back(player2);
+
+    Enemy evil("warrior1.png",64,64,55,55);
+    evil.setHero("demon",40,0,5,8,100);
+
+    evils.push_back(evil);
+    evils.push_back(evil);
+    evils.push_back(evil);
+    evils.push_back(evil);
+
+    startCord(evils);
 
     // Главный цикл приложения
     while(window.isOpen()) {
@@ -135,19 +149,19 @@ int main() {
 
 
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right){
-            if( tileInfo(cursor.getPosition().x+32,cursor.getPosition().y, nullptr) )
+            if( tileInfo(cursor.getPosition().x+32,cursor.getPosition().y, nullptr,nullptr) )
             cursorMove(cursor, 'r');
         }
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left){
-            if( tileInfo(cursor.getPosition().x-32,cursor.getPosition().y, nullptr) )
+            if( tileInfo(cursor.getPosition().x-32,cursor.getPosition().y, nullptr,nullptr) )
             cursorMove(cursor, 'l');
         }
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up){
-            if( tileInfo(cursor.getPosition().x,cursor.getPosition().y-32, nullptr) )
+            if( tileInfo(cursor.getPosition().x,cursor.getPosition().y-32, nullptr,nullptr) )
             cursorMove(cursor, 'u');
         }
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down){
-            if( tileInfo(cursor.getPosition().x,cursor.getPosition().y+32, nullptr) )
+            if( tileInfo(cursor.getPosition().x,cursor.getPosition().y+32, nullptr,nullptr) )
             cursorMove(cursor, 'd');
         }
 
@@ -176,7 +190,7 @@ int main() {
 
             //bool YouCan = pathIsCorrect(mans[0].sprite.getPosition().x,mans[0].sprite.getPosition().y,
             //                    cursor.getPosition().x , cursor.getPosition().y, mans[0].getSpeed());
-            bool tileFree = tileInfo(cursor.getPosition().x,cursor.getPosition().y, &mans);
+            bool tileFree = tileInfo(cursor.getPosition().x,cursor.getPosition().y, &mans,&evils);
             bool lenghOfMove = mans[choiseMan].characterMove(cursor.getPosition().x,cursor.getPosition().y);
 //            if(YouCan)
 //            std::cout<<"true: " << std::endl;
@@ -244,12 +258,18 @@ int main() {
         for(auto i: mans)
         window.draw(i.sprite);
 
+        for(auto i: evils)
+            window.draw(i.sprite);
+
 
         if(mans[0].getStep() <= 0 && mans[1].getStep() <= 0) {
             roundOver.setString("Round Over");
             roundOver.setPosition(overview.getCenter());
             mans[0].setStep(2);
             mans[1].setStep(2);
+            if(countOfMove >4) countOfMove = 1;
+            moveAI(evils,&mans, countOfMove);
+            countOfMove++;
         }else roundOver.setString("");
 
         window.draw(tableInfo);

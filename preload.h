@@ -50,7 +50,7 @@ sf::RectangleShape& cursorMove(sf::RectangleShape& Cursor,char dir){
 
 
 
-bool tileInfo(float X , float Y, std::vector<Hero>* mans){
+bool tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* evils){
     bool check = true;
 
     if(mans != nullptr){
@@ -58,6 +58,14 @@ bool tileInfo(float X , float Y, std::vector<Hero>* mans){
         if(X == it.sprite.getPosition().x && Y == it.sprite.getPosition().y)
             check = false;
     }}
+
+    if(evils != nullptr){
+        for(auto it : *evils){
+            if(X == it.sprite.getPosition().x && Y == it.sprite.getPosition().y)
+                check = false;
+        }}
+
+
 
     if(Y/32 <= 0)
         return false;
@@ -101,7 +109,7 @@ bool damageCorrect(float X, float Y,std::vector<Hero> &mans,int Ac) {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(1, 100);
 
-    if (dist(gen) > Ac) return false;
+    if (dist(gen) >= Ac) return false;
 
 
     for(auto it = 0; it != mans.size(); it++){
@@ -127,111 +135,8 @@ sf::CircleShape& whereGo(sf::CircleShape& radiusOfMove,int speed, float X, float
     radiusOfMove.setFillColor(sf::Color(210,210,0,30));
 }
 
-//bool pathIsCorrect(float startX, float startY, float X , float Y , int longPath){
-//
-//    int count=0;
-//
-//
-//    std::cout<<"star cord: "<< startX/32<< " , "<< startY/32 << std::endl;
-//    std::cout<<"cord: "<< X/32<< " , "<< Y/32 << std::endl;
-//
-////    if(MapHelper[x][y] == '0'){
-////        std::cout<<"Map111: "<< MapHelper[x][y] << std::endl;
-////        std::cout<<"cord111: "<< x << " , "<< y << std::endl;
-////        return false;
-////    }
-//
-//
-//        while(startX != X || startY != Y ) {
-//            //std::cout<<" "<<count <<" ";
-//            if(count > longPath)
-//                return false;
-//
-//            if (startX < X) {
-//                if (tileInfo(startX + 32, startY, nullptr)) {
-//                    startX += 32;
-//                    count++;
-//                }
-//            }
-//
-//            if (startY < Y) {
-//                if (tileInfo(startX, startY + 32, nullptr)) {
-//                    count++;
-//                    startY += 32;
-//                }else if (tileInfo(startX + 32, startY, nullptr)) {
-//                    startX += 32;
-//                    count++;
-//                }
-//            }
-//        }
-//
-//
-//    if(longPath >= count)
-//        return true;
-//    else return false;
-//
-//}
 
-//using namespace std;
-//
-//bool pathIsCorrect(float startX, float startY, float X , float Y , int longPath){
-//
-//    vector<pair<float, float> > wave;
-//    vector<pair<float, float> > oldWave;
-//    oldWave.emplace_back(pair<float, float>(startX/32, startY/32));
-//
-//    int nstep = 0;
-//
-//    const float dx[] = { 0, 1, 0, -1 };
-//    const float dy[] = { -1, 0, 1, 0 };
-//
-//    while (oldWave.size() > 0) {
-//
-//        ++nstep;
-//        wave.clear();
-//        for (auto i = oldWave.begin(); i != oldWave.end(); ++i)
-//        {
-//            for (int d = 0; d < 4; ++d)
-//            {
-//                float nx = i->first + dx[d];
-//                float ny = i->second + dy[d];
-//                if (mapInt[(int)nx][(int)ny] == 1)
-//                {
-//                    wave.emplace_back(pair<float, float>(nx, ny));
-//                    //mapInt[nx][ny] = nstep;
-//                    if (nx == X/32 && ny == Y/32)
-//                        goto done;
-//
-//                }
-//            }
-//        }
-//        oldWave = wave;
-//    }
-//    done:
-////    float x = X;
-////    float y = Y;
-////    wave.clear();
-////    wave.emplace_back(pair<float, float>(x, y));
-////    while (mapInt[x][y] != 0)
-////    {
-////        for (int d = 0; d < 4; ++d)
-////        {
-////            float nx = x + dx[d];
-////            float ny = y + dy[d];
-////            if (mapInt[x][y] - 1 == mapInt[nx][ny])
-////            {
-////                x = nx;
-////                y = ny;
-////                wave.emplace_back(pair<float, float>(x, y));
-////                break;
-////            }
-////        }
-////    }
-//    std::cout<<"wave: "<< wave.size() << std::endl;
-//    std::cout<<"Oldwave: "<< oldWave.size() << std::endl;
-//
-//return true;
-//}
+
 bool openDoor(float X, float Y, float plX, float plY){
 int i=0;
     if(X/32 == 7 && Y/32 == 3) {
@@ -241,6 +146,24 @@ int i=0;
     else return false;
 }
 
+void startCord(std::vector<Enemy> &evils){
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distY(1, 15);
+    std::uniform_int_distribution<> distX(8, 38);
+    float X,Y;
+
+    for(auto it = 0; it != evils.size(); it++){
+        X = distX(gen)*32;
+        Y = distY(gen)*32;
+        if(tileInfo(X,Y,nullptr, &evils))
+        evils[it].sprite.setPosition(X,Y);
+        else it--;
+    }
+
+
+}
 
 
 

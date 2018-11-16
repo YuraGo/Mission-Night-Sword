@@ -4,12 +4,11 @@
 
 #include "characters.h"
 #include <iostream>
-
+#include <random>
 
 
 
 Hero::Hero(sf::String F, float X, float Y, float W, float H) {
-    direction=0;
     File = F;//имя файла+расширение
     w = W;
     h = H;//высота и ширина
@@ -32,6 +31,7 @@ void Hero::setHero(std::string Name, int hp, int Mass, int Speed, int View,int A
     this->accuracy = Accuracy;
     this->step = 2;
 }
+
 
 void Hero::getInfo() {
     std::cout<<"name "<<this->name<<std::endl;
@@ -86,3 +86,4 @@ float Hero::getplayercoordinateX(){	//этим методом будем заб�
 float Hero::getplayercoordinateY(){	//этим методом будем забирать координату Y
     return this->cordY;
 }
+

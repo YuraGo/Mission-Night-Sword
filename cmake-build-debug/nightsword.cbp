@@ -86,6 +86,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/AI.h">
+			<Option target="nightsword"/>
+		</Unit>
 		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/Graphics/graphics.cpp">
 			<Option target="nightsword"/>
 		</Unit>

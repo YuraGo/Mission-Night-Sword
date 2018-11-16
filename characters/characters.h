@@ -28,8 +28,6 @@ protected:
 public:
     float cordX, cordY, w,h;
 
-    int direction;
-
     sf::String File;
 
     sf::Image image;//сфмл изображение
@@ -87,10 +85,14 @@ public:
 
 class Enemy: public Hero {
 private:
+    bool agressive = false;
     //link for texture
 public:
-    //Enemy(): Hero( "Demon",  50,  0,  4,  6, 60){};
+    Enemy(sf::String F, float X, float Y, float W, float H): Hero( F,  X,  Y,  W,  H){};
 
+    bool getAgr(){return this->agressive;};
+
+    void setAgr(bool agr){this->agressive = agr;};
 };
 
 

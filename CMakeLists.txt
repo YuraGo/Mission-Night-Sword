@@ -13,7 +13,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
 include_directories(${SFML_INCLUDE_DIR})
 include_directories(../Graphics)
 #add_subdirectory(Graphics)
-add_executable(nightsword main.cpp items/items.cpp items/items.h characters/characters.cpp characters/characters.h Graphics/graphics.cpp Graphics/graphics.h preload.h)
+add_executable(nightsword main.cpp items/items.cpp items/items.h characters/characters.cpp characters/characters.h Graphics/graphics.cpp Graphics/graphics.h preload.h AI.h)
 target_link_libraries(nightsword sfml-audio sfml-network sfml-graphics sfml-window sfml-system)
 
 

@@ -9,6 +9,7 @@ CMakeFiles/nightsword.dir/characters/characters.cpp.o: ../characters/characters.
 CMakeFiles/nightsword.dir/items/items.cpp.o: ../items/items.cpp
 CMakeFiles/nightsword.dir/items/items.cpp.o: ../items/items.h
 
+CMakeFiles/nightsword.dir/main.cpp.o: ../AI.h
 CMakeFiles/nightsword.dir/main.cpp.o: ../Graphics/graphics.h
 CMakeFiles/nightsword.dir/main.cpp.o: ../characters/characters.h
 CMakeFiles/nightsword.dir/main.cpp.o: ../main.cpp
