@@ -50,11 +50,11 @@ bool Hero::isReload() {
 }
 
 
-bool Hero::characterMove(float X, float Y) {
+bool Hero::characterMove(float X, float Y,int x) {
 
     if( (X-this->sprite.getPosition().x)*(X - this->sprite.getPosition().x) +
             (Y - this->sprite.getPosition().y) * (Y - this->sprite.getPosition().y)
-    <= (this->speed*32)*(this->speed*32) ) {
+    <= ((this->speed+x)*32)*((this->speed+x)*32) ) {
         this->cordX = X;
         this->cordY = Y;
         //this->sprite.setPosition(X , Y);

@@ -17,6 +17,23 @@
 #include <sstream>
 #include <random>
 
+void tableEnemyDraw(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2, float X,float Y, Enemy* player) {
+    table.setPosition(X+40,Y) ;//-270
+    text1.setPosition(X+45,Y+5);
+    text2.setPosition(X+45,Y+23);
+
+    table.setFillColor(sf::Color::Black);
+    text1.setFillColor(sf::Color::Yellow);
+    text2.setFillColor(sf::Color::Yellow);
+
+
+    text1.setString("HP: " + std::to_string(player->getHP()) + "  " + "Speed: " + std::to_string(player->getSpeed()));
+
+    text2.setString("Step: " + std::to_string(player->getStep()) +"  " + "Accuracy: " + std::to_string(player->getAccuracy()));
+
+}
+
+
 void tableInfodraw(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3, float X,float Y, Hero* player) {
     table.setPosition(X-270,Y + 65);//-270
     text1.setPosition(X-265,Y + 85);
@@ -67,6 +84,7 @@ bool tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* ev
 
 
 
+
     if(Y/32 <= 0)
         return false;
     if(X/32 <= 0)
@@ -104,7 +122,7 @@ bool tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* ev
     return check;
 }
 
-bool damageCorrect(float X, float Y,std::vector<Hero> &mans,int Ac) {
+bool damageCorrect(float X, float Y,std::vector<Enemy> &mans,int Ac) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(1, 100);
@@ -115,7 +133,6 @@ bool damageCorrect(float X, float Y,std::vector<Hero> &mans,int Ac) {
     for(auto it = 0; it != mans.size(); it++){
         if(X == mans[it].sprite.getPosition().x && Y == mans[it].sprite.getPosition().y) {
             mans[it].setHP(10);
-            std::cout<<"?";
             if(mans[it].getHP() <= 0){
                 mans[it].setStep(-1000);
                 mans.erase(mans.begin() + it);

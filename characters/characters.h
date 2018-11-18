@@ -70,7 +70,7 @@ public:
     void update(float);
 
 
-    bool characterMove(float  , float );
+    bool characterMove(float  , float,int x=0 );
 };
 
 class SmartEnemy: public Hero {

@@ -41,13 +41,13 @@ void moveAI(std::vector<Enemy>& evils,std::vector<Hero>* mans,int countOfMove) {
                     another = false;
                     break;
                 }
-                if (tileInfo(X, Y - 64, nullptr, nullptr) && tileInfo(X, Y - 32, nullptr, nullptr)) {
+                if (tileInfo(X, Y - 64, nullptr, nullptr) && tileInfo(X, Y - 32, mans,  &evils)) {
                     evils[it].sprite.setPosition(X, Y - 32);
                     correct = true;
                     another = false;
                     break;
                 }
-                if (tileInfo(X, Y - 64, nullptr, nullptr)) {
+                if (tileInfo(X, Y - 64, mans,  &evils)) {
                     evils[it].sprite.setPosition(X, Y - 64);
                     correct = true;
                     another = false;
@@ -72,13 +72,13 @@ void moveAI(std::vector<Enemy>& evils,std::vector<Hero>* mans,int countOfMove) {
                         another = false;
                         break;
                     }
-                    if (tileInfo(X + 64, Y, nullptr, nullptr) && tileInfo(X + 32, Y, nullptr, nullptr)) {
+                    if (tileInfo(X + 64, Y, nullptr, nullptr) && tileInfo(X + 32, Y, mans,  &evils)) {
                         evils[it].sprite.setPosition(X + 32, Y);
                         correct = true;
                         another = false;
                         break;
                     }
-                    if (tileInfo(X - 64, Y, nullptr, nullptr)) {
+                    if (tileInfo(X - 64, Y, mans,  &evils)) {
                         evils[it].sprite.setPosition(X + 64, Y);
                         correct = true;
                         another = false;
@@ -104,14 +104,14 @@ void moveAI(std::vector<Enemy>& evils,std::vector<Hero>* mans,int countOfMove) {
                         break;
 
                     }
-                    if (tileInfo(X, Y + 64, nullptr, nullptr) && tileInfo(X, Y + 32, nullptr, nullptr)) {
+                    if (tileInfo(X, Y + 64, nullptr, nullptr) && tileInfo(X, Y + 32, mans,  &evils)) {
                         evils[it].sprite.setPosition(X, Y + 32);
                         correct = true;
                         another = false;
                         break;
 
                     }
-                    if (tileInfo(X, Y + 64, nullptr, nullptr)) {
+                    if (tileInfo(X, Y + 64, mans,  &evils)) {
                         evils[it].sprite.setPosition(X, Y + 64);
                         correct = true;
                         another = false;
@@ -135,13 +135,13 @@ void moveAI(std::vector<Enemy>& evils,std::vector<Hero>* mans,int countOfMove) {
                         another = false;
                         break;
                     }
-                    if (tileInfo(X - 64, Y, nullptr, nullptr) && tileInfo(X - 32, Y, nullptr, nullptr)) {
+                    if (tileInfo(X - 64, Y, nullptr, nullptr) && tileInfo(X - 32, Y, mans,  &evils)) {
                         evils[it].sprite.setPosition(X - 32, Y);
                         correct = true;
                         another = false;
                         break;
                     }
-                    if (tileInfo(X - 64, Y, nullptr, nullptr)) {
+                    if (tileInfo(X - 64, Y, mans,  &evils)) {
                         evils[it].sprite.setPosition(X - 64, Y);
                         correct = true;
                         another = false;
