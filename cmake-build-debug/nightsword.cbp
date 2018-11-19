@@ -95,6 +95,9 @@
 		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/Graphics/graphics.h">
 			<Option target="nightsword"/>
 		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/UnitTest/Gtest.cpp">
+			<Option target="nightsword"/>
+		</Unit>
 		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/characters/characters.cpp">
 			<Option target="nightsword"/>
 		</Unit>

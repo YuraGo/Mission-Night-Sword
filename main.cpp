@@ -5,7 +5,7 @@
 #include "characters/characters.h"
 #include "preload.h"
 #include "AI.h"
-
+#include "items/items.h"
 
 
 int main() {
@@ -73,6 +73,9 @@ int main() {
     int choiseMan=0;
     int doorOpen =0;
     int countOfMove =1;
+
+    Medkit aid(5,12,1);
+    Medkit aid2(7,20,2);
 
 
     Enemy evil("warrior1.png",64,64,55,55);

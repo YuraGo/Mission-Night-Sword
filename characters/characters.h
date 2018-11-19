@@ -25,14 +25,11 @@ protected:
     int accuracy;
     int step;
     bool reload=false;
-public:
-    float cordX, cordY, w,h;
-
     sf::String File;
-
     sf::Image image;//сфмл изображение
-
     sf::Texture texture;//сфмл текстура
+    float cordX, cordY, w,h;
+public:
 
     sf::Sprite sprite;//сфмл
 

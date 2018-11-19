@@ -26,6 +26,14 @@ SFML/Graphics.hpp
 vector
 -
 
+/home/dartmoor/Desktop/C++/nightsword/characters/characters.cpp
+characters.h
+/home/dartmoor/Desktop/C++/nightsword/characters/characters.h
+iostream
+-
+random
+-
+
 /home/dartmoor/Desktop/C++/nightsword/characters/characters.h
 SFML/Window.hpp
 -

@@ -150,6 +150,33 @@ Graphics/graphics.cpp.s:
 	$(MAKE) -f CMakeFiles/nightsword.dir/build.make CMakeFiles/nightsword.dir/Graphics/graphics.cpp.s
 .PHONY : Graphics/graphics.cpp.s
 
+UnitTest/Gtest.o: UnitTest/Gtest.cpp.o
+
+.PHONY : UnitTest/Gtest.o
+
+# target to build an object file
+UnitTest/Gtest.cpp.o:
+	$(MAKE) -f CMakeFiles/nightsword.dir/build.make CMakeFiles/nightsword.dir/UnitTest/Gtest.cpp.o
+.PHONY : UnitTest/Gtest.cpp.o
+
+UnitTest/Gtest.i: UnitTest/Gtest.cpp.i
+
+.PHONY : UnitTest/Gtest.i
+
+# target to preprocess a source file
+UnitTest/Gtest.cpp.i:
+	$(MAKE) -f CMakeFiles/nightsword.dir/build.make CMakeFiles/nightsword.dir/UnitTest/Gtest.cpp.i
+.PHONY : UnitTest/Gtest.cpp.i
+
+UnitTest/Gtest.s: UnitTest/Gtest.cpp.s
+
+.PHONY : UnitTest/Gtest.s
+
+# target to generate assembly for a file
+UnitTest/Gtest.cpp.s:
+	$(MAKE) -f CMakeFiles/nightsword.dir/build.make CMakeFiles/nightsword.dir/UnitTest/Gtest.cpp.s
+.PHONY : UnitTest/Gtest.cpp.s
+
 characters/characters.o: characters/characters.cpp.o
 
 .PHONY : characters/characters.o
@@ -243,6 +270,9 @@ help:
 	@echo "... Graphics/graphics.o"
 	@echo "... Graphics/graphics.i"
 	@echo "... Graphics/graphics.s"
+	@echo "... UnitTest/Gtest.o"
+	@echo "... UnitTest/Gtest.i"
+	@echo "... UnitTest/Gtest.s"
 	@echo "... characters/characters.o"
 	@echo "... characters/characters.i"
 	@echo "... characters/characters.s"
