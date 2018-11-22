@@ -6,6 +6,9 @@
 #include "preload.h"
 #include "AI.h"
 #include "items/items.h"
+#include <list>
+
+#include "preload.h"
 
 
 int main() {
@@ -18,8 +21,8 @@ int main() {
     window.setVerticalSyncEnabled(true);
 
     sf::View overview;
-    overview.setSize(sf::Vector2f(1000.f, 1000.f));//540 380
-    overview.setCenter(320,240);
+    overview.setSize(sf::Vector2f(1000.f, 600.f));//540 380
+    overview.setCenter(600,360);//320, 240
 
     sf::RectangleShape pickHero(sf::Vector2f(32.f,64.f));
     sf::RectangleShape cursor(sf::Vector2f(32.f, 32.f));
@@ -37,15 +40,24 @@ int main() {
     sf::Text roundOver("",font,45);
     roundOver.setFillColor(sf::Color::Blue);
 
-    sf::RectangleShape tableInfo(sf::Vector2f(200,128));
+    sf::RectangleShape tableInfo(sf::Vector2f(180,70));
     sf::RectangleShape tableInfoEnemy(sf::Vector2f(180,80));
+    sf::RectangleShape tableInventory(sf::Vector2f(220,70));
+    tableInventory.setFillColor(sf::Color::Black);
+
     tableInfo.setFillColor(sf::Color::Black);
     sf::Text heroInfo1("", font, 18);
     sf::Text heroInfo2("", font, 18);
     sf::Text heroInfo3("", font, 18);
     sf::Text enemyInfo1("", font, 18);
     sf::Text enemyInfo2("", font, 18);
+    sf::Text inventoryInfo1("",font,18);
+    sf::Text inventoryInfo2("",font,18);
+    sf::Text inventoryInfo3("",font,18);
 
+    inventoryInfo1.setFillColor(sf::Color::Blue);
+    inventoryInfo2.setFillColor(sf::Color::Blue);
+    inventoryInfo3.setFillColor(sf::Color::Blue);
 
     sf::Text gameOver("Game Over",font,50);
     gameOver.setPosition(overview.getCenter());
@@ -73,9 +85,27 @@ int main() {
     int choiseMan=0;
     int doorOpen =0;
     int countOfMove =1;
+    int countOfInventorySlot = 0;
 
-    Medkit aid(5,12,1);
-    Medkit aid2(7,20,2);
+    Weapon bow(20,80,"arrow",15,"bow","Items/Axe02.PNG");
+    Medkit aid(1,20,5,"Items/PotionTallRuby.PNG");
+    Ammo bullets("5.56",20,5,"Items/CoinsTeal.PNG");
+    //bow.getInfor();
+
+    Medkit aid1(2,50,10,"Items/PotionTriangularRuby.PNG");
+    Medkit aid2(1,30,6,"Items/PotionTallYellow2.PNG");
+    Medkit aid3(1,30,6,"Items/PotionTallYellow2.PNG");
+
+
+    Inventory backpack;
+    backpack.setIt(&bow);
+    backpack.setIt(&bullets);
+    backpack.setIt(&aid);
+
+    Inventory someItem;
+    someItem.setIt(&aid1);
+    someItem.setIt(&aid2);
+    someItem.setIt(&aid3);
 
 
     Enemy evil("warrior1.png",64,64,55,55);
@@ -86,8 +116,8 @@ int main() {
     evils.push_back(evil);
     evils.push_back(evil);
 
-    startCord(evils);
-
+    startCord(evils,someItem);
+    //someItem.getItOne(0)->getSprite().setPosition(64,64);
     // Главный цикл приложения
     while(window.isOpen()) {
 
@@ -135,23 +165,6 @@ int main() {
                 default:
                     break;
             }
-//             Кроме обычного способа наше окно будет закрываться по нажатию на Escape
-//            if(event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
-//                window.close();
-//
-//            if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num1) {
-//
-//                cursor.setPosition(player1.sprite.getPosition().x, player1.sprite.getPosition().y);
-//                whereGo(radiusOfMove, player1.getSpeed(), player1.sprite.getPosition().x, player1.sprite.getPosition().y);
-//
-//            }
-//
-//                if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num2) {
-//                    std::cout<<" ? "<< cursor.getPosition().x << " , "<< cursor.getPosition().y<<std::endl;
-//                    player1.characterMove(cursor.getPosition().x, cursor.getPosition().y);
-//                    //player1.characterMove(32, 32);
-//                    //player1.sprite.move(128,128);
-//                }
 
 
         }
@@ -197,22 +210,44 @@ int main() {
 
         }
         if (event.key.code == sf::Keyboard::H ) {
-            //tableInfo, heroInfo1,heroInfo2,heroInfo3
+
             if(!flagTableHide) {
                 tableInfo.setFillColor(sf::Color(0, 0, 0, 0));
                 heroInfo1.setFillColor(sf::Color(0, 0, 0, 0));
                 heroInfo2.setFillColor(sf::Color(0, 0, 0, 0));
                 heroInfo3.setFillColor(sf::Color(0, 0, 0, 0));
+
+
+                mans[0].sprite.setScale(0,0);
+                tableInventory.setFillColor(sf::Color(0,0,0,0));
+                inventoryInfo1.setFillColor(sf::Color(0,0,0,0));
+                inventoryInfo2.setFillColor(sf::Color(0,0,0,0));
+                inventoryInfo3.setFillColor(sf::Color(0,0,0,0));
+
+
                 flagTableHide=true;
             }else {
+
                 flagTableHide = false;
+                mans[0].sprite.setScale(1,1);
                 tableInfo.setFillColor(sf::Color::Black);
                 heroInfo1.setFillColor(sf::Color(120,150,83));
                 heroInfo2.setFillColor(sf::Color(120,150,83));
                 heroInfo3.setFillColor(sf::Color(120,150,83));
+
+                tableInventory.setFillColor(sf::Color::Black);
+                inventoryInfo1.setFillColor(sf::Color::Blue);
+                inventoryInfo2.setFillColor(sf::Color::Blue);
+                inventoryInfo3.setFillColor(sf::Color::Blue);
+
             }
         }
+        if(event.key.code == sf::Keyboard::K){
 
+            if(countOfInventorySlot == backpack.getIt().size()-1)
+                countOfInventorySlot = 0;
+            else countOfInventorySlot++;
+        }
 
 
 
@@ -222,7 +257,7 @@ int main() {
             bool tileFree = tileInfo(cursor.getPosition().x,cursor.getPosition().y, &mans,&evils);
             bool lenghOfMove = mans[choiseMan].characterMove(cursor.getPosition().x,cursor.getPosition().y);
 //            if(YouCan)
-//            std::cout<<"true: " << std::endl;
+            std::cout<<"X: "<<mans[choiseMan].sprite.getPosition().x<<" , "<<mans[choiseMan].sprite.getPosition().y << std::endl;
 //            else std::cout<<"false: " << std::endl;
 
             if( !tileFree || !lenghOfMove || mans[choiseMan].getStep() <= 0){
@@ -251,7 +286,6 @@ int main() {
                         else s_map.setTextureRect(sf::IntRect(160, 96, 192, 128));
                     }
                     if (TileMap[i][j] == ' ') s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
-                    //if(MapHelper[i][j] == 'F') s_map.setTextureRect(sf::IntRect(128,160,160,192));
 
                     s_map.setPosition(j * 32, i * 32);
                     window.draw(s_map);
@@ -269,6 +303,11 @@ int main() {
         pickHero.setPosition(mans[choiseMan].sprite.getPosition());
         window.draw(pickHero);
         tableInfodraw(tableInfo, heroInfo1,heroInfo2,heroInfo3, overview.getCenter().x,overview.getCenter().y , &mans[choiseMan]);
+
+
+        for(auto it: someItem.getIt()){
+            window.draw(it->getSprite());
+        }
 
         for(auto i: mans)
         window.draw(i.sprite);
@@ -305,6 +344,15 @@ int main() {
         if(evils.empty() || mans.empty()){
             window.draw(gameOver);
         }
+
+        backpack.getItOne(countOfInventorySlot)->drawInventory(tableInventory,inventoryInfo1,inventoryInfo2,inventoryInfo3,overview.getCenter().x,overview.getCenter().y);
+        window.draw(tableInventory);
+        window.draw(inventoryInfo1);
+        window.draw(inventoryInfo2);
+        window.draw(inventoryInfo3);
+
+
+        window.draw(backpack.getItOne(countOfInventorySlot)->getSprite());
 
 
         window.draw(tableInfo);

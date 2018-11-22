@@ -1,33 +1,38 @@
 ////
 //// Created by dartmoor on 12.11.18.
 ////
-//
+
 //#include "graphics.h"
+
+
+//LevelMap::LevelMap(sf::String* TileMap){
 //
-//sfText::sfText(sf::Text text, float X, float Y) {
+//    for(int i = 0; i < H; i++){
+//        for(int j = 0; j < W; j++ ){
 //
-//    this->sourceText.emplace_back(text);
-//    this->cordx= X;
-//    this->cordy= Y;
+//         if(TileMap[i][j] == '0') {
+//             this->infoOfTile[i][j] = false;
+//         }
+//         else this->infoOfTile[i][j] = true;
+//        }
+//    }
 //
 //}
 //
-//void sfText::addEL(sf::Text text) {
-//    this->sourceText.emplace_back();
-//}
 //
-//void sfText::setXY(float X, float Y) {
-//    this->cordx = X;
-//    this->cordy = Y;
-//}
+//void LevelMap::updateTileInfo(std::vector<Hero>* mans, std::vector<Enemy>* evils){
 //
-//void sfText::draw(sf::RenderWindow* window) {
-//    for(auto it: sourceText)
-//        window->draw(it);
-//}
+//    for(auto it: *mans){
+//        int X = (int) (it.sprite.getPosition().x)/32;
+//        int Y = (int) (it.sprite.getPosition().y)/32;
+//        this->infoOfTile[X][Y] = false;
+//    }
 //
-//void sfText::enter(){
-//    this->cordx = 0;
-//    this->cordy+=sizeOfSymb;
+//    for(auto it: *evils){
+//        int X = (int) (it.sprite.getPosition().x)/32;
+//        int Y = (int) (it.sprite.getPosition().y)/32;
+//        this->infoOfTile[X][Y] = false;
+//    }
+//
 //
 //}

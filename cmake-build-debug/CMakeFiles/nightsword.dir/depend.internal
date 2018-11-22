@@ -3,6 +3,8 @@
 
 CMakeFiles/nightsword.dir/Graphics/graphics.cpp.o
  /home/dartmoor/Desktop/C++/nightsword/Graphics/graphics.cpp
+CMakeFiles/nightsword.dir/UnitTest/unitTest.cpp.o
+ /home/dartmoor/Desktop/C++/nightsword/UnitTest/unitTest.cpp
 CMakeFiles/nightsword.dir/characters/characters.cpp.o
  /home/dartmoor/Desktop/C++/nightsword/characters/characters.cpp
  /home/dartmoor/Desktop/C++/nightsword/characters/characters.h
@@ -13,5 +15,6 @@ CMakeFiles/nightsword.dir/main.cpp.o
  /home/dartmoor/Desktop/C++/nightsword/AI.h
  /home/dartmoor/Desktop/C++/nightsword/Graphics/graphics.h
  /home/dartmoor/Desktop/C++/nightsword/characters/characters.h
+ /home/dartmoor/Desktop/C++/nightsword/items/items.h
  /home/dartmoor/Desktop/C++/nightsword/main.cpp
  /home/dartmoor/Desktop/C++/nightsword/preload.h

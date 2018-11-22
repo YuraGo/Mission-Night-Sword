@@ -3,7 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/nightsword.dir/items/items.cpp.o"
   "CMakeFiles/nightsword.dir/characters/characters.cpp.o"
   "CMakeFiles/nightsword.dir/Graphics/graphics.cpp.o"
-  "CMakeFiles/nightsword.dir/UnitTest/Gtest.cpp.o"
+  "CMakeFiles/nightsword.dir/UnitTest/unitTest.cpp.o"
   "nightsword.pdb"
   "nightsword"
 )

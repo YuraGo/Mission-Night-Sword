@@ -56,16 +56,29 @@ CMAKE_BINARY_DIR = /home/dartmoor/Desktop/C++/nightsword/cmake-build-debug
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/clion/49/bin/cmake/linux/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/snap/clion/49/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
 
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/snap/clion/49/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
 
-.PHONY : rebuild_cache/fast
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/snap/clion/49/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/snap/clion/49/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -77,6 +90,39 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/snap/clion/49/bin/cmake/linux/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/snap/clion/49/bin/cmake/linux/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/snap/clion/49/bin/cmake/linux/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -123,6 +169,71 @@ nightsword/fast:
 	$(MAKE) -f CMakeFiles/nightsword.dir/build.make CMakeFiles/nightsword.dir/build
 .PHONY : nightsword/fast
 
+#=============================================================================
+# Target rules for targets named gmock_main
+
+# Build rule for target.
+gmock_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gmock_main
+.PHONY : gmock_main
+
+# fast build rule for target.
+gmock_main/fast:
+	$(MAKE) -f gtest/googletest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googletest/googlemock/CMakeFiles/gmock_main.dir/build
+.PHONY : gmock_main/fast
+
+#=============================================================================
+# Target rules for targets named gmock
+
+# Build rule for target.
+gmock: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gmock
+.PHONY : gmock
+
+# fast build rule for target.
+gmock/fast:
+	$(MAKE) -f gtest/googletest/googlemock/CMakeFiles/gmock.dir/build.make gtest/googletest/googlemock/CMakeFiles/gmock.dir/build
+.PHONY : gmock/fast
+
+#=============================================================================
+# Target rules for targets named gtest_main
+
+# Build rule for target.
+gtest_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gtest_main
+.PHONY : gtest_main
+
+# fast build rule for target.
+gtest_main/fast:
+	$(MAKE) -f gtest/googletest/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make gtest/googletest/googlemock/gtest/CMakeFiles/gtest_main.dir/build
+.PHONY : gtest_main/fast
+
+#=============================================================================
+# Target rules for targets named gtest
+
+# Build rule for target.
+gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gtest
+.PHONY : gtest
+
+# fast build rule for target.
+gtest/fast:
+	$(MAKE) -f gtest/googletest/googlemock/gtest/CMakeFiles/gtest.dir/build.make gtest/googletest/googlemock/gtest/CMakeFiles/gtest.dir/build
+.PHONY : gtest/fast
+
+#=============================================================================
+# Target rules for targets named UnitTest
+
+# Build rule for target.
+UnitTest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 UnitTest
+.PHONY : UnitTest
+
+# fast build rule for target.
+UnitTest/fast:
+	$(MAKE) -f UnitTest/CMakeFiles/UnitTest.dir/build.make UnitTest/CMakeFiles/UnitTest.dir/build
+.PHONY : UnitTest/fast
+
 Graphics/graphics.o: Graphics/graphics.cpp.o
 
 .PHONY : Graphics/graphics.o
@@ -150,32 +261,32 @@ Graphics/graphics.cpp.s:
 	$(MAKE) -f CMakeFiles/nightsword.dir/build.make CMakeFiles/nightsword.dir/Graphics/graphics.cpp.s
 .PHONY : Graphics/graphics.cpp.s
 
-UnitTest/Gtest.o: UnitTest/Gtest.cpp.o
+UnitTest/unitTest.o: UnitTest/unitTest.cpp.o
 
-.PHONY : UnitTest/Gtest.o
+.PHONY : UnitTest/unitTest.o
 
 # target to build an object file
-UnitTest/Gtest.cpp.o:
-	$(MAKE) -f CMakeFiles/nightsword.dir/build.make CMakeFiles/nightsword.dir/UnitTest/Gtest.cpp.o
-.PHONY : UnitTest/Gtest.cpp.o
+UnitTest/unitTest.cpp.o:
+	$(MAKE) -f CMakeFiles/nightsword.dir/build.make CMakeFiles/nightsword.dir/UnitTest/unitTest.cpp.o
+.PHONY : UnitTest/unitTest.cpp.o
 
-UnitTest/Gtest.i: UnitTest/Gtest.cpp.i
+UnitTest/unitTest.i: UnitTest/unitTest.cpp.i
 
-.PHONY : UnitTest/Gtest.i
+.PHONY : UnitTest/unitTest.i
 
 # target to preprocess a source file
-UnitTest/Gtest.cpp.i:
-	$(MAKE) -f CMakeFiles/nightsword.dir/build.make CMakeFiles/nightsword.dir/UnitTest/Gtest.cpp.i
-.PHONY : UnitTest/Gtest.cpp.i
+UnitTest/unitTest.cpp.i:
+	$(MAKE) -f CMakeFiles/nightsword.dir/build.make CMakeFiles/nightsword.dir/UnitTest/unitTest.cpp.i
+.PHONY : UnitTest/unitTest.cpp.i
 
-UnitTest/Gtest.s: UnitTest/Gtest.cpp.s
+UnitTest/unitTest.s: UnitTest/unitTest.cpp.s
 
-.PHONY : UnitTest/Gtest.s
+.PHONY : UnitTest/unitTest.s
 
 # target to generate assembly for a file
-UnitTest/Gtest.cpp.s:
-	$(MAKE) -f CMakeFiles/nightsword.dir/build.make CMakeFiles/nightsword.dir/UnitTest/Gtest.cpp.s
-.PHONY : UnitTest/Gtest.cpp.s
+UnitTest/unitTest.cpp.s:
+	$(MAKE) -f CMakeFiles/nightsword.dir/build.make CMakeFiles/nightsword.dir/UnitTest/unitTest.cpp.s
+.PHONY : UnitTest/unitTest.cpp.s
 
 characters/characters.o: characters/characters.cpp.o
 
@@ -264,15 +375,24 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
-	@echo "... edit_cache"
+	@echo "... install/strip"
+	@echo "... install/local"
 	@echo "... nightsword"
+	@echo "... edit_cache"
+	@echo "... rebuild_cache"
+	@echo "... install"
+	@echo "... list_install_components"
+	@echo "... gmock_main"
+	@echo "... gmock"
+	@echo "... gtest_main"
+	@echo "... gtest"
+	@echo "... UnitTest"
 	@echo "... Graphics/graphics.o"
 	@echo "... Graphics/graphics.i"
 	@echo "... Graphics/graphics.s"
-	@echo "... UnitTest/Gtest.o"
-	@echo "... UnitTest/Gtest.i"
-	@echo "... UnitTest/Gtest.s"
+	@echo "... UnitTest/unitTest.o"
+	@echo "... UnitTest/unitTest.i"
+	@echo "... UnitTest/unitTest.s"
 	@echo "... characters/characters.o"
 	@echo "... characters/characters.i"
 	@echo "... characters/characters.s"

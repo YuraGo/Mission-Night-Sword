@@ -25,14 +25,8 @@ SFML/Graphics.hpp
 -
 vector
 -
-
-/home/dartmoor/Desktop/C++/nightsword/characters/characters.cpp
-characters.h
+../characters/characters.h
 /home/dartmoor/Desktop/C++/nightsword/characters/characters.h
-iostream
--
-random
--
 
 /home/dartmoor/Desktop/C++/nightsword/characters/characters.h
 SFML/Window.hpp
@@ -46,6 +40,20 @@ iostream
 string
 -
 vector
+-
+
+/home/dartmoor/Desktop/C++/nightsword/items/items.h
+string.h
+-
+iostream
+-
+string
+-
+vector
+-
+SFML/Window.hpp
+-
+SFML/Graphics.hpp
 -
 
 /home/dartmoor/Desktop/C++/nightsword/main.cpp
@@ -63,6 +71,12 @@ preload.h
 /home/dartmoor/Desktop/C++/nightsword/preload.h
 AI.h
 /home/dartmoor/Desktop/C++/nightsword/AI.h
+items/items.h
+/home/dartmoor/Desktop/C++/nightsword/items/items.h
+list
+-
+preload.h
+/home/dartmoor/Desktop/C++/nightsword/preload.h
 
 /home/dartmoor/Desktop/C++/nightsword/preload.h
 SFML/Window.hpp
@@ -75,6 +89,8 @@ iostream
 -
 characters/characters.h
 /home/dartmoor/Desktop/C++/nightsword/characters/characters.h
+items/items.h
+/home/dartmoor/Desktop/C++/nightsword/items/items.h
 stdio.h
 -
 cstdlib

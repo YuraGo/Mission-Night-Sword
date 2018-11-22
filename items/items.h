@@ -14,8 +14,22 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-class Weapon {
-private:
+
+
+class Item{
+protected:
+
+public:
+    virtual void getInfo(){std::cout<<"nothing"<<std::endl;};
+
+    virtual sf::Sprite& getSprite(){sf::Sprite p; return p;};
+
+    virtual void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float,float){};
+};
+
+
+class Weapon: public Item {
+protected:
     std::string name;
     int damage;
     int accuracy;
@@ -24,49 +38,75 @@ private:
     sf::String File;
     sf::Image image;//сфмл изображение
     sf::Texture texture;//сфмл текстура
+    sf::Sprite sprite;
 public:
-    Weapon(int,int,int,std::string,int,std::string);
+    sf::Sprite& getSprite(){ return this->sprite;};
+
+    Weapon(int,int, const std::string&,int,const std::string&,sf::String);
 
     void getInfo();
 
+    void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float, float);
 };
 
-class Ammo{
-private:
+class Ammo : public Item{
+protected:
     std::string type;
     int size;
     int mass;
     sf::String File;
     sf::Image image;//сфмл изображение
     sf::Texture texture;//сфмл текстура
+    sf::Sprite sprite;
 public:
-    Ammo(std::string, int, int);
+    Ammo(const std::string&, int, int,sf::String);
+
+    sf::Sprite& getSprite(){ return this->sprite;};
 
     void setSize(int change);
+
+    void getInfo();
+
+    void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float,float);
 };
 
-class Medkit {
-private:
+class Medkit: public Item {
+protected:
     int mass;
     int regen;
     int step;
     sf::String File;
     sf::Image image;//сфмл изображение
     sf::Texture texture;//сфмл текстура
+    sf::Sprite sprite;
+
 public:
-    Medkit(int,int,int);
+    Medkit(int,int,int,sf::String);
+
+    void getInfo();
+
+    sf::Sprite& getSprite(){ return sprite;};
+
+    void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3, float ,float );
 };
 
-template <class item>
+
+
 class Inventory{
 protected:
-    item *thing;
+    ///// Наследовать все класса предметов и хранить тут указатели
 
+    std::vector<Item*> items;
+    //items.push_back(&medkit);
 public:
-    explicit Inventory(item ptr){this->thing = ptr;};
 
-    void getInfo(){this->thing.getInfo();};
+    const std::vector<Item*>& getIt() const{ return items; };
 
+    Item* getItOne(int);
+
+    void setIt(Item* some){this->items.push_back(some);};
+
+    void throwIt(int index){ this->items.erase(items.begin() + index);};
 
 };
 

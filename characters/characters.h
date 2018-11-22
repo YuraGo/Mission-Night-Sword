@@ -36,7 +36,7 @@ public:
 
     Hero(sf::String , float , float , float , float );
 
-    void setHero(std::string ,int ,int ,int ,int ,int );
+    void setHero(const std::string&,int ,int ,int ,int ,int );
 
     void setHP(int damage){ this->HP -= damage; };
 

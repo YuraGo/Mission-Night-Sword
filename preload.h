@@ -10,12 +10,14 @@
 #include "Graphics/graphics.h"
 #include <iostream>
 #include "characters/characters.h"
+#include "items/items.h"
 #include <stdio.h>
 #include <cstdlib>
 #include <vector>
 #include <algorithm>
 #include <sstream>
 #include <random>
+
 
 void tableEnemyDraw(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2, float X,float Y, Enemy* player) {
     table.setPosition(X+40,Y) ;//-270
@@ -34,11 +36,12 @@ void tableEnemyDraw(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2, 
 }
 
 
+
 void tableInfodraw(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3, float X,float Y, Hero* player) {
-    table.setPosition(X-270,Y + 65);//-270
-    text1.setPosition(X-265,Y + 85);
-    text2.setPosition(X-265,Y + 105);
-    text3.setPosition(X-265,Y + 125);
+    table.setPosition(X-270,Y + 120);//-270
+    text1.setPosition(X-265,Y + 125);
+    text2.setPosition(X-265,Y + 144);
+    text3.setPosition(X-265,Y + 160);
 
     text1.setString("HP: " + std::to_string(player->getHP()) + "  " + "Speed: " + std::to_string(player->getSpeed()));
 
@@ -163,19 +166,30 @@ int i=0;
     else return false;
 }
 
-void startCord(std::vector<Enemy> &evils){
+void startCord(std::vector<Enemy> &evils,Inventory& item){
 
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distY(1, 15);
     std::uniform_int_distribution<> distX(8, 38);
-    float X,Y;
+    float X,Y,Xi,Yi;
 
-    for(auto it = 0; it != evils.size(); it++){
+    for(auto it = 0;it != evils.size(); it++){
         X = distX(gen)*32;
         Y = distY(gen)*32;
+
         if(tileInfo(X,Y,nullptr, &evils))
         evils[it].sprite.setPosition(X,Y);
+        else it--;
+    }
+
+   // for(auto it: item.getIt()){
+   for(int it = 0;it != item.getIt().size(); it++){
+        item.getItOne(it)->getInfo();
+        Xi = distX(gen)*32;
+        Yi = distY(gen)*32;
+        if(tileInfo(Xi,Yi,nullptr, nullptr))
+            item.getItOne(it)->getSprite().setPosition(Xi,Yi);
         else it--;
     }
 

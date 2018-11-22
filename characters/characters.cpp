@@ -22,7 +22,7 @@ Hero::Hero(sf::String F, float X, float Y, float W, float H) {
     sprite.setTextureRect(sf::IntRect(0, 0, w, h));
 }
 
-void Hero::setHero(std::string Name, int hp, int Mass, int Speed, int View,int Accuracy){
+void Hero::setHero(const std::string &Name, int hp, int Mass, int Speed, int View,int Accuracy){
     this->name = Name;
     this->HP = hp;
     this->mass = Mass;

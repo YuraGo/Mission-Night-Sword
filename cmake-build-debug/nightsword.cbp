@@ -5,7 +5,7 @@
 		<Option title="nightsword"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\UnitTest\;CMake Files\gtest\;CMake Files\gtest\googletest\;CMake Files\gtest\googletest\googlemock\;CMake Files\gtest\googletest\googlemock\cmake\;CMake Files\gtest\googletest\googletest\;CMake Files\gtest\googletest\googletest\cmake\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug"/>
@@ -17,21 +17,21 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="rebuild_cache">
+			<Target title="install/strip">
 				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="edit_cache">
+			<Target title="install/local">
 				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -85,6 +85,310 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gmock_main">
+				<Option output="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/lib/libgmock_maind.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googlemock/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googlemock"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 gmock_main"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gmock_main/fast">
+				<Option output="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/lib/libgmock_maind.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googlemock/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googlemock"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 gmock_main/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gmock">
+				<Option output="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/lib/libgmockd.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googlemock/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googlemock"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 gmock"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gmock/fast">
+				<Option output="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/lib/libgmockd.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googlemock/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googlemock"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 gmock/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest_main">
+				<Option output="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/lib/libgtest_maind.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 gtest_main"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest_main/fast">
+				<Option output="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/lib/libgtest_maind.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 gtest_main/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest">
+				<Option output="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/lib/libgtestd.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 gtest"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest/fast">
+				<Option output="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/lib/libgtestd.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 gtest/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/gtest/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="UnitTest">
+				<Option output="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/UnitTest/UnitTest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/UnitTest"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/UnitTest/../characters"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/UnitTest/../items"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/UnitTest/../gtest/googletest/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/UnitTest/Makefile&quot;  VERBOSE=1 UnitTest"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/UnitTest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/UnitTest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/UnitTest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="UnitTest/fast">
+				<Option output="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/UnitTest/UnitTest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/UnitTest"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/UnitTest/../characters"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/UnitTest/../items"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/UnitTest/../gtest/googletest/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/include"/>
+					<Add directory="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/UnitTest/Makefile&quot;  VERBOSE=1 UnitTest/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/UnitTest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/UnitTest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dartmoor/Desktop/C++/nightsword/cmake-build-debug/UnitTest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 		</Build>
 		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/AI.h">
 			<Option target="nightsword"/>
@@ -95,14 +399,27 @@
 		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/Graphics/graphics.h">
 			<Option target="nightsword"/>
 		</Unit>
-		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/UnitTest/Gtest.cpp">
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/UnitTest/unitTest.cpp">
 			<Option target="nightsword"/>
+			<Option target="UnitTest"/>
 		</Unit>
 		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/characters/characters.cpp">
 			<Option target="nightsword"/>
 		</Unit>
 		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/characters/characters.h">
 			<Option target="nightsword"/>
+		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googlemock/src/gmock-all.cc">
+			<Option target="gmock"/>
+		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googlemock/src/gmock_main.cc">
+			<Option target="gmock_main"/>
+		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/src/gtest-all.cc">
+			<Option target="gtest"/>
+		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/src/gtest_main.cc">
+			<Option target="gtest_main"/>
 		</Unit>
 		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/items/items.cpp">
 			<Option target="nightsword"/>
@@ -118,6 +435,36 @@
 		</Unit>
 		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/UnitTest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\UnitTest\"/>
+		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\gtest\googletest\"/>
+		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googlemock/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\gtest\googletest\googlemock\"/>
+		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googlemock/cmake/gmock.pc.in">
+			<Option virtualFolder="CMake Files\gtest\googletest\googlemock\cmake\"/>
+		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googlemock/cmake/gmock_main.pc.in">
+			<Option virtualFolder="CMake Files\gtest\googletest\googlemock\cmake\"/>
+		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\gtest\googletest\googletest\"/>
+		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/cmake/Config.cmake.in">
+			<Option virtualFolder="CMake Files\gtest\googletest\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/cmake/gtest.pc.in">
+			<Option virtualFolder="CMake Files\gtest\googletest\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/cmake/gtest_main.pc.in">
+			<Option virtualFolder="CMake Files\gtest\googletest\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/home/dartmoor/Desktop/C++/nightsword/gtest/googletest/googletest/cmake/internal_utils.cmake">
+			<Option virtualFolder="CMake Files\gtest\googletest\googletest\cmake\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

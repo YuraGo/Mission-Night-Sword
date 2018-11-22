@@ -3,6 +3,8 @@
 
 CMakeFiles/nightsword.dir/Graphics/graphics.cpp.o: ../Graphics/graphics.cpp
 
+CMakeFiles/nightsword.dir/UnitTest/unitTest.cpp.o: ../UnitTest/unitTest.cpp
+
 CMakeFiles/nightsword.dir/characters/characters.cpp.o: ../characters/characters.cpp
 CMakeFiles/nightsword.dir/characters/characters.cpp.o: ../characters/characters.h
 
@@ -12,6 +14,7 @@ CMakeFiles/nightsword.dir/items/items.cpp.o: ../items/items.h
 CMakeFiles/nightsword.dir/main.cpp.o: ../AI.h
 CMakeFiles/nightsword.dir/main.cpp.o: ../Graphics/graphics.h
 CMakeFiles/nightsword.dir/main.cpp.o: ../characters/characters.h
+CMakeFiles/nightsword.dir/main.cpp.o: ../items/items.h
 CMakeFiles/nightsword.dir/main.cpp.o: ../main.cpp
 CMakeFiles/nightsword.dir/main.cpp.o: ../preload.h
 
