@@ -75,8 +75,8 @@ int main() {
 
     Hero player1("solder.png",32,32,50,70);
     Hero player2("solder.png",64,64,55,55);
-    player1.setHero("Bob",100,50,5,8,80);
-    player2.setHero("Silver",100,50,6,10,40);
+    player1.setHero("Bob",100,30,5,8,80);
+    player2.setHero("Silver",100,30,6,10,40);
     mans.push_back(player1);
     mans.push_back(player2);
 
@@ -87,26 +87,44 @@ int main() {
     int countOfMove =1;
     int countOfInventorySlot = 0;
 
-    Weapon bow(20,80,"arrow",15,"bow","Items/Axe02.PNG");
+    Weapon bow(20,1,80,"arrow",15,"bow","Items/Axe02.PNG");
+    Weapon axe(40,5,70,"5.56",15,"axe","Items/Bow09.PNG");
     Medkit aid(1,20,5,"Items/PotionTallRuby.PNG");
     Ammo bullets("5.56",20,5,"Items/CoinsTeal.PNG");
+    Ammo arrows("arrow",10,5,"Items/ArrowSteel.PNG");
     //bow.getInfor();
 
+    Ammo bullets1("arrow",10,5,"Items/ArrowSteel.PNG");
+    Ammo bullets2("7.62",20,10,"Items/CoinsGold.PNG");
+    Ammo bullets3("5.56",30,5,"Items/CoinsTeal.PNG");
+
     Medkit aid1(2,50,10,"Items/PotionTriangularRuby.PNG");
-    Medkit aid2(1,30,6,"Items/PotionTallYellow2.PNG");
+    Medkit aid2(2,35,6,"Items/PotionTallYellow2.PNG");
     Medkit aid3(1,30,6,"Items/PotionTallYellow2.PNG");
 
+    std::vector<Inventory> stash;
 
     Inventory backpack;
     backpack.setIt(&bow);
-    backpack.setIt(&bullets);
+    backpack.setIt(&arrows);
     backpack.setIt(&aid);
+
+    Inventory backpack2;
+    backpack2.setIt(&axe);
+    backpack2.setIt(&bullets);
+    backpack2.setIt(&aid);
+
+
+    stash.push_back(backpack);
+    stash.push_back(backpack2);
 
     Inventory someItem;
     someItem.setIt(&aid1);
     someItem.setIt(&aid2);
     someItem.setIt(&aid3);
-
+    someItem.setIt(&bullets1);
+    someItem.setIt(&bullets2);
+    someItem.setIt(&bullets3);
 
     Enemy evil("warrior1.png",64,64,55,55);
     evil.setHero("demon",40,0,5,8,100);
@@ -115,6 +133,14 @@ int main() {
     evils.push_back(evil);
     evils.push_back(evil);
     evils.push_back(evil);
+
+    for(int it =0; it < stash[0].getIt().size(); it++ ) {
+        mans[0].setCurrentMass( stash[0].getItOne(it)->getMass());
+    }
+
+    for(int it =0; it < stash[1].getIt().size(); it++ ) {
+        mans[1].setCurrentMass( stash[0].getItOne(it)->getMass());
+    }
 
     startCord(evils,someItem);
     //someItem.getItOne(0)->getSprite().setPosition(64,64);
@@ -125,7 +151,6 @@ int main() {
         time /= 800;
         // Обрабатываем события в цикле
         sf::Event event;
-
 
 
 
@@ -142,23 +167,16 @@ int main() {
 
                     if (event.key.code == sf::Keyboard::Num1 && mans[0].getHP() > 0) {
                         choiseMan=0;
+                        countOfInventorySlot = 0;
                         cursor.setPosition(mans[0].sprite.getPosition().x, mans[0].sprite.getPosition().y);
 
                     }
                     if (event.key.code == sf::Keyboard::Num2 && mans[1].getHP() > 0) {
                         choiseMan=1;
+                        countOfInventorySlot = 0;
                         cursor.setPosition(mans[1].sprite.getPosition().x, mans[1].sprite.getPosition().y);
                     }
 
-
-
-//                    if (event.key.code == sf::Keyboard::Space) {
-//                        if( pathIsCorrect( mans[0].sprite.getPosition().x,mans[0].sprite.getPosition().y,
-//                                cursor.getPosition().x , cursor.getPosition().y) )
-//                            mans[0].characterMove(cursor.getPosition().x, cursor.getPosition().y);
-                        //player1.characterMove(32, 32);
-                        //player1.sprite.move(128,128);
-                    //}
                     break;
 
                 }
@@ -186,20 +204,28 @@ int main() {
             if( tileInfo(cursor.getPosition().x,cursor.getPosition().y+32, nullptr,nullptr) )
             cursorMove(cursor, 'd');
         }
-
+        /////////////////////////////////// Atack /////////////////////////////////////
         if (event.key.code == sf::Keyboard::F && mans[choiseMan].getStep() > 0) {
-            bool damageCheck = damageCorrect(cursor.getPosition().x, cursor.getPosition().y, evils, mans[choiseMan].getAccuracy());
+
+            bool damageCheck = damageCorrect(cursor.getPosition().x, cursor.getPosition().y, evils,
+                    ( mans[choiseMan].getAccuracy() + stash[choiseMan].getItOne(countOfInventorySlot)->getAccuracy() )/2,
+                     stash[choiseMan].getItOne(countOfInventorySlot)->getHpChange());
+
+            bool ammoHave = ammoCheck( stash, choiseMan);
+
             if(mans[choiseMan].characterMove(cursor.getPosition().x,cursor.getPosition().y,2)) {
-                if (damageCheck) {
-                    message.setString("Damage is" + std::to_string(10));
+                if (damageCheck ) {
+                    message.setString("Damage is" + std::to_string(stash[choiseMan].getItOne(countOfInventorySlot)->getHpChange()));
                     message.setPosition(cursor.getPosition().x, cursor.getPosition().y - 20);
                 } else message.setString("Miss...");
                 mans[choiseMan].setStep(-1);
+
             }else{
                 message.setString("Too far...");
                 message.setPosition(mans[choiseMan].sprite.getPosition());
             }
         }
+
         if (event.key.code == sf::Keyboard::D ) {
 
             doorOpen++;
@@ -209,6 +235,7 @@ int main() {
             }
 
         }
+
         if (event.key.code == sf::Keyboard::H ) {
 
             if(!flagTableHide) {
@@ -242,13 +269,67 @@ int main() {
 
             }
         }
-        if(event.key.code == sf::Keyboard::K){
 
-            if(countOfInventorySlot == backpack.getIt().size()-1)
+        //// Swap item
+        if(event.key.code == sf::Keyboard::K) {
+
+            if (!stash[choiseMan].getIt().empty()) {
+                if (countOfInventorySlot >= stash[choiseMan].getIt().size() - 1)
+                    countOfInventorySlot = 0;
+                else countOfInventorySlot++;
+                message.setString("");
+            } else message.setString("Empty");
+        }
+        //// Drop Item
+        if(event.key.code == sf::Keyboard::L){
+
+            if(!stash[choiseMan].getIt().empty()) {
+                stash[choiseMan].getItOne(countOfInventorySlot)->getSprite().setPosition(mans[choiseMan].sprite.getPosition());
+                mans[choiseMan].setCurrentMass(- stash[choiseMan].getItOne(countOfInventorySlot)->getMass());
+                someItem.setIt(stash[choiseMan].getItOne(countOfInventorySlot));
+                stash[choiseMan].throwIt(countOfInventorySlot);
                 countOfInventorySlot = 0;
-            else countOfInventorySlot++;
+
+
+            }
+
+        }
+        //// Take item
+        if(event.key.code == sf::Keyboard::J){
+            for(int it =0; it < someItem.getIt().size(); it++ ) {
+                if (someItem.getItOne(it)->getSprite().getPosition() == cursor.getPosition() &&
+                someItem.getItOne(it)->getMass() <= (mans[choiseMan].getMass() - mans[choiseMan].getCurrentMass())) {
+                    stash[choiseMan].setIt( someItem.getItOne(it) );
+                    mans[choiseMan].setCurrentMass(someItem.getItOne(it)->getMass());
+                    someItem.throwIt(it);
+                    message.setString("");
+                } else {
+                    message.setString("So heavy...");
+                    message.setPosition(mans[choiseMan].sprite.getPosition().x,mans[choiseMan].sprite.getPosition().y-32);
+                }
+            }
         }
 
+        //// HEAL /////////////////////////////
+        if(event.key.code == sf::Keyboard::M){
+
+            std::cout<<"Aid step: " << stash[choiseMan].getItOne(countOfInventorySlot)->getAidStep() << std::endl;
+            std::cout<<"pers step: "<< mans[choiseMan].getStep() <<std::endl;
+
+            if( stash[choiseMan].getItOne(countOfInventorySlot)->getRegen() != 0 &&
+                    mans[choiseMan].getStep() >= stash[choiseMan].getItOne(countOfInventorySlot)->getAidStep()) {
+
+                mans[choiseMan].setHP(-stash[choiseMan].getItOne(countOfInventorySlot)->getRegen());
+                mans[choiseMan].setStep( -stash[choiseMan].getItOne(countOfInventorySlot)->getAidStep() );
+                stash[choiseMan].throwIt(countOfInventorySlot);
+                countOfInventorySlot = 0;
+                message.setString("");
+
+            } else {
+                message.setString("I cant use this");
+                message.setPosition(mans[choiseMan].sprite.getPosition().x,mans[choiseMan].sprite.getPosition().y -32 );
+                }
+        }
 
 
         if (event.key.code == sf::Keyboard::Space) {
@@ -257,7 +338,7 @@ int main() {
             bool tileFree = tileInfo(cursor.getPosition().x,cursor.getPosition().y, &mans,&evils);
             bool lenghOfMove = mans[choiseMan].characterMove(cursor.getPosition().x,cursor.getPosition().y);
 //            if(YouCan)
-            std::cout<<"X: "<<mans[choiseMan].sprite.getPosition().x<<" , "<<mans[choiseMan].sprite.getPosition().y << std::endl;
+            //std::cout<<"X: "<<mans[choiseMan].sprite.getPosition().x<<" , "<<mans[choiseMan].sprite.getPosition().y << std::endl;
 //            else std::cout<<"false: " << std::endl;
 
             if( !tileFree || !lenghOfMove || mans[choiseMan].getStep() <= 0){
@@ -345,15 +426,21 @@ int main() {
             window.draw(gameOver);
         }
 
-        backpack.getItOne(countOfInventorySlot)->drawInventory(tableInventory,inventoryInfo1,inventoryInfo2,inventoryInfo3,overview.getCenter().x,overview.getCenter().y);
-        window.draw(tableInventory);
-        window.draw(inventoryInfo1);
-        window.draw(inventoryInfo2);
-        window.draw(inventoryInfo3);
+        if(!stash[choiseMan].getIt().empty()){
+            stash[choiseMan].getItOne(countOfInventorySlot)->drawInventory(tableInventory,inventoryInfo1,inventoryInfo2,inventoryInfo3,overview.getCenter().x,overview.getCenter().y);
+
+            window.draw(tableInventory);
+            window.draw(inventoryInfo1);
+            window.draw(inventoryInfo2);
+            window.draw(inventoryInfo3);
+            window.draw(stash[choiseMan].getItOne(countOfInventorySlot)->getSprite());
+        }
 
 
-        window.draw(backpack.getItOne(countOfInventorySlot)->getSprite());
 
+//        if(!stash[choiseMan].getIt().empty()) {
+//            window.draw(stash[choiseMan].getItOne(countOfInventorySlot)->getSprite());
+//        }
 
         window.draw(tableInfo);
         window.draw(heroInfo1);

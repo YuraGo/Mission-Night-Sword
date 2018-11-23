@@ -14,80 +14,101 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-
+//// getSprite
 
 class Item{
 protected:
+    std::string name;
+    int HPchange;
+    int mass;
+    sf::String File;
+    sf::Image image;//сфмл изображение
+    sf::Texture texture;//сфмл текстура
+    sf::Sprite sprite;
 
 public:
     virtual void getInfo(){std::cout<<"nothing"<<std::endl;};
 
-    virtual sf::Sprite& getSprite(){sf::Sprite p; return p;};
+    sf::Sprite& getSprite(){return this->sprite;};
 
     virtual void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float,float){};
+
+    int getMass(){return this->mass;};
+
+    int getHpChange(){return this->HPchange;};
+
+    virtual int getRegen(){return 0;};
+
+    virtual int getAidStep(){return 0;};
+
+    virtual int getAmmoSize(){return 0;};
+
+    virtual int getAccuracy(){return 100;};
+
+    virtual void setCurrentSize(int count){};
+
+    std::string getName(){return this->name;};
+
+    virtual std::string getTypeOfAmmo(){return " ";};
+
+    virtual int getBullets(){ return 0;};
 };
 
 
 class Weapon: public Item {
 protected:
-    std::string name;
-    int damage;
     int accuracy;
     std::string typeOfAmmo;
-    int mass;
-    sf::String File;
-    sf::Image image;//сфмл изображение
-    sf::Texture texture;//сфмл текстура
-    sf::Sprite sprite;
+    int bulletsPerShoot;
 public:
-    sf::Sprite& getSprite(){ return this->sprite;};
+    //sf::Sprite& getSprite()override{ return this->sprite;};
 
-    Weapon(int,int, const std::string&,int,const std::string&,sf::String);
+    Weapon(int,int,int, const std::string&,int,const std::string&,sf::String);
 
-    void getInfo();
+    int getAccuracy()override{return this->accuracy;};
 
-    void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float, float);
+    std::string getTypeOfAmmo()override{return this->typeOfAmmo;};
+
+    void getInfo()override;
+
+    int getBullets()override{ return this->bulletsPerShoot;};
+
+    void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float, float)override;
 };
 
 class Ammo : public Item{
 protected:
-    std::string type;
     int size;
-    int mass;
-    sf::String File;
-    sf::Image image;//сфмл изображение
-    sf::Texture texture;//сфмл текстура
-    sf::Sprite sprite;
 public:
     Ammo(const std::string&, int, int,sf::String);
 
-    sf::Sprite& getSprite(){ return this->sprite;};
+    //sf::Sprite& getSprite()override{ return this->sprite;};
 
     void setSize(int change);
 
-    void getInfo();
+    void getInfo()override;
 
-    void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float,float);
+    int getAmmoSize()override{return this->size;};
+
+    void setCurrentSize(int count)override{this->size-=count;};
+
+    void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float,float)override;
 };
 
 class Medkit: public Item {
 protected:
-    int mass;
-    int regen;
     int step;
-    sf::String File;
-    sf::Image image;//сфмл изображение
-    sf::Texture texture;//сфмл текстура
-    sf::Sprite sprite;
 
 public:
     Medkit(int,int,int,sf::String);
 
-    void getInfo();
+    void getInfo()override;
 
-    sf::Sprite& getSprite(){ return sprite;};
+    virtual int getAidStep()override{return this->step;};
 
-    void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3, float ,float );
+    int getRegen()override{return this->HPchange;};
+
+    void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3, float ,float )override;
 };
 
 
@@ -95,9 +116,7 @@ public:
 class Inventory{
 protected:
     ///// Наследовать все класса предметов и хранить тут указатели
-
     std::vector<Item*> items;
-    //items.push_back(&medkit);
 public:
 
     const std::vector<Item*>& getIt() const{ return items; };

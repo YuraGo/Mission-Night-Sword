@@ -25,6 +25,8 @@ Hero::Hero(sf::String F, float X, float Y, float W, float H) {
 void Hero::setHero(const std::string &Name, int hp, int Mass, int Speed, int View,int Accuracy){
     this->name = Name;
     this->HP = hp;
+    this->currentHP = hp;
+    this->currentMass = 0;
     this->mass = Mass;
     this->speed = Speed;
     this->view = View;

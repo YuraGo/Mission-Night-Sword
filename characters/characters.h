@@ -20,6 +20,8 @@ protected:
     //std::vector<int> inventory;
     int HP;
     int mass;
+    int currentMass;
+    int currentHP;
     int speed;
     int view;
     int accuracy;
@@ -38,7 +40,7 @@ public:
 
     void setHero(const std::string&,int ,int ,int ,int ,int );
 
-    void setHP(int damage){ this->HP -= damage; };
+    void setHP(int damage){ this->currentHP -= damage; };
 
     int getView() { return  this->view;};
 
@@ -52,7 +54,13 @@ public:
 
     int getMass() { return  this->mass;};
 
+    void setCurrentMass(int mass){this->currentMass +=mass;};
+
     int getAccuracy() { return  this->accuracy;};
+
+    int getCurrentMass(){return this->currentMass;};
+
+    int getCurrentHP(){return this->currentHP;};
 
     bool isReload();
 

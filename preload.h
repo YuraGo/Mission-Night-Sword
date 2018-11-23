@@ -29,7 +29,7 @@ void tableEnemyDraw(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2, 
     text2.setFillColor(sf::Color::Yellow);
 
 
-    text1.setString("HP: " + std::to_string(player->getHP()) + "  " + "Speed: " + std::to_string(player->getSpeed()));
+    text1.setString("HP: " + std::to_string(player->getCurrentHP()) +"/"+ std::to_string(player->getHP()) + "  " + "Speed: " + std::to_string(player->getSpeed()));
 
     text2.setString("Step: " + std::to_string(player->getStep()) +"  " + "Accuracy: " + std::to_string(player->getAccuracy()));
 
@@ -43,9 +43,9 @@ void tableInfodraw(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf
     text2.setPosition(X-265,Y + 144);
     text3.setPosition(X-265,Y + 160);
 
-    text1.setString("HP: " + std::to_string(player->getHP()) + "  " + "Speed: " + std::to_string(player->getSpeed()));
+    text1.setString("HP: " + std::to_string(player->getCurrentHP()) + "/" + std::to_string(player->getHP()) +" " + "Speed: " + std::to_string(player->getSpeed()));
 
-    text2.setString("Step: " + std::to_string(player->getStep()) +"  " + "Mass: " + std::to_string(player->getMass()));
+    text2.setString("Step: " + std::to_string(player->getStep()) +"  " + "Mass: " + std::to_string(player->getCurrentMass()) + "/" +std::to_string(player->getMass()));
 
     text3.setString("Accuracy: " + std::to_string(player->getAccuracy() ));
 }
@@ -125,7 +125,7 @@ bool tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* ev
     return check;
 }
 
-bool damageCorrect(float X, float Y,std::vector<Enemy> &mans,int Ac) {
+bool damageCorrect(float X, float Y,std::vector<Enemy>& mans,int Ac,int damage) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(1, 100);
@@ -135,8 +135,8 @@ bool damageCorrect(float X, float Y,std::vector<Enemy> &mans,int Ac) {
 
     for(auto it = 0; it != mans.size(); it++){
         if(X == mans[it].sprite.getPosition().x && Y == mans[it].sprite.getPosition().y) {
-            mans[it].setHP(10);
-            if(mans[it].getHP() <= 0){
+            mans[it].setHP(damage);
+            if(mans[it].getCurrentHP() <= 0){
                 mans[it].setStep(-1000);
                 mans.erase(mans.begin() + it);
             }
@@ -144,6 +144,29 @@ bool damageCorrect(float X, float Y,std::vector<Enemy> &mans,int Ac) {
         }
     }
     return true;
+}
+
+bool ammoCheck(std::vector<Inventory>& items, int index){
+    int i=0;
+    std::string type;
+    while(i <= items[index].getIt().size()) {
+
+        if(items[index].getItOne(i)->getTypeOfAmmo() != " ") {
+            type = items[index].getItOne(i)->getTypeOfAmmo();
+            break;
+        }else i++;
+    }
+
+    for(auto it: items[index].getIt() ){
+        if( it->getName() == type){
+            if( items[index].getItOne(i)->getBullets() <= it->getAmmoSize()) {
+                it->setCurrentSize(items[index].getItOne(i)->getBullets());
+
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 
@@ -185,7 +208,7 @@ void startCord(std::vector<Enemy> &evils,Inventory& item){
 
    // for(auto it: item.getIt()){
    for(int it = 0;it != item.getIt().size(); it++){
-        item.getItOne(it)->getInfo();
+        //item.getItOne(it)->getInfo();
         Xi = distX(gen)*32;
         Yi = distY(gen)*32;
         if(tileInfo(Xi,Yi,nullptr, nullptr))

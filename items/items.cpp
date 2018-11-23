@@ -4,35 +4,37 @@
 
 
 
-Weapon::Weapon(int Damage,int Accuracy,const std::string& TypeOfAmmo,int Mass,const std::string& Name,sf::String File){
+Weapon::Weapon(int Damage,int bullets,int Accuracy,const std::string& TypeOfAmmo,int Mass,const std::string& Name,sf::String File){
 
-
-    this->damage = Damage;
+    this->HPchange = Damage;
     this->accuracy = Accuracy;
     this->name = Name;
     this->mass = Mass;
     this->typeOfAmmo = TypeOfAmmo;
     image.loadFromFile(File);
+    image.createMaskFromColor(sf::Color(255,0,255,255));
     texture.loadFromImage(image);
     this->sprite.setTexture(texture);
    // this->sprite.setPosition(X,Y);
     this->sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
+    this->bulletsPerShoot = bullets;
 };
 
 void Weapon::getInfo() {
     std::cout<<"WEAPON-----"<<std::endl;
     std::cout<<"Mass: " <<this->mass       <<std::endl;
-    std::cout<<"damage: " <<this->damage     <<std::endl;
+    std::cout<<"damage: " <<this->HPchange     <<std::endl;
     std::cout<<"name: " <<this->name       <<std::endl;
     std::cout<<"accuracy: " <<this->accuracy   <<std::endl;
     std::cout<<"typeOfAmmo: " <<this->typeOfAmmo <<std::endl;
 }
 
 Ammo::Ammo(const std::string& Type,int Size,int Mass,sf::String File) {
-    this->type = Type;
+    this->name = Type;
     this->size = Size;
     this->mass = Mass;
     image.loadFromFile(File);
+    image.createMaskFromColor(sf::Color(255,0,255,255));
     texture.loadFromImage(image);
     this->sprite.setTexture(texture);
     //this->sprite.setPosition(X,Y);
@@ -42,7 +44,7 @@ Ammo::Ammo(const std::string& Type,int Size,int Mass,sf::String File) {
 void Ammo::getInfo() {
     std::cout<<"AMMO------"<<std::endl;
     std::cout<<"Mass: " <<this->mass       <<std::endl;
-    std::cout<<"Type: " <<this->type       <<std::endl;
+    std::cout<<"Type: " <<this->name       <<std::endl;
     std::cout<<"Size: " <<this->size   <<std::endl;
 }
 
@@ -52,18 +54,20 @@ void Ammo::setSize(int change) {
 
 Medkit::Medkit(int Step, int Regen, int Mass,sf::String File) {
     this->step = Step;
-    this->regen = Regen;
+    this->HPchange = Regen;
     this->mass = Mass;
     image.loadFromFile(File);
+    image.createMaskFromColor(sf::Color(255,0,255,255));
     texture.loadFromImage(image);
     this->sprite.setTexture(texture);
+
     //this->sprite.setPosition(X,Y);
     this->sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
 }
 void Medkit::getInfo() {
     std::cout<<"MEDKIT-----"<<std::endl;
     std::cout<<"Mass: " <<this->mass <<std::endl;
-    std::cout<<"Regen: " <<this->regen<<std::endl;
+    std::cout<<"Regen: " <<this->HPchange<<std::endl;
     std::cout<<"Step: " <<this->step <<std::endl;
 }
 
@@ -76,7 +80,7 @@ void Weapon::drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& 
     text2.setPosition(X - 50, Y + 145);
     text3.setPosition(X - 50, Y + 165);
 
-    text1.setString("Name: " + std::to_string(this->damage) + " "+"Damage: " + std::to_string(this->damage));
+    text1.setString("Name: " + this->name + " "+"Damage: " + std::to_string(this->HPchange));
     text2.setString("Type of ammo: "+ this->typeOfAmmo);
     text3.setString("Weight: " + std::to_string(this->mass));
 
@@ -92,7 +96,7 @@ void Medkit::drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& 
     text2.setPosition(X - 50, Y + 145);
     text3.setPosition(X - 50, Y + 165);
 
-    text1.setString("Regen: " + std::to_string(this->regen));
+    text1.setString("Regen: " + std::to_string(this->HPchange));
     text2.setString("Weight: " + std::to_string(this->mass));
     text3.setString("Step: " + std::to_string(this->step));
 }
@@ -106,7 +110,7 @@ void Ammo::drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& te
     text2.setPosition(X - 50, Y + 145);
     text3.setPosition(X - 50, Y + 165);
 
-    text1.setString("Type of ammo: " + this->type );
+    text1.setString("Type of ammo: " + this->name );
     text2.setString("Weight: " + std::to_string(this->mass));
     text3.setString("Size: " + std::to_string(this->size));
 
