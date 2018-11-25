@@ -21,7 +21,7 @@ int main() {
     window.setVerticalSyncEnabled(true);
 
     sf::View overview;
-    overview.setSize(sf::Vector2f(1000.f, 600.f));//540 380
+    overview.setSize(sf::Vector2f(1000.f, 680.f));//540 380
     overview.setCenter(600,360);//320, 240
 
     sf::RectangleShape pickHero(sf::Vector2f(32.f,64.f));
@@ -39,6 +39,9 @@ int main() {
 
     sf::Text roundOver("",font,45);
     roundOver.setFillColor(sf::Color::Blue);
+    sf::Text countOfRound("",font,35);
+    countOfRound.setFillColor(sf::Color(40, 227, 11));
+
 
     sf::RectangleShape tableInfo(sf::Vector2f(180,70));
     sf::RectangleShape tableInfoEnemy(sf::Vector2f(180,80));
@@ -70,6 +73,7 @@ int main() {
     sf::Sprite s_map;
     s_map.setTexture(map);
 
+
     std::vector<Hero> mans;
     std::vector<Enemy> evils;
 
@@ -83,12 +87,13 @@ int main() {
 
     bool flagTableHide=false;
     int choiseMan=0;
-    int doorOpen =0;
+    bool doorOpen =false;
     int countOfMove =1;
     int countOfInventorySlot = 0;
+    int numbOfRound = 1;
 
-    Weapon bow(20,1,80,"arrow",15,"bow","Items/Axe02.PNG");
-    Weapon axe(40,5,70,"5.56",15,"axe","Items/Bow09.PNG");
+    Weapon bow(20,1,80,4,"arrow",15,"bow","Items/Axe02.PNG");
+    Weapon axe(40,5,70,15,"5.56",15,"axe","Items/Bow09.PNG");
     Medkit aid(1,20,5,"Items/PotionTallRuby.PNG");
     Ammo bullets("5.56",20,5,"Items/CoinsTeal.PNG");
     Ammo arrows("arrow",10,5,"Items/ArrowSteel.PNG");
@@ -211,27 +216,37 @@ int main() {
                     ( mans[choiseMan].getAccuracy() + stash[choiseMan].getItOne(countOfInventorySlot)->getAccuracy() )/2,
                      stash[choiseMan].getItOne(countOfInventorySlot)->getHpChange());
 
-            bool ammoHave = ammoCheck( stash, choiseMan);
+            bool ammoHave = ammoCheck( stash, choiseMan,0);
 
             if(mans[choiseMan].characterMove(cursor.getPosition().x,cursor.getPosition().y,2)) {
-                if (damageCheck ) {
-                    message.setString("Damage is" + std::to_string(stash[choiseMan].getItOne(countOfInventorySlot)->getHpChange()));
-                    message.setPosition(cursor.getPosition().x, cursor.getPosition().y - 20);
-                } else message.setString("Miss...");
-                mans[choiseMan].setStep(-1);
-
-            }else{
+                if(ammoHave) {
+                    if (damageCheck) {
+                        message.setString("Damage is" + std::to_string(
+                                stash[choiseMan].getItOne(countOfInventorySlot)->getHpChange()));
+                        message.setPosition(cursor.getPosition().x, cursor.getPosition().y - 20);
+                    } else message.setString("Miss...");
+                    mans[choiseMan].setStep(-1);
+                } else{
+                    message.setString("Not enough ammo...");
+                    message.setPosition(mans[choiseMan].sprite.getPosition());
+                }
+            }else {
                 message.setString("Too far...");
                 message.setPosition(mans[choiseMan].sprite.getPosition());
             }
         }
 
         if (event.key.code == sf::Keyboard::D ) {
-
-            doorOpen++;
             if(openDoor(cursor.getPosition().x,cursor.getPosition().y,
-            mans[choiseMan].sprite.getPosition().x,mans[choiseMan].sprite.getPosition().y)){
+            mans[choiseMan].sprite.getPosition().x,mans[choiseMan].sprite.getPosition().y) && mans[choiseMan].getStep() >0){
                 mans[choiseMan].setStep(-1);
+                message.setString("");
+                if(!doorOpen)
+                    doorOpen = true;
+                else doorOpen = false;
+            } else{
+                message.setPosition(mans[choiseMan].sprite.getPosition().x,mans[choiseMan].sprite.getPosition().y-32);
+                message.setString("I cant");
             }
 
         }
@@ -268,6 +283,19 @@ int main() {
                 inventoryInfo3.setFillColor(sf::Color::Blue);
 
             }
+        }
+        //// Reaload
+        if(event.key.code == sf::Keyboard::R) {
+
+            if(ammoCheck( stash, choiseMan,1)){
+                message.setString("I`m full");
+                message.setPosition(mans[choiseMan].sprite.getPosition().x,mans[choiseMan].sprite.getPosition().y -32);
+                mans[choiseMan].setStep(-1);
+            }else {
+                message.setString("I cant");
+                message.setPosition(mans[choiseMan].sprite.getPosition().x,mans[choiseMan].sprite.getPosition().y -32);
+            }
+
         }
 
         //// Swap item
@@ -363,7 +391,7 @@ int main() {
 
                     if (TileMap[i][j] == '0') s_map.setTextureRect(sf::IntRect(384, 128, 416, 160)); // 8W 5H
                     if (TileMap[i][j] == 'D'){
-                        if(doorOpen%2 != 0) s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
+                        if(doorOpen) s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
                         else s_map.setTextureRect(sf::IntRect(160, 96, 192, 128));
                     }
                     if (TileMap[i][j] == ' ') s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
@@ -372,6 +400,7 @@ int main() {
                     window.draw(s_map);
                 }
             }
+
 
 
         bool endOfRound;
@@ -384,7 +413,8 @@ int main() {
         pickHero.setPosition(mans[choiseMan].sprite.getPosition());
         window.draw(pickHero);
         tableInfodraw(tableInfo, heroInfo1,heroInfo2,heroInfo3, overview.getCenter().x,overview.getCenter().y , &mans[choiseMan]);
-
+        countOfRound.setPosition(overview.getCenter().x -150, overview.getCenter().y-150);
+        countOfRound.setString("Round " + std::to_string(numbOfRound));
 
         for(auto it: someItem.getIt()){
             window.draw(it->getSprite());
@@ -413,6 +443,7 @@ int main() {
         }
 
         if(mans[0].getStep() <= 0 && mans[1].getStep() <= 0) {
+            numbOfRound++;
             roundOver.setString("Round Over");
             roundOver.setPosition(overview.getCenter());
             mans[0].setStep(2);
@@ -442,6 +473,7 @@ int main() {
 //            window.draw(stash[choiseMan].getItOne(countOfInventorySlot)->getSprite());
 //        }
 
+        window.draw(countOfRound);
         window.draw(tableInfo);
         window.draw(heroInfo1);
         window.draw(heroInfo2);

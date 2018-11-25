@@ -4,7 +4,7 @@
 
 
 
-Weapon::Weapon(int Damage,int bullets,int Accuracy,const std::string& TypeOfAmmo,int Mass,const std::string& Name,sf::String File){
+Weapon::Weapon(int Damage,int bullets,int Accuracy, int cap,const std::string& TypeOfAmmo,int Mass,const std::string& Name,sf::String File){
 
     this->HPchange = Damage;
     this->accuracy = Accuracy;
@@ -18,6 +18,8 @@ Weapon::Weapon(int Damage,int bullets,int Accuracy,const std::string& TypeOfAmmo
    // this->sprite.setPosition(X,Y);
     this->sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
     this->bulletsPerShoot = bullets;
+    this->capacity = cap;
+    this->currentCapacity = cap;
 };
 
 void Weapon::getInfo() {
@@ -80,9 +82,9 @@ void Weapon::drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& 
     text2.setPosition(X - 50, Y + 145);
     text3.setPosition(X - 50, Y + 165);
 
-    text1.setString("Name: " + this->name + " "+"Damage: " + std::to_string(this->HPchange));
+    text1.setString("Name: " + this->name + " Damage: " + std::to_string(this->HPchange));
     text2.setString("Type of ammo: "+ this->typeOfAmmo);
-    text3.setString("Weight: " + std::to_string(this->mass));
+    text3.setString("Weight: " + std::to_string(this->mass) + " Clip: " + std::to_string(this->currentCapacity)+ "/" +std::to_string(this->capacity) );
 
 }
 
@@ -126,3 +128,4 @@ Item* Inventory::getItOne(int count){
     }
     return nullptr;
 }
+

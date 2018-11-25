@@ -52,6 +52,15 @@ public:
     virtual std::string getTypeOfAmmo(){return " ";};
 
     virtual int getBullets(){ return 0;};
+
+    virtual void setCapacity(int cap){};
+
+    virtual int getCapacity(){return 0;};
+
+    virtual int getCurrentCapacity(){return 0;};
+
+    virtual void setCurrentCapacity(int shot){};
+
 };
 
 
@@ -60,10 +69,12 @@ protected:
     int accuracy;
     std::string typeOfAmmo;
     int bulletsPerShoot;
+    int capacity;
+    int currentCapacity;
 public:
     //sf::Sprite& getSprite()override{ return this->sprite;};
 
-    Weapon(int,int,int, const std::string&,int,const std::string&,sf::String);
+    Weapon(int,int,int,int ,const std::string&,int,const std::string&,sf::String);
 
     int getAccuracy()override{return this->accuracy;};
 
@@ -74,6 +85,15 @@ public:
     int getBullets()override{ return this->bulletsPerShoot;};
 
     void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float, float)override;
+
+    void setCapacity(int cap)override{this->currentCapacity = cap;};
+
+    int getCapacity()override{return this->capacity;};
+
+    int getCurrentCapacity()override{return this->currentCapacity;};
+
+    void setCurrentCapacity(int shot)override{this->currentCapacity -= shot;};
+
 };
 
 class Ammo : public Item{

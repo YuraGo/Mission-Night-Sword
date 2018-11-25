@@ -27,6 +27,8 @@ vector
 -
 ../characters/characters.h
 /home/dartmoor/Desktop/C++/nightsword/characters/characters.h
+../items/items.h
+/home/dartmoor/Desktop/C++/nightsword/items/items.h
 
 /home/dartmoor/Desktop/C++/nightsword/characters/characters.h
 SFML/Window.hpp

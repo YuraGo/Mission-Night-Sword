@@ -146,7 +146,7 @@ bool damageCorrect(float X, float Y,std::vector<Enemy>& mans,int Ac,int damage) 
     return true;
 }
 
-bool ammoCheck(std::vector<Inventory>& items, int index){
+bool ammoCheck(std::vector<Inventory>& items, int index, int clip){
     int i=0;
     std::string type;
     while(i <= items[index].getIt().size()) {
@@ -159,11 +159,36 @@ bool ammoCheck(std::vector<Inventory>& items, int index){
 
     for(auto it: items[index].getIt() ){
         if( it->getName() == type){
-            if( items[index].getItOne(i)->getBullets() <= it->getAmmoSize()) {
-                it->setCurrentSize(items[index].getItOne(i)->getBullets());
 
-                return true;
-            }
+                //// SHOOT
+                if(clip == 0 && items[index].getItOne(i)->getBullets() <= items[index].getItOne(i)->getCurrentCapacity() ) {
+                    //it->setCurrentSize(items[index].getItOne(i)->getBullets());
+                    items[index].getItOne(i)->setCurrentCapacity(items[index].getItOne(i)->getBullets());
+                    return true;
+                }
+                //// RELOAD
+                if(clip != 0 && it->getAmmoSize() > 0 ){
+
+                    if(items[index].getItOne(i)->getCurrentCapacity() > 0)
+                        return false;
+
+                    if( it->getAmmoSize() >= items[index].getItOne(i)->getCapacity() ) {
+                        items[index].getItOne(i)->setCapacity(items[index].getItOne(i)->getCapacity());
+                        it->setCurrentSize(items[index].getItOne(i)->getCapacity());
+                    }
+                    else {
+                        std::cout<<"tyt je";
+                        items[index].getItOne(i)->setCapacity( it->getAmmoSize() );
+                        it->setCurrentSize(it->getAmmoSize());
+                    }
+
+                    return true;
+                } else{
+                    return false;
+                }
+
+
+
         }
     }
     return false;
@@ -178,16 +203,24 @@ sf::CircleShape& whereGo(sf::CircleShape& radiusOfMove,int speed, float X, float
     radiusOfMove.setFillColor(sf::Color(210,210,0,30));
 }
 
+bool rangeOfAct (float X, float Y,float anX, float anY ) {
 
+    if( (X - anX)*(X - anX) + (Y - anY) * (Y - anY) <= (64)*(64) ) {
+        return true;
+    }else return false;
+
+}
 
 bool openDoor(float X, float Y, float plX, float plY){
-int i=0;
-    if(X/32 == 7 && Y/32 == 3) {
-        i++;
+
+    if(X/32 == 25 && Y/32 == 6) {
+        if( rangeOfAct(X,Y,plX,plY))
         return true;
     }
-    else return false;
+     return false;
 }
+
+
 
 void startCord(std::vector<Enemy> &evils,Inventory& item){
 
