@@ -75,7 +75,16 @@ const int W = 42;
     };
 
 
+class LevelMap{
+private:
+    bool freeTile[H][W];
+    //// true - zanyato
+public:
 
+    bool getInfo(int X,int Y){return this->freeTile[X][Y];};
+
+    void update(int X, int Y,bool flag){this->freeTile[X][Y]=flag;};
+};
 
 
 

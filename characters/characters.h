@@ -29,12 +29,15 @@ protected:
     sf::String File;
     sf::Image image;//сфмл изображение
     sf::Texture texture;//сфмл текстура
+    sf::Sprite sprite;//сфмл
     float cordX, cordY, w,h;
 public:
 
-    sf::Sprite sprite;//сфмл
+
 
     Hero(){};
+
+    sf::Sprite& getSprite(){return this->sprite;};
 
     Hero(sf::String , float , float , float , float );
 

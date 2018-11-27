@@ -7,9 +7,9 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "Graphics/graphics.h"
+#include "../Graphics/graphics.h"
 #include <iostream>
-#include "characters/characters.h"
+#include "../characters/characters.h"
 #include "preload.h"
 
 
@@ -24,31 +24,31 @@ void moveAI(std::vector<Enemy>& evils,std::vector<Hero>* mans,int countOfMove) {
         correct = false;
         another = false;
         demension = 2;
-        X = evils[it].sprite.getPosition().x;
-        Y = evils[it].sprite.getPosition().y;
+        X = evils[it].getSprite().getPosition().x;
+        Y = evils[it].getSprite().getPosition().y;
 
         while(!correct) {
             if (countOfMove == 1 || another) { // down Y+
-                X = evils[it].sprite.getPosition().x;
-                Y = evils[it].sprite.getPosition().y;
+                X = evils[it].getSprite().getPosition().x;
+                Y = evils[it].getSprite().getPosition().y;
                 Y += 96;
 
             while(!correct){
                 if (tileInfo(X, Y, mans, &evils) && tileInfo(X, Y - 64, nullptr, nullptr)
                     && tileInfo(X, Y - 32, nullptr, nullptr)) {
-                    evils[it].sprite.setPosition(X, Y);
+                    evils[it].getSprite().setPosition(X, Y);
                     correct = true;
                     another = false;
                     break;
                 }
                 if (tileInfo(X, Y - 64, nullptr, nullptr) && tileInfo(X, Y - 32, mans,  &evils)) {
-                    evils[it].sprite.setPosition(X, Y - 32);
+                    evils[it].getSprite().setPosition(X, Y - 32);
                     correct = true;
                     another = false;
                     break;
                 }
                 if (tileInfo(X, Y - 64, mans,  &evils)) {
-                    evils[it].sprite.setPosition(X, Y - 64);
+                    evils[it].getSprite().setPosition(X, Y - 64);
                     correct = true;
                     another = false;
                     break;
@@ -60,26 +60,26 @@ void moveAI(std::vector<Enemy>& evils,std::vector<Hero>* mans,int countOfMove) {
 
 
             if (countOfMove == 2 || another) { // left X-
-                X = evils[it].sprite.getPosition().x;
-                Y = evils[it].sprite.getPosition().y;
+                X = evils[it].getSprite().getPosition().x;
+                Y = evils[it].getSprite().getPosition().y;
                 X -= 96;
 
                 while (!correct) {
                     if (tileInfo(X, Y, mans, &evils) && tileInfo(X + 64, Y, nullptr, nullptr)
                         && tileInfo(X + 32, Y, nullptr, nullptr)) {
-                        evils[it].sprite.setPosition(X, Y);
+                        evils[it].getSprite().setPosition(X, Y);
                         correct = true;
                         another = false;
                         break;
                     }
                     if (tileInfo(X + 64, Y, nullptr, nullptr) && tileInfo(X + 32, Y, mans,  &evils)) {
-                        evils[it].sprite.setPosition(X + 32, Y);
+                        evils[it].getSprite().setPosition(X + 32, Y);
                         correct = true;
                         another = false;
                         break;
                     }
                     if (tileInfo(X - 64, Y, mans,  &evils)) {
-                        evils[it].sprite.setPosition(X + 64, Y);
+                        evils[it].getSprite().setPosition(X + 64, Y);
                         correct = true;
                         another = false;
                         break;
@@ -92,27 +92,27 @@ void moveAI(std::vector<Enemy>& evils,std::vector<Hero>* mans,int countOfMove) {
 
 
             if (countOfMove == 3 || another) { // Up Y+
-                X = evils[it].sprite.getPosition().x;
-                Y = evils[it].sprite.getPosition().y;
+                X = evils[it].getSprite().getPosition().x;
+                Y = evils[it].getSprite().getPosition().y;
                 Y -= 96;
                 while(!correct) {
                     if (tileInfo(X, Y, mans, &evils) && tileInfo(X, Y + 64, nullptr, nullptr)
                         && tileInfo(X, Y + 32, nullptr, nullptr)) {
-                        evils[it].sprite.setPosition(X, Y);
+                        evils[it].getSprite().setPosition(X, Y);
                         correct = true;
                         another = false;
                         break;
 
                     }
                     if (tileInfo(X, Y + 64, nullptr, nullptr) && tileInfo(X, Y + 32, mans,  &evils)) {
-                        evils[it].sprite.setPosition(X, Y + 32);
+                        evils[it].getSprite().setPosition(X, Y + 32);
                         correct = true;
                         another = false;
                         break;
 
                     }
                     if (tileInfo(X, Y + 64, mans,  &evils)) {
-                        evils[it].sprite.setPosition(X, Y + 64);
+                        evils[it].getSprite().setPosition(X, Y + 64);
                         correct = true;
                         another = false;
                         break;
@@ -124,25 +124,25 @@ void moveAI(std::vector<Enemy>& evils,std::vector<Hero>* mans,int countOfMove) {
 
 
             if (countOfMove == 4 || another) { // Right X+
-                X = evils[it].sprite.getPosition().x;
-                Y = evils[it].sprite.getPosition().y;
+                X = evils[it].getSprite().getPosition().x;
+                Y = evils[it].getSprite().getPosition().y;
                 X += 96;
                 while(!correct) {
                     if (tileInfo(X, Y, mans, &evils) && tileInfo(X - 64, Y, nullptr, nullptr)
                         && tileInfo(X - 32, Y, nullptr, nullptr)) {
-                        evils[it].sprite.setPosition(X, Y);
+                        evils[it].getSprite().setPosition(X, Y);
                         correct = true;
                         another = false;
                         break;
                     }
                     if (tileInfo(X - 64, Y, nullptr, nullptr) && tileInfo(X - 32, Y, mans,  &evils)) {
-                        evils[it].sprite.setPosition(X - 32, Y);
+                        evils[it].getSprite().setPosition(X - 32, Y);
                         correct = true;
                         another = false;
                         break;
                     }
                     if (tileInfo(X - 64, Y, mans,  &evils)) {
-                        evils[it].sprite.setPosition(X - 64, Y);
+                        evils[it].getSprite().setPosition(X - 64, Y);
                         correct = true;
                         another = false;
                         break;
@@ -157,13 +157,19 @@ void moveAI(std::vector<Enemy>& evils,std::vector<Hero>* mans,int countOfMove) {
 void heroIsNear(std::vector<Enemy>& evils,std::vector<Hero>* mans){
  float enemyX,enemyY,heroX,heroY;
     for (auto it = 0; it != evils.size(); it++) {
-        enemyX = evils[it].sprite.getPosition().x;
-        enemyY = evils[it].sprite.getPosition().y;
+
+        if(evils[it].getAgr())
+            continue;
+
+        enemyX = evils[it].getSprite().getPosition().x;
+        enemyY = evils[it].getSprite().getPosition().y;
 
         for(auto j: *mans){
-            heroX = j.sprite.getPosition().x;
-            heroY = j.sprite.getPosition().y;
-
+            heroX = j.getSprite().getPosition().x;
+            heroY = j.getSprite().getPosition().y;
+            if(rangeOfAct( enemyX/32,enemyY/32, heroX/32, heroY/32, (evils[it].getView()) )){
+                evils[it].setAgr(true);
+            }
 
         }
 

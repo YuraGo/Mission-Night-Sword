@@ -133,7 +133,6 @@ public:
 
 class Inventory{
 protected:
-    ///// Наследовать все класса предметов и хранить тут указатели
     std::vector<Item*> items;
 public:
 

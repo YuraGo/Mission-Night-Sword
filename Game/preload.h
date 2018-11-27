@@ -7,10 +7,10 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "Graphics/graphics.h"
+#include "../Graphics/graphics.h"
 #include <iostream>
-#include "characters/characters.h"
-#include "items/items.h"
+#include "../characters/characters.h"
+#include "../items/items.h"
 #include <stdio.h>
 #include <cstdlib>
 #include <vector>
@@ -29,9 +29,9 @@ void tableEnemyDraw(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2, 
     text2.setFillColor(sf::Color::Yellow);
 
 
-    text1.setString("HP: " + std::to_string(player->getCurrentHP()) +"/"+ std::to_string(player->getHP()) + "  " + "Speed: " + std::to_string(player->getSpeed()));
+    text1.setString("HP: " + std::to_string(player->getCurrentHP()) +"/"+ std::to_string(player->getHP()) + "  Speed: " + std::to_string(player->getSpeed()));
 
-    text2.setString("Step: " + std::to_string(player->getStep()) +"  " + "Accuracy: " + std::to_string(player->getAccuracy()));
+    text2.setString("Step: " + std::to_string(player->getStep()) +"  Accuracy: " + std::to_string(player->getAccuracy()) + " Arg: "+ std::to_string(player->getAgr()));
 
 }
 
@@ -75,13 +75,13 @@ bool tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* ev
 
     if(mans != nullptr){
     for(auto it : *mans){
-        if(X == it.sprite.getPosition().x && Y == it.sprite.getPosition().y)
+        if(X == it.getSprite().getPosition().x && Y == it.getSprite().getPosition().y)
             check = false;
     }}
 
     if(evils != nullptr){
         for(auto it : *evils){
-            if(X == it.sprite.getPosition().x && Y == it.sprite.getPosition().y)
+            if(X == it.getSprite().getPosition().x && Y == it.getSprite().getPosition().y)
                 check = false;
         }}
 
@@ -134,7 +134,7 @@ bool damageCorrect(float X, float Y,std::vector<Enemy>& mans,int Ac,int damage) 
 
 
     for(auto it = 0; it != mans.size(); it++){
-        if(X == mans[it].sprite.getPosition().x && Y == mans[it].sprite.getPosition().y) {
+        if(X == mans[it].getSprite().getPosition().x && Y == mans[it].getSprite().getPosition().y) {
             mans[it].setHP(damage);
             if(mans[it].getCurrentHP() <= 0){
                 mans[it].setStep(-1000);
@@ -203,18 +203,14 @@ sf::CircleShape& whereGo(sf::CircleShape& radiusOfMove,int speed, float X, float
     radiusOfMove.setFillColor(sf::Color(210,210,0,30));
 }
 
-bool rangeOfAct (float X, float Y,float anX, float anY ) {
-
-    if( (X - anX)*(X - anX) + (Y - anY) * (Y - anY) <= (64)*(64) ) {
-        return true;
-    }else return false;
-
+bool rangeOfAct (float X, float Y,float anX, float anY,int plus=32 ) {
+    return ((X - anX)*(X - anX) + (Y - anY) * (Y - anY) )<= (plus)*(plus) ? true : false;
 }
 
 bool openDoor(float X, float Y, float plX, float plY){
 
     if(X/32 == 25 && Y/32 == 6) {
-        if( rangeOfAct(X,Y,plX,plY))
+        if( rangeOfAct(X,Y,plX,plY,32))
         return true;
     }
      return false;
@@ -235,7 +231,7 @@ void startCord(std::vector<Enemy> &evils,Inventory& item){
         Y = distY(gen)*32;
 
         if(tileInfo(X,Y,nullptr, &evils))
-        evils[it].sprite.setPosition(X,Y);
+        evils[it].getSprite().setPosition(X,Y);
         else it--;
     }
 

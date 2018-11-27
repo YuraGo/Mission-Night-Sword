@@ -1,11 +1,16 @@
+//
+// Created by dartmoor on 27.11.18.
+//
+
+#include "game.h"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "Graphics/graphics.h"
+//#include "../Graphics/graphics.h"
 #include <iostream>
-#include "characters/characters.h"
+//#include "../characters/characters.h"
 #include "preload.h"
 #include "AI.h"
-#include "items/items.h"
+//#include "../items/items.h"
 #include <list>
 
 #include "preload.h"
@@ -21,7 +26,7 @@ int main(int argc,char *argv[]) {
     window.setVerticalSyncEnabled(true);
 
     sf::View overview;
-    overview.setSize(sf::Vector2f(1000.f, 680.f));//540 380
+    overview.setSize(sf::Vector2f(1300.f, 680.f));//540 380
     overview.setCenter(600,360);//320, 240
 
     sf::RectangleShape pickHero(sf::Vector2f(32.f,64.f));
@@ -84,8 +89,8 @@ int main(int argc,char *argv[]) {
     mans.push_back(player1);
     mans.push_back(player2);
 
-
-    bool flagTableHide=false;
+    //LevelMap objectMap;
+    bool flagTableHide=true;
     int choiseMan=0;
     bool doorOpen =false;
     int countOfMove =1;
@@ -132,7 +137,7 @@ int main(int argc,char *argv[]) {
     someItem.setIt(&bullets3);
 
     Enemy evil("warrior1.png",64,64,55,55);
-    evil.setHero("demon",40,0,5,8,100);
+    evil.setHero("demon",60,0,5,8,100);
 
     evils.push_back(evil);
     evils.push_back(evil);
@@ -148,7 +153,7 @@ int main(int argc,char *argv[]) {
     }
 
     startCord(evils,someItem);
-    //someItem.getItOne(0)->getSprite().setPosition(64,64);
+    //someItem.getItOne(0)->getgetSprite().setPosition(64,64);
     // Главный цикл приложения
     while(window.isOpen()) {
 
@@ -173,13 +178,13 @@ int main(int argc,char *argv[]) {
                     if (event.key.code == sf::Keyboard::Num1 && mans[0].getHP() > 0) {
                         choiseMan=0;
                         countOfInventorySlot = 0;
-                        cursor.setPosition(mans[0].sprite.getPosition().x, mans[0].sprite.getPosition().y);
+                        cursor.setPosition(mans[0].getSprite().getPosition().x, mans[0].getSprite().getPosition().y);
 
                     }
                     if (event.key.code == sf::Keyboard::Num2 && mans[1].getHP() > 0) {
                         choiseMan=1;
                         countOfInventorySlot = 0;
-                        cursor.setPosition(mans[1].sprite.getPosition().x, mans[1].sprite.getPosition().y);
+                        cursor.setPosition(mans[1].getSprite().getPosition().x, mans[1].getSprite().getPosition().y);
                     }
 
                     break;
@@ -195,19 +200,19 @@ int main(int argc,char *argv[]) {
 
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right){
             if( tileInfo(cursor.getPosition().x+32,cursor.getPosition().y, nullptr,nullptr) )
-            cursorMove(cursor, 'r');
+                cursorMove(cursor, 'r');
         }
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left){
             if( tileInfo(cursor.getPosition().x-32,cursor.getPosition().y, nullptr,nullptr) )
-            cursorMove(cursor, 'l');
+                cursorMove(cursor, 'l');
         }
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up){
             if( tileInfo(cursor.getPosition().x,cursor.getPosition().y-32, nullptr,nullptr) )
-            cursorMove(cursor, 'u');
+                cursorMove(cursor, 'u');
         }
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down){
             if( tileInfo(cursor.getPosition().x,cursor.getPosition().y+32, nullptr,nullptr) )
-            cursorMove(cursor, 'd');
+                cursorMove(cursor, 'd');
         }
         /////////////////////////////////// Atack /////////////////////////////////////
         if (event.key.code == sf::Keyboard::F && mans[choiseMan].getStep() > 0) {
@@ -230,24 +235,24 @@ int main(int argc,char *argv[]) {
                     mans[choiseMan].setStep(-1);
                 } else{
                     message.setString("Not enough ammo...");
-                    message.setPosition(mans[choiseMan].sprite.getPosition());
+                    message.setPosition(mans[choiseMan].getSprite().getPosition());
                 }
             }else {
                 message.setString("Too far...");
-                message.setPosition(mans[choiseMan].sprite.getPosition());
+                message.setPosition(mans[choiseMan].getSprite().getPosition());
             }
         }
 
         if (event.key.code == sf::Keyboard::D ) {
             if(openDoor(cursor.getPosition().x,cursor.getPosition().y,
-            mans[choiseMan].sprite.getPosition().x,mans[choiseMan].sprite.getPosition().y) && mans[choiseMan].getStep() >0){
+                        mans[choiseMan].getSprite().getPosition().x,mans[choiseMan].getSprite().getPosition().y) && mans[choiseMan].getStep() >0){
                 mans[choiseMan].setStep(-1);
                 message.setString("");
                 if(!doorOpen)
                     doorOpen = true;
                 else doorOpen = false;
             } else{
-                message.setPosition(mans[choiseMan].sprite.getPosition().x,mans[choiseMan].sprite.getPosition().y-32);
+                message.setPosition(mans[choiseMan].getSprite().getPosition().x,mans[choiseMan].getSprite().getPosition().y-32);
                 message.setString("I cant");
             }
 
@@ -255,47 +260,22 @@ int main(int argc,char *argv[]) {
 
         if (event.key.code == sf::Keyboard::H ) {
 
-            if(!flagTableHide) {
-                tableInfo.setFillColor(sf::Color(0, 0, 0, 0));
-                heroInfo1.setFillColor(sf::Color(0, 0, 0, 0));
-                heroInfo2.setFillColor(sf::Color(0, 0, 0, 0));
-                heroInfo3.setFillColor(sf::Color(0, 0, 0, 0));
-
-
-                mans[0].sprite.setScale(0,0);
-                tableInventory.setFillColor(sf::Color(0,0,0,0));
-                inventoryInfo1.setFillColor(sf::Color(0,0,0,0));
-                inventoryInfo2.setFillColor(sf::Color(0,0,0,0));
-                inventoryInfo3.setFillColor(sf::Color(0,0,0,0));
-
-
+            if(!flagTableHide)
                 flagTableHide=true;
-            }else {
-
+            else
                 flagTableHide = false;
-                mans[0].sprite.setScale(1,1);
-                tableInfo.setFillColor(sf::Color::Black);
-                heroInfo1.setFillColor(sf::Color(120,150,83));
-                heroInfo2.setFillColor(sf::Color(120,150,83));
-                heroInfo3.setFillColor(sf::Color(120,150,83));
 
-                tableInventory.setFillColor(sf::Color::Black);
-                inventoryInfo1.setFillColor(sf::Color::Blue);
-                inventoryInfo2.setFillColor(sf::Color::Blue);
-                inventoryInfo3.setFillColor(sf::Color::Blue);
-
-            }
         }
         //// Reaload
         if(event.key.code == sf::Keyboard::R) {
 
             if(ammoCheck( stash, choiseMan,1)){
                 message.setString("I`m full");
-                message.setPosition(mans[choiseMan].sprite.getPosition().x,mans[choiseMan].sprite.getPosition().y -32);
+                message.setPosition(mans[choiseMan].getSprite().getPosition().x,mans[choiseMan].getSprite().getPosition().y -32);
                 mans[choiseMan].setStep(-1);
             }else {
                 message.setString("I cant");
-                message.setPosition(mans[choiseMan].sprite.getPosition().x,mans[choiseMan].sprite.getPosition().y -32);
+                message.setPosition(mans[choiseMan].getSprite().getPosition().x,mans[choiseMan].getSprite().getPosition().y -32);
             }
 
         }
@@ -314,7 +294,7 @@ int main(int argc,char *argv[]) {
         if(event.key.code == sf::Keyboard::L){
 
             if(!stash[choiseMan].getIt().empty()) {
-                stash[choiseMan].getItOne(countOfInventorySlot)->getSprite().setPosition(mans[choiseMan].sprite.getPosition());
+                stash[choiseMan].getItOne(countOfInventorySlot)->getSprite().setPosition(mans[choiseMan].getSprite().getPosition());
                 mans[choiseMan].setCurrentMass(- stash[choiseMan].getItOne(countOfInventorySlot)->getMass());
                 someItem.setIt(stash[choiseMan].getItOne(countOfInventorySlot));
                 stash[choiseMan].throwIt(countOfInventorySlot);
@@ -328,14 +308,14 @@ int main(int argc,char *argv[]) {
         if(event.key.code == sf::Keyboard::J){
             for(int it =0; it < someItem.getIt().size(); it++ ) {
                 if (someItem.getItOne(it)->getSprite().getPosition() == cursor.getPosition() &&
-                someItem.getItOne(it)->getMass() <= (mans[choiseMan].getMass() - mans[choiseMan].getCurrentMass())) {
+                    someItem.getItOne(it)->getMass() <= (mans[choiseMan].getMass() - mans[choiseMan].getCurrentMass())) {
                     stash[choiseMan].setIt( someItem.getItOne(it) );
                     mans[choiseMan].setCurrentMass(someItem.getItOne(it)->getMass());
                     someItem.throwIt(it);
                     message.setString("");
                 } else {
                     message.setString("So heavy...");
-                    message.setPosition(mans[choiseMan].sprite.getPosition().x,mans[choiseMan].sprite.getPosition().y-32);
+                    message.setPosition(mans[choiseMan].getSprite().getPosition().x,mans[choiseMan].getSprite().getPosition().y-32);
                 }
             }
         }
@@ -343,40 +323,39 @@ int main(int argc,char *argv[]) {
         //// HEAL /////////////////////////////
         if(event.key.code == sf::Keyboard::M){
 
-            std::cout<<"Aid step: " << stash[choiseMan].getItOne(countOfInventorySlot)->getAidStep() << std::endl;
-            std::cout<<"pers step: "<< mans[choiseMan].getStep() <<std::endl;
-
             if( stash[choiseMan].getItOne(countOfInventorySlot)->getRegen() != 0 &&
-                    mans[choiseMan].getStep() >= stash[choiseMan].getItOne(countOfInventorySlot)->getAidStep()) {
-
+                mans[choiseMan].getStep() >= stash[choiseMan].getItOne(countOfInventorySlot)->getAidStep() &&
+                    mans[choiseMan].getCurrentHP() != mans[choiseMan].getHP()) {
                 mans[choiseMan].setHP(-stash[choiseMan].getItOne(countOfInventorySlot)->getRegen());
                 mans[choiseMan].setStep( -stash[choiseMan].getItOne(countOfInventorySlot)->getAidStep() );
                 stash[choiseMan].throwIt(countOfInventorySlot);
                 countOfInventorySlot = 0;
                 message.setString("");
+                if(mans[choiseMan].getCurrentHP() > mans[choiseMan].getHP())
+                    mans[choiseMan].setHP( mans[choiseMan].getCurrentHP() - mans[choiseMan].getHP() );
 
             } else {
                 message.setString("I cant use this");
-                message.setPosition(mans[choiseMan].sprite.getPosition().x,mans[choiseMan].sprite.getPosition().y -32 );
-                }
+                message.setPosition(mans[choiseMan].getSprite().getPosition().x,mans[choiseMan].getSprite().getPosition().y -32 );
+            }
         }
 
 
         if (event.key.code == sf::Keyboard::Space) {
-            //bool YouCan = pathIsCorrect(mans[0].sprite.getPosition().x,mans[0].sprite.getPosition().y,
+            //bool YouCan = pathIsCorrect(mans[0].getSprite()etPosition().x,mans[0].getSprite()etPosition().y,
             //                    cursor.getPosition().x , cursor.getPosition().y, mans[0].getSpeed());
             bool tileFree = tileInfo(cursor.getPosition().x,cursor.getPosition().y, &mans,&evils);
             bool lenghOfMove = mans[choiseMan].characterMove(cursor.getPosition().x,cursor.getPosition().y);
 //            if(YouCan)
-            //std::cout<<"X: "<<mans[choiseMan].sprite.getPosition().x<<" , "<<mans[choiseMan].sprite.getPosition().y << std::endl;
+            //std::cout<<"X: "<<mans[choiseMan].getSprite()etPosition().x<<" , "<<mans[choiseMan].getSprite()etPosition().y << std::endl;
 //            else std::cout<<"false: " << std::endl;
 
             if( !tileFree || !lenghOfMove || mans[choiseMan].getStep() <= 0){
                 message.setString("I cant");
-                message.setPosition( mans[choiseMan].sprite.getPosition().x , mans[choiseMan].sprite.getPosition().y-20 );
+                message.setPosition( mans[choiseMan].getSprite().getPosition().x , mans[choiseMan].getSprite().getPosition().y-20 );
             }else{
                 message.setString("");
-                mans[choiseMan].sprite.setPosition(cursor.getPosition().x, cursor.getPosition().y);
+                mans[choiseMan].getSprite().setPosition(cursor.getPosition().x, cursor.getPosition().y);
                 mans[choiseMan].setPlayerCordinate(cursor.getPosition().x, cursor.getPosition().y);
                 mans[choiseMan].setStep(-1);
             }
@@ -388,20 +367,27 @@ int main(int argc,char *argv[]) {
         window.clear(sf::Color(176, 147, 60));
 
 
-            for (int i = 0; i < H; i++) {
-                for (int j = 0; j < W; j++) {
+        for (int i = 0; i < H; i++) {
+            for (int j = 0; j < W; j++) {
 
-                    if (TileMap[i][j] == '0') s_map.setTextureRect(sf::IntRect(384, 128, 416, 160)); // 8W 5H
-                    if (TileMap[i][j] == 'D'){
-                        if(doorOpen) s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
-                        else s_map.setTextureRect(sf::IntRect(160, 96, 192, 128));
-                    }
-                    if (TileMap[i][j] == ' ') s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
-
-                    s_map.setPosition(j * 32, i * 32);
-                    window.draw(s_map);
+                if (TileMap[i][j] == '0'){
+                    s_map.setTextureRect(sf::IntRect(384, 128, 416, 160));
+                    //objectMap.update(i,j,true);
+                } // 8W 5H
+                if (TileMap[i][j] == 'D'){
+                    if(doorOpen) s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
+                    else s_map.setTextureRect(sf::IntRect(160, 96, 192, 128));
+                    //objectMap.update(i,j,false);
                 }
+                if (TileMap[i][j] == ' '){
+                    s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
+                    //objectMap.update(i,j,false);
+                }
+
+                s_map.setPosition(j * 32, i * 32);
+                window.draw(s_map);
             }
+        }
 
 
 
@@ -409,10 +395,10 @@ int main(int argc,char *argv[]) {
         //mans[0].update(time);
         clock.restart();
 
-        overview.setCenter(mans[choiseMan].sprite.getPosition().x, mans[choiseMan].sprite.getPosition().y);
-        whereGo(radiusOfMove, mans[choiseMan].getSpeed(),mans[choiseMan].sprite.getPosition().x, mans[choiseMan].sprite.getPosition().y);
+        overview.setCenter(mans[choiseMan].getSprite().getPosition().x, mans[choiseMan].getSprite().getPosition().y);
+        whereGo(radiusOfMove, mans[choiseMan].getSpeed(),mans[choiseMan].getSprite().getPosition().x, mans[choiseMan].getSprite().getPosition().y);
         window.draw(radiusOfMove);
-        pickHero.setPosition(mans[choiseMan].sprite.getPosition());
+        pickHero.setPosition(mans[choiseMan].getSprite().getPosition());
         window.draw(pickHero);
         tableInfodraw(tableInfo, heroInfo1,heroInfo2,heroInfo3, overview.getCenter().x,overview.getCenter().y , &mans[choiseMan]);
         countOfRound.setPosition(overview.getCenter().x -150, overview.getCenter().y-150);
@@ -422,15 +408,18 @@ int main(int argc,char *argv[]) {
             window.draw(it->getSprite());
         }
 
-        for(auto i: mans)
-        window.draw(i.sprite);
+        for(auto i: mans) {
+            window.draw(i.getSprite());
+            //objectMap.update((int)i.getSprite()etPosition().x/32 , (int)i.getSprite()etPosition().y/32 ,true);
+        }
 
         for(auto i: evils) {
-            window.draw(i.sprite);
-       // }
+            window.draw(i.getSprite());
+            //objectMap.update((int)i.getSprite()etPosition().x/32 , (int)i.getSprite()etPosition().y/32 ,true);
+            // }
 
-        //for(auto i: evils){
-            if(cursor.getPosition().x == i.sprite.getPosition().x && cursor.getPosition().y == i.sprite.getPosition().y ){
+            //for(auto i: evils){
+            if(cursor.getPosition().x == i.getSprite().getPosition().x && cursor.getPosition().y == i.getSprite().getPosition().y ){
                 tableEnemyDraw(tableInfoEnemy,enemyInfo1,enemyInfo2,cursor.getPosition().x,cursor.getPosition().y,&i);
 
             }else{
@@ -452,6 +441,7 @@ int main(int argc,char *argv[]) {
             mans[1].setStep(2);
             if(countOfMove > 4) countOfMove = 1;
             moveAI(evils,&mans, countOfMove);
+            //heroIsNear(evils,&mans);
             countOfMove++;
         }else roundOver.setString("");
 
@@ -459,7 +449,7 @@ int main(int argc,char *argv[]) {
             window.draw(gameOver);
         }
 
-        if(!stash[choiseMan].getIt().empty()){
+        if(!stash[choiseMan].getIt().empty() && flagTableHide){
             stash[choiseMan].getItOne(countOfInventorySlot)->drawInventory(tableInventory,inventoryInfo1,inventoryInfo2,inventoryInfo3,overview.getCenter().x,overview.getCenter().y);
 
             window.draw(tableInventory);
@@ -469,17 +459,21 @@ int main(int argc,char *argv[]) {
             window.draw(stash[choiseMan].getItOne(countOfInventorySlot)->getSprite());
         }
 
+        if(flagTableHide){
+            window.draw(tableInfo);
+            window.draw(heroInfo1);
+            window.draw(heroInfo2);
+            window.draw(heroInfo3);
+        }
+
 
 
 //        if(!stash[choiseMan].getIt().empty()) {
-//            window.draw(stash[choiseMan].getItOne(countOfInventorySlot)->getSprite());
+//            window.draw(stash[choiseMan].getItOne(countOfInventorySlot)->getgetSprite());
 //        }
 
         window.draw(countOfRound);
-        window.draw(tableInfo);
-        window.draw(heroInfo1);
-        window.draw(heroInfo2);
-        window.draw(heroInfo3);
+
         window.draw(roundOver);
         window.draw(message);
         window.draw(cursor);
