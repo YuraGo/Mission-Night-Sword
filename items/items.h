@@ -102,8 +102,6 @@ protected:
 public:
     Ammo(const std::string&, int, int,sf::String);
 
-    //sf::Sprite& getSprite()override{ return this->sprite;};
-
     void setSize(int change);
 
     void getInfo()override;

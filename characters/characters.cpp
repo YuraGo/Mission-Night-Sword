@@ -46,10 +46,6 @@ void Hero::getInfo() {
     //std::cout<<"inventory "<<this->inventory<<std::endl;
 }
 
-bool Hero::isReload() {
-    this->reload = false;
-    return this->reload;
-}
 
 
 bool Hero::characterMove(float X, float Y,int range) {
@@ -59,7 +55,6 @@ bool Hero::characterMove(float X, float Y,int range) {
     <= ((this->speed+range)*32)*((this->speed+range)*32) ) {
         this->cordX = X;
         this->cordY = Y;
-        //this->sprite.setPosition(X , Y);
         return true;
     }else return false;
 

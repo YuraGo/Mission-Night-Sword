@@ -1,10 +1,17 @@
 cmake_minimum_required(VERSION 3.12)
 project(nightsword)
 
-
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 add_subdirectory(gtest/googletest)
+
+
 add_subdirectory(UnitTest)
 
+######################
+
+#enable_testing()
+
+########################
 set(CMAKE_CXX_STANDARD 14)
 
 

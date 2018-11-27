@@ -11,7 +11,7 @@
 #include "preload.h"
 
 
-int main() {
+int main(int argc,char *argv[]) {
     // Создаем главное окно приложения
     sf::RenderWindow window(sf::VideoMode(640, 480), "Test"); // 640 480
     sf::Clock clock;
@@ -212,15 +212,17 @@ int main() {
         /////////////////////////////////// Atack /////////////////////////////////////
         if (event.key.code == sf::Keyboard::F && mans[choiseMan].getStep() > 0) {
 
-            bool damageCheck = damageCorrect(cursor.getPosition().x, cursor.getPosition().y, evils,
-                    ( mans[choiseMan].getAccuracy() + stash[choiseMan].getItOne(countOfInventorySlot)->getAccuracy() )/2,
-                     stash[choiseMan].getItOne(countOfInventorySlot)->getHpChange());
+//            bool damageCheck = damageCorrect(cursor.getPosition().x, cursor.getPosition().y, evils,
+//                    ( mans[choiseMan].getAccuracy() + stash[choiseMan].getItOne(countOfInventorySlot)->getAccuracy() )/2,
+//                     stash[choiseMan].getItOne(countOfInventorySlot)->getHpChange());
 
-            bool ammoHave = ammoCheck( stash, choiseMan,0);
+            //bool ammoHave = ammoCheck( stash, choiseMan,0);
 
             if(mans[choiseMan].characterMove(cursor.getPosition().x,cursor.getPosition().y,2)) {
-                if(ammoHave) {
-                    if (damageCheck) {
+                if(ammoCheck( stash, choiseMan,0)) {
+                    if (damageCorrect(cursor.getPosition().x, cursor.getPosition().y, evils,
+                                      ( mans[choiseMan].getAccuracy() + stash[choiseMan].getItOne(countOfInventorySlot)->getAccuracy() )/2,
+                                      stash[choiseMan].getItOne(countOfInventorySlot)->getHpChange())) {
                         message.setString("Damage is" + std::to_string(
                                 stash[choiseMan].getItOne(countOfInventorySlot)->getHpChange()));
                         message.setPosition(cursor.getPosition().x, cursor.getPosition().y - 20);

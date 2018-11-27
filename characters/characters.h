@@ -26,7 +26,6 @@ protected:
     int view;
     int accuracy;
     int step;
-    bool reload=false;
     sf::String File;
     sf::Image image;//сфмл изображение
     sf::Texture texture;//сфмл текстура
@@ -35,6 +34,7 @@ public:
 
     sf::Sprite sprite;//сфмл
 
+    Hero(){};
 
     Hero(sf::String , float , float , float , float );
 
@@ -61,8 +61,6 @@ public:
     int getCurrentMass(){return this->currentMass;};
 
     int getCurrentHP(){return this->currentHP;};
-
-    bool isReload();
 
     void getInfo();
 

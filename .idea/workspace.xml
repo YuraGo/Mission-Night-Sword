@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="nightsword" targetName="nightsword" />
-      <config projectName="nightsword" targetName="gmock" />
+      <config projectName="nightsword" targetName="gtest_main" />
       <config projectName="nightsword" targetName="UnitTest" />
       <config projectName="nightsword" targetName="gmock_main" />
-      <config projectName="nightsword" targetName="gtest_main" />
+      <config projectName="nightsword" targetName="nightsword" />
+      <config projectName="nightsword" targetName="gmock" />
       <config projectName="nightsword" targetName="gtest" />
     </generated>
   </component>
@@ -17,20 +17,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="33c5774a-7fa1-429a-81d0-e4c807e952d0" name="Default Changelist" comment="'Something new'">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/graphics.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Graphics/graphics.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/graphics.h" beforeDir="false" afterPath="$PROJECT_DIR$/Graphics/graphics.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UnitTest/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/UnitTest/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UnitTest/unitTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/UnitTest/unitTest.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/characters/characters.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/characters/characters.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/characters/characters.h" beforeDir="false" afterPath="$PROJECT_DIR$/characters/characters.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/nightsword.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/nightsword.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/nightsword.dir/characters/characters.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/nightsword.dir/characters/characters.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/nightsword.dir/items/items.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/nightsword.dir/items/items.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/nightsword.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/nightsword.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/nightsword" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/nightsword" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/items/items.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/items/items.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/items/items.h" beforeDir="false" afterPath="$PROJECT_DIR$/items/items.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preload.h" beforeDir="false" afterPath="$PROJECT_DIR$/preload.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/voin.png" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,97 +38,13 @@
   </component>
   <component name="ChangesViewManager" show_ignored="true" />
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
-  <component name="FUSProjectUsageTrigger">
-    <session id="-1527843797">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="13" />
-          <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.10" value="2" />
-          <entry key="project.open.time.11" value="3" />
-          <entry key="project.open.time.12" value="1" />
-          <entry key="project.open.time.13" value="2" />
-          <entry key="project.open.time.14" value="1" />
-          <entry key="project.open.time.22" value="1" />
-          <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="12" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="cpp" value="12928" />
-          <entry key="h" value="11839" />
-          <entry key="txt" value="519" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="CMakeLists.txt" value="499" />
-          <entry key="Doxygen file" value="3" />
-          <entry key="ObjectiveC" value="24764" />
-          <entry key="PLAIN_TEXT" value="20" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="Makefile" value="1" />
-          <entry key="cpp" value="25" />
-          <entry key="gitignore" value="1" />
-          <entry key="gitmodules" value="2" />
-          <entry key="h" value="26" />
-          <entry key="md" value="1" />
-          <entry key="txt" value="25" />
-          <entry key="xml" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="CMakeLists.txt" value="25" />
-          <entry key="ObjectiveC" value="51" />
-          <entry key="PLAIN_TEXT" value="5" />
-          <entry key="XML" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.cidr.testingFrameworks.usages">
-        <counts>
-          <entry key="Google Test" value="1" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
-              <caret line="417" lean-forward="true" selection-start-line="417" selection-end-line="417" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-                <marker date="1543169689697" expanded="true" signature="8776:10077" ph="..." />
-                <marker date="1543169689697" expanded="false" signature="8831:10067" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AI.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="13" selection-start-line="13" selection-end-line="13" />
-              <folding>
-                <element signature="e#92#118#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/characters/characters.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="70" column="33" lean-forward="true" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="33" />
+            <state relative-caret-position="864">
+              <caret line="48" column="16" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="16" />
               <folding>
                 <element signature="e#108#134#0" expanded="true" />
               </folding>
@@ -142,8 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/characters/characters.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="58" column="60" lean-forward="true" selection-start-line="58" selection-start-column="60" selection-end-line="58" selection-end-column="60" />
+            <state relative-caret-position="1008">
+              <caret line="56" column="24" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="24" />
               <folding>
                 <element signature="e#43#66#0" expanded="true" />
               </folding>
@@ -154,7 +67,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/items/items.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1087">
+            <state relative-caret-position="2358">
               <caret line="131" selection-start-line="131" selection-end-line="131" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -166,10 +79,24 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/items/items.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="88" column="68" lean-forward="true" selection-start-line="88" selection-start-column="68" selection-end-line="88" selection-end-column="68" />
+            <state relative-caret-position="2268">
+              <caret line="126" column="51" selection-start-line="126" selection-start-column="51" selection-end-line="126" selection-end-column="51" />
               <folding>
                 <element signature="e#100#119#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3762">
+              <caret line="219" selection-start-line="219" selection-end-line="219" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+                <marker date="1543262391463" expanded="true" signature="9126:10427" ph="..." />
+                <marker date="1543262391463" expanded="false" signature="9181:10417" ph="..." />
               </folding>
             </state>
           </provider>
@@ -178,11 +105,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/preload.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="172" column="37" selection-start-line="172" selection-start-column="37" selection-end-line="172" selection-end-column="37" />
+            <state relative-caret-position="2430">
+              <caret line="135" column="46" selection-start-line="135" selection-start-column="46" selection-end-line="135" selection-end-column="46" />
               <folding>
                 <element signature="e#102#128#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UnitTest/unitTest.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1836">
+              <caret line="102" column="32" selection-start-line="102" selection-start-column="11" selection-end-line="102" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -233,26 +169,21 @@
         <option value="$PROJECT_DIR$/AI/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/AI.h" />
         <option value="$PROJECT_DIR$/.gitmodules" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/UnitTest/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/UnitTest/unitTest.cpp" />
         <option value="$PROJECT_DIR$/items/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Graphics/graphics.h" />
         <option value="$PROJECT_DIR$/Graphics/graphics.cpp" />
-        <option value="$PROJECT_DIR$/characters/characters.h" />
-        <option value="$PROJECT_DIR$/characters/characters.cpp" />
         <option value="$PROJECT_DIR$/items/items.cpp" />
-        <option value="$PROJECT_DIR$/items/items.h" />
         <option value="$PROJECT_DIR$/preload.h" />
+        <option value="$PROJECT_DIR$/characters/characters.h" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/items/items.h" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/UnitTest/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/UnitTest/unitTest.cpp" />
+        <option value="$PROJECT_DIR$/characters/characters.cpp" />
         <option value="$PROJECT_DIR$/main.cpp" />
       </list>
     </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="87" />
@@ -266,7 +197,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -277,22 +207,13 @@
             <path>
               <item name="nightsword" type="b2602c69:ProjectViewProjectNode" />
               <item name="nightsword" type="462c0819:PsiDirectoryNode" />
-              <item name="Graphics" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nightsword" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nightsword" type="462c0819:PsiDirectoryNode" />
-              <item name="items" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nightsword" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nightsword" type="462c0819:PsiDirectoryNode" />
               <item name="UnitTest" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -316,12 +237,49 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.nightsword">
-    <configuration name="Unnamed" type="CLion_Remote" factoryName="GDB Remote Debug" remoteCommand="" symbolFile="" sysroot="">
+    <configuration name="Unnamed" type="CLion_Remote" remoteCommand="" symbolFile="" sysroot="">
       <method v="2" />
+    </configuration>
+    <configuration name="ClassAmmo.Methods" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nightsword" TARGET_NAME="nightsword" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="nightsword" RUN_TARGET_NAME="nightsword" TEST_CLASS="ClassAmmo" TEST_METHOD="Methods" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClassHero.GetterTest" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nightsword" TARGET_NAME="UnitTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="nightsword" RUN_TARGET_NAME="UnitTest" TEST_CLASS="ClassHero" TEST_METHOD="GetterTest" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClassHero.SetterTest" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nightsword" TARGET_NAME="UnitTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="nightsword" RUN_TARGET_NAME="UnitTest" TEST_CLASS="ClassHero" TEST_METHOD="SetterTest" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClassInventory.Method" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nightsword" TARGET_NAME="nightsword" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="nightsword" RUN_TARGET_NAME="nightsword" TEST_CLASS="ClassInventory" TEST_METHOD="Method" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClassWeapon.Methods" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nightsword" TARGET_NAME="UnitTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="nightsword" RUN_TARGET_NAME="UnitTest" TEST_CLASS="ClassWeapon" TEST_METHOD="Methods" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
     </configuration>
     <configuration name="Tests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nightsword" TARGET_NAME="UnitTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="nightsword" RUN_TARGET_NAME="UnitTest" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="check" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" WORKING_DIR="file://$PROJECT_DIR$/UnitTest" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nightsword" TARGET_NAME="UnitTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="nightsword" RUN_TARGET_NAME="UnitTest" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nightsword" TARGET_NAME="nightsword" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="nightsword" RUN_TARGET_NAME="nightsword">
@@ -360,7 +318,6 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="GDB Remote Debug.Unnamed" />
       <item itemvalue="Application.Build All" />
       <item itemvalue="Application.nightsword" />
       <item itemvalue="Application.gmock" />
@@ -368,8 +325,24 @@
       <item itemvalue="Application.gtest" />
       <item itemvalue="Application.gtest_main" />
       <item itemvalue="Application.UnitTest" />
+      <item itemvalue="GDB Remote Debug.Unnamed" />
       <item itemvalue="Google Test.Tests" />
+      <item itemvalue="Google Test.check" />
+      <item itemvalue="Google Test.ClassAmmo.Methods" />
+      <item itemvalue="Google Test.ClassInventory.Method" />
+      <item itemvalue="Google Test.ClassHero.SetterTest" />
+      <item itemvalue="Google Test.ClassHero.GetterTest" />
+      <item itemvalue="Google Test.ClassWeapon.Methods" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Google Test.ClassWeapon.Methods" />
+        <item itemvalue="Google Test.ClassInventory.Method" />
+        <item itemvalue="Google Test.ClassHero.GetterTest" />
+        <item itemvalue="Google Test.ClassHero.SetterTest" />
+        <item itemvalue="Google Test.ClassAmmo.Methods" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -393,6 +366,10 @@
       <workItem from="1542959829824" duration="16458000" />
       <workItem from="1543102733888" duration="912000" />
       <workItem from="1543159965056" duration="9622000" />
+      <workItem from="1543228250543" duration="6465000" />
+      <workItem from="1543257161789" duration="523000" />
+      <workItem from="1543258055795" duration="4339000" />
+      <workItem from="1543324882599" duration="304000" />
     </task>
     <servers />
   </component>
@@ -400,9 +377,12 @@
     <history-entry file="Tests - 2018.11.21 at 16h 54m 11s.xml">
       <configuration name="Tests" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
+    <history-entry file="Tests - 2018.11.26 at 15h 09m 10s.xml">
+      <configuration name="Tests" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="161402000" />
+    <option name="totallyTimeSpent" value="173033000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -415,8 +395,31 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1971269" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49880287" weight="0.5089723" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.6688418" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32626426" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.68352365" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32952693" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5011971" side_tool="true" weight="0.4502447" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.7585644" />
+      <window_info anchor="bottom" id="CMake" order="12" weight="0.61174554" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1915403" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -436,7 +439,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -493,9 +496,20 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="'Something new'" />
@@ -535,50 +549,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gtest/googletest/googletest/include/gtest/gtest.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="59" column="9" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gtest/googletest/googletest/scripts/test/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UnitTest/unitTest.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="45" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UnitTest/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/items/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitmodules">
       <provider selected="true" editor-type-id="text-editor" />
@@ -590,36 +566,96 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="64" column="14" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="14" />
-          <folding>
-            <element signature="e#103#131#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/characters/characters.h">
+    <entry file="file://$APPLICATION_HOME_DIR$/bin/cmake/linux/share/cmake-3.12/Modules/FindGTest.cmake">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="70" column="33" lean-forward="true" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="33" />
-          <folding>
-            <element signature="e#108#134#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="70">
+          <caret line="195" selection-start-line="195" selection-end-line="195" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/bin/cmake/linux/share/cmake-3.12/Modules/FindPackageHandleStandardArgs.cmake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/bin/cmake/linux/share/cmake-3.12/Modules/WriteBasicConfigVersionFile.cmake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/SFML/Graphics/Sprite.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gtest/googletest/googletest/include/gtest/gtest.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="2369" selection-start-line="2369" selection-end-line="2369" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AI.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="792">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
           <folding>
             <element signature="e#92#118#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="14" lean-forward="true" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gtest/googletest/googletest/scripts/test/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="59" selection-start-line="59" selection-end-line="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UnitTest/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/characters/characters.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="864">
+          <caret line="48" column="16" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="16" />
+          <folding>
+            <element signature="e#108#134#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/characters/characters.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="58" column="60" lean-forward="true" selection-start-line="58" selection-start-column="60" selection-end-line="58" selection-end-column="60" />
+        <state relative-caret-position="1008">
+          <caret line="56" column="24" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="24" />
           <folding>
             <element signature="e#43#66#0" expanded="true" />
           </folding>
@@ -628,7 +664,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/items/items.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1087">
+        <state relative-caret-position="2358">
           <caret line="131" selection-start-line="131" selection-end-line="131" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -638,8 +674,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/items/items.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="88" column="68" lean-forward="true" selection-start-line="88" selection-start-column="68" selection-end-line="88" selection-end-column="68" />
+        <state relative-caret-position="2268">
+          <caret line="126" column="51" selection-start-line="126" selection-start-column="51" selection-end-line="126" selection-end-column="51" />
           <folding>
             <element signature="e#100#119#0" expanded="true" />
           </folding>
@@ -648,22 +684,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/preload.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="172" column="37" selection-start-line="172" selection-start-column="37" selection-end-line="172" selection-end-column="37" />
+        <state relative-caret-position="2430">
+          <caret line="135" column="46" selection-start-line="135" selection-start-column="46" selection-end-line="135" selection-end-column="46" />
           <folding>
             <element signature="e#102#128#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/UnitTest/unitTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1836">
+          <caret line="102" column="32" selection-start-line="102" selection-start-column="11" selection-end-line="102" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="417" lean-forward="true" selection-start-line="417" selection-end-line="417" />
+        <state relative-caret-position="3762">
+          <caret line="219" selection-start-line="219" selection-end-line="219" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <marker date="1543169689697" expanded="true" signature="8776:10077" ph="..." />
-            <marker date="1543169689697" expanded="false" signature="8831:10067" ph="..." />
+            <marker date="1543262391463" expanded="true" signature="9126:10427" ph="..." />
+            <marker date="1543262391463" expanded="false" signature="9181:10417" ph="..." />
           </folding>
         </state>
       </provider>
