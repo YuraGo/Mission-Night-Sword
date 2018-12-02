@@ -75,7 +75,6 @@ void Medkit::getInfo() {
 
 void Weapon::drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float X,float Y){
 
-
     table.setPosition(X-90,Y+120);
     this->sprite.setPosition(X-85,Y+140);
     text1.setPosition(X - 50, Y + 125 );
@@ -89,8 +88,6 @@ void Weapon::drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& 
 }
 
 void Medkit::drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3, float X,float Y){
-
-
 
     table.setPosition(X-90,Y+120);
     this->sprite.setPosition(X-85,Y+140);

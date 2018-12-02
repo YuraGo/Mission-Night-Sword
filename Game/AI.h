@@ -151,6 +151,7 @@ void moveAI(std::vector<Enemy>& evils,std::vector<Hero>* mans,int countOfMove) {
                 }
             }
         }
+        evils[it].setPlayerCordinate(evils[it].getSprite().getPosition().x ,evils[it].getSprite().getPosition().y);
     }
 }
 
@@ -167,7 +168,7 @@ void heroIsNear(std::vector<Enemy>& evils,std::vector<Hero>* mans){
         for(auto j: *mans){
             heroX = j.getSprite().getPosition().x;
             heroY = j.getSprite().getPosition().y;
-            if(rangeOfAct( enemyX/32,enemyY/32, heroX/32, heroY/32, (evils[it].getView()) )){
+            if(rangeOfAct( enemyX/32,enemyY/32, heroX/32, heroY/32, ((float)evils[it].getView()) )){
                 evils[it].setAgr(true);
             }
 

@@ -5,15 +5,15 @@
 #include "game.h"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-//#include "../Graphics/graphics.h"
 #include <iostream>
+#include "../Graphics/graphics.h"
 //#include "../characters/characters.h"
 #include "preload.h"
 #include "AI.h"
 //#include "../items/items.h"
-#include <list>
+#include "classGame.h"
+#include "paint.h"
 
-#include "preload.h"
 
 
 int main(int argc,char *argv[]) {
@@ -79,15 +79,18 @@ int main(int argc,char *argv[]) {
     s_map.setTexture(map);
 
 
-    std::vector<Hero> mans;
-    std::vector<Enemy> evils;
+    //std::vector<Hero> mans;
+    //std::vector<Enemy> play.evils;
+    classGame play;
+    play.createHero("solder.png");
+    play.createEnemy();
 
-    Hero player1("solder.png",32,32,50,70);
-    Hero player2("solder.png",64,64,55,55);
-    player1.setHero("Bob",100,30,5,8,80);
-    player2.setHero("Silver",100,30,6,10,40);
-    mans.push_back(player1);
-    mans.push_back(player2);
+//    Hero player1("solder.png",32,32,50,70);
+//    Hero player2("solder.png",64,64,55,55);
+//    player1.setHero("Bob",100,30,5,8,80);
+//    player2.setHero("Silver",100,30,6,10,40);
+//    mans.push_back(player1);
+//    mans.push_back(player2);
 
     //LevelMap objectMap;
     bool flagTableHide=true;
@@ -114,19 +117,27 @@ int main(int argc,char *argv[]) {
 
     std::vector<Inventory> stash;
 
-    Inventory backpack;
-    backpack.setIt(&bow);
-    backpack.setIt(&arrows);
-    backpack.setIt(&aid);
+    play.mans[0].rukzak.setIt(&bow);
+    play.mans[0].rukzak.setIt(&arrows);
+    play.mans[0].rukzak.setIt(&aid);
 
-    Inventory backpack2;
-    backpack2.setIt(&axe);
-    backpack2.setIt(&bullets);
-    backpack2.setIt(&aid);
+    //Inventory backpack;
+    //backpack.setIt(&bow);
+    //backpack.setIt(&arrows);
+    //backpack.setIt(&aid);
+
+//    Inventory backpack2;
+//    backpack2.setIt(&axe);
+//    backpack2.setIt(&bullets);
+//    backpack2.setIt(&aid);
+
+    play.mans[1].rukzak.setIt(&axe);
+    play.mans[1].rukzak.setIt(&bullets);
+    play.mans[1].rukzak.setIt(&aid);
 
 
-    stash.push_back(backpack);
-    stash.push_back(backpack2);
+    //stash.push_back(backpack);
+    //stash.push_back(backpack2);
 
     Inventory someItem;
     someItem.setIt(&aid1);
@@ -136,23 +147,23 @@ int main(int argc,char *argv[]) {
     someItem.setIt(&bullets2);
     someItem.setIt(&bullets3);
 
-    Enemy evil("warrior1.png",64,64,55,55);
-    evil.setHero("demon",60,0,5,8,100);
+//    Enemy evil("warrior1.png",64,64,55,55);
+//    evil.setHero("demon",60,0,5,8,100);
+/////// GAME CLASS
+//    play.evils.push_back(evil);
+//    play.evils.push_back(evil);
+//    play.evils.push_back(evil);
+//    play.evils.push_back(evil);
 
-    evils.push_back(evil);
-    evils.push_back(evil);
-    evils.push_back(evil);
-    evils.push_back(evil);
-
-    for(int it =0; it < stash[0].getIt().size(); it++ ) {
-        mans[0].setCurrentMass( stash[0].getItOne(it)->getMass());
+    for(int it =0; it <  play.mans[0].rukzak.getIt().size(); it++ ) {
+        play.mans[0].setCurrentMass(  play.mans[0].rukzak.getItOne(it)->getMass());
     }
 
-    for(int it =0; it < stash[1].getIt().size(); it++ ) {
-        mans[1].setCurrentMass( stash[0].getItOne(it)->getMass());
+    for(int it =0; it < play.mans[1].rukzak.getIt().size(); it++ ) {
+        play.mans[1].setCurrentMass( play.mans[1].rukzak.getItOne(it)->getMass());
     }
 
-    startCord(evils,someItem);
+    startCord(play.evils,someItem);
     //someItem.getItOne(0)->getgetSprite().setPosition(64,64);
     // Главный цикл приложения
     while(window.isOpen()) {
@@ -175,16 +186,16 @@ int main(int argc,char *argv[]) {
                         window.close();
 
 
-                    if (event.key.code == sf::Keyboard::Num1 && mans[0].getHP() > 0) {
+                    if (event.key.code == sf::Keyboard::Num1 && play.mans[0].getHP() > 0) {
                         choiseMan=0;
                         countOfInventorySlot = 0;
-                        cursor.setPosition(mans[0].getSprite().getPosition().x, mans[0].getSprite().getPosition().y);
+                        cursor.setPosition(play.mans[0].getSprite().getPosition().x, play.mans[0].getSprite().getPosition().y);
 
                     }
-                    if (event.key.code == sf::Keyboard::Num2 && mans[1].getHP() > 0) {
+                    if (event.key.code == sf::Keyboard::Num2 && play.mans[1].getHP() > 0) {
                         choiseMan=1;
                         countOfInventorySlot = 0;
-                        cursor.setPosition(mans[1].getSprite().getPosition().x, mans[1].getSprite().getPosition().y);
+                        cursor.setPosition(play.mans[1].getSprite().getPosition().x, play.mans[1].getSprite().getPosition().y);
                     }
 
                     break;
@@ -215,44 +226,21 @@ int main(int argc,char *argv[]) {
                 cursorMove(cursor, 'd');
         }
         /////////////////////////////////// Atack /////////////////////////////////////
-        if (event.key.code == sf::Keyboard::F && mans[choiseMan].getStep() > 0) {
-
-//            bool damageCheck = damageCorrect(cursor.getPosition().x, cursor.getPosition().y, evils,
-//                    ( mans[choiseMan].getAccuracy() + stash[choiseMan].getItOne(countOfInventorySlot)->getAccuracy() )/2,
-//                     stash[choiseMan].getItOne(countOfInventorySlot)->getHpChange());
-
-            //bool ammoHave = ammoCheck( stash, choiseMan,0);
-
-            if(mans[choiseMan].characterMove(cursor.getPosition().x,cursor.getPosition().y,2)) {
-                if(ammoCheck( stash, choiseMan,0)) {
-                    if (damageCorrect(cursor.getPosition().x, cursor.getPosition().y, evils,
-                                      ( mans[choiseMan].getAccuracy() + stash[choiseMan].getItOne(countOfInventorySlot)->getAccuracy() )/2,
-                                      stash[choiseMan].getItOne(countOfInventorySlot)->getHpChange())) {
-                        message.setString("Damage is" + std::to_string(
-                                stash[choiseMan].getItOne(countOfInventorySlot)->getHpChange()));
-                        message.setPosition(cursor.getPosition().x, cursor.getPosition().y - 20);
-                    } else message.setString("Miss...");
-                    mans[choiseMan].setStep(-1);
-                } else{
-                    message.setString("Not enough ammo...");
-                    message.setPosition(mans[choiseMan].getSprite().getPosition());
-                }
-            }else {
-                message.setString("Too far...");
-                message.setPosition(mans[choiseMan].getSprite().getPosition());
-            }
+        if (event.key.code == sf::Keyboard::F && play.mans[choiseMan].getStep() > 0) {
+            message.setString(play.mans[choiseMan].Attack(countOfInventorySlot,cursor.getPosition().x,cursor.getPosition().y,play.evils));
+            message.setPosition(play.mans[choiseMan].getCordX(),play.mans[choiseMan].getCordY());
         }
 
         if (event.key.code == sf::Keyboard::D ) {
             if(openDoor(cursor.getPosition().x,cursor.getPosition().y,
-                        mans[choiseMan].getSprite().getPosition().x,mans[choiseMan].getSprite().getPosition().y) && mans[choiseMan].getStep() >0){
-                mans[choiseMan].setStep(-1);
+                        play.mans[choiseMan].getSprite().getPosition().x,play.mans[choiseMan].getSprite().getPosition().y) && play.mans[choiseMan].getStep() >0){
+                play.mans[choiseMan].setStep(-1);
                 message.setString("");
                 if(!doorOpen)
                     doorOpen = true;
                 else doorOpen = false;
             } else{
-                message.setPosition(mans[choiseMan].getSprite().getPosition().x,mans[choiseMan].getSprite().getPosition().y-32);
+                message.setPosition(play.mans[choiseMan].getSprite().getPosition().x,play.mans[choiseMan].getSprite().getPosition().y-32);
                 message.setString("I cant");
             }
 
@@ -269,22 +257,19 @@ int main(int argc,char *argv[]) {
         //// Reaload
         if(event.key.code == sf::Keyboard::R) {
 
-            if(ammoCheck( stash, choiseMan,1)){
+            message.setPosition(play.mans[choiseMan].getCordX(),play.mans[choiseMan].getCordY());
+            if(play.mans[choiseMan].reload()){
                 message.setString("I`m full");
-                message.setPosition(mans[choiseMan].getSprite().getPosition().x,mans[choiseMan].getSprite().getPosition().y -32);
-                mans[choiseMan].setStep(-1);
             }else {
                 message.setString("I cant");
-                message.setPosition(mans[choiseMan].getSprite().getPosition().x,mans[choiseMan].getSprite().getPosition().y -32);
             }
-
         }
 
         //// Swap item
         if(event.key.code == sf::Keyboard::K) {
 
-            if (!stash[choiseMan].getIt().empty()) {
-                if (countOfInventorySlot >= stash[choiseMan].getIt().size() - 1)
+            if (!play.mans[choiseMan].rukzak.getIt().empty()) {
+                if (countOfInventorySlot >= play.mans[choiseMan].rukzak.getIt().size() - 1)
                     countOfInventorySlot = 0;
                 else countOfInventorySlot++;
                 message.setString("");
@@ -293,13 +278,12 @@ int main(int argc,char *argv[]) {
         //// Drop Item
         if(event.key.code == sf::Keyboard::L){
 
-            if(!stash[choiseMan].getIt().empty()) {
-                stash[choiseMan].getItOne(countOfInventorySlot)->getSprite().setPosition(mans[choiseMan].getSprite().getPosition());
-                mans[choiseMan].setCurrentMass(- stash[choiseMan].getItOne(countOfInventorySlot)->getMass());
-                someItem.setIt(stash[choiseMan].getItOne(countOfInventorySlot));
-                stash[choiseMan].throwIt(countOfInventorySlot);
+            if(!play.mans[choiseMan].rukzak.getIt().empty()) {
+                play.mans[choiseMan].rukzak.getItOne(countOfInventorySlot)->getSprite().setPosition(play.mans[choiseMan].getSprite().getPosition());
+                play.mans[choiseMan].setCurrentMass(- play.mans[choiseMan].rukzak.getItOne(countOfInventorySlot)->getMass());
+                someItem.setIt(play.mans[choiseMan].rukzak.getItOne(countOfInventorySlot));
+                play.mans[choiseMan].rukzak.throwIt(countOfInventorySlot);
                 countOfInventorySlot = 0;
-
 
             }
 
@@ -308,14 +292,14 @@ int main(int argc,char *argv[]) {
         if(event.key.code == sf::Keyboard::J){
             for(int it =0; it < someItem.getIt().size(); it++ ) {
                 if (someItem.getItOne(it)->getSprite().getPosition() == cursor.getPosition() &&
-                    someItem.getItOne(it)->getMass() <= (mans[choiseMan].getMass() - mans[choiseMan].getCurrentMass())) {
-                    stash[choiseMan].setIt( someItem.getItOne(it) );
-                    mans[choiseMan].setCurrentMass(someItem.getItOne(it)->getMass());
+                    someItem.getItOne(it)->getMass() <= (play.mans[choiseMan].getMass() - play.mans[choiseMan].getCurrentMass())) {
+                    play.mans[choiseMan].rukzak.setIt( someItem.getItOne(it) );
+                    play.mans[choiseMan].setCurrentMass(someItem.getItOne(it)->getMass());
                     someItem.throwIt(it);
                     message.setString("");
                 } else {
                     message.setString("So heavy...");
-                    message.setPosition(mans[choiseMan].getSprite().getPosition().x,mans[choiseMan].getSprite().getPosition().y-32);
+                    message.setPosition(play.mans[choiseMan].getSprite().getPosition().x,play.mans[choiseMan].getSprite().getPosition().y-32);
                 }
             }
         }
@@ -323,43 +307,32 @@ int main(int argc,char *argv[]) {
         //// HEAL /////////////////////////////
         if(event.key.code == sf::Keyboard::M){
 
-            if( stash[choiseMan].getItOne(countOfInventorySlot)->getRegen() != 0 &&
-                mans[choiseMan].getStep() >= stash[choiseMan].getItOne(countOfInventorySlot)->getAidStep() &&
-                    mans[choiseMan].getCurrentHP() != mans[choiseMan].getHP()) {
-                mans[choiseMan].setHP(-stash[choiseMan].getItOne(countOfInventorySlot)->getRegen());
-                mans[choiseMan].setStep( -stash[choiseMan].getItOne(countOfInventorySlot)->getAidStep() );
-                stash[choiseMan].throwIt(countOfInventorySlot);
+            if( play.mans[choiseMan].rukzak.getItOne(countOfInventorySlot)->getRegen() != 0 &&
+                    play.mans[choiseMan].getStep() >= play.mans[choiseMan].rukzak.getItOne(countOfInventorySlot)->getAidStep() &&
+                    play.mans[choiseMan].getCurrentHP() != play.mans[choiseMan].getHP()) {
+                play.mans[choiseMan].setHP(-play.mans[choiseMan].rukzak.getItOne(countOfInventorySlot)->getRegen());
+                play.mans[choiseMan].setStep( -play.mans[choiseMan].rukzak.getItOne(countOfInventorySlot)->getAidStep() );
+                play.mans[choiseMan].rukzak.throwIt(countOfInventorySlot);
                 countOfInventorySlot = 0;
                 message.setString("");
-                if(mans[choiseMan].getCurrentHP() > mans[choiseMan].getHP())
-                    mans[choiseMan].setHP( mans[choiseMan].getCurrentHP() - mans[choiseMan].getHP() );
+                if(play.mans[choiseMan].getCurrentHP() > play.mans[choiseMan].getHP())
+                    play.mans[choiseMan].setHP( play.mans[choiseMan].getCurrentHP() - play.mans[choiseMan].getHP() );
 
             } else {
                 message.setString("I cant use this");
-                message.setPosition(mans[choiseMan].getSprite().getPosition().x,mans[choiseMan].getSprite().getPosition().y -32 );
+                message.setPosition(play.mans[choiseMan].getSprite().getPosition().x,play.mans[choiseMan].getSprite().getPosition().y -32 );
             }
         }
 
 
         if (event.key.code == sf::Keyboard::Space) {
-            //bool YouCan = pathIsCorrect(mans[0].getSprite()etPosition().x,mans[0].getSprite()etPosition().y,
-            //                    cursor.getPosition().x , cursor.getPosition().y, mans[0].getSpeed());
-            bool tileFree = tileInfo(cursor.getPosition().x,cursor.getPosition().y, &mans,&evils);
-            bool lenghOfMove = mans[choiseMan].characterMove(cursor.getPosition().x,cursor.getPosition().y);
-//            if(YouCan)
-            //std::cout<<"X: "<<mans[choiseMan].getSprite()etPosition().x<<" , "<<mans[choiseMan].getSprite()etPosition().y << std::endl;
-//            else std::cout<<"false: " << std::endl;
 
-            if( !tileFree || !lenghOfMove || mans[choiseMan].getStep() <= 0){
+            if( !play.moveHero(choiseMan, cursor.getPosition().x,cursor.getPosition().y)){
                 message.setString("I cant");
-                message.setPosition( mans[choiseMan].getSprite().getPosition().x , mans[choiseMan].getSprite().getPosition().y-20 );
+                message.setPosition( play.mans[choiseMan].getCordX() , play.mans[choiseMan].getCordY()-20 );
             }else{
                 message.setString("");
-                mans[choiseMan].getSprite().setPosition(cursor.getPosition().x, cursor.getPosition().y);
-                mans[choiseMan].setPlayerCordinate(cursor.getPosition().x, cursor.getPosition().y);
-                mans[choiseMan].setStep(-1);
             }
-
 
         }
 
@@ -392,34 +365,35 @@ int main(int argc,char *argv[]) {
 
 
         bool endOfRound;
-        //mans[0].update(time);
+        //play.mans[0].update(time);
         clock.restart();
 
-        overview.setCenter(mans[choiseMan].getSprite().getPosition().x, mans[choiseMan].getSprite().getPosition().y);
-        whereGo(radiusOfMove, mans[choiseMan].getSpeed(),mans[choiseMan].getSprite().getPosition().x, mans[choiseMan].getSprite().getPosition().y);
+        overview.setCenter(play.mans[choiseMan].getSprite().getPosition().x, play.mans[choiseMan].getSprite().getPosition().y);
+        whereGo(radiusOfMove, play.mans[choiseMan].getSpeed(),play.mans[choiseMan].getSprite().getPosition().x, play.mans[choiseMan].getSprite().getPosition().y);
         window.draw(radiusOfMove);
-        pickHero.setPosition(mans[choiseMan].getSprite().getPosition());
+        pickHero.setPosition(play.mans[choiseMan].getSprite().getPosition());
         window.draw(pickHero);
-        tableInfodraw(tableInfo, heroInfo1,heroInfo2,heroInfo3, overview.getCenter().x,overview.getCenter().y , &mans[choiseMan]);
+        tableInfodraw(tableInfo, heroInfo1,heroInfo2,heroInfo3, overview.getCenter().x,overview.getCenter().y , &play.mans[choiseMan]);
         countOfRound.setPosition(overview.getCenter().x -150, overview.getCenter().y-150);
         countOfRound.setString("Round " + std::to_string(numbOfRound));
 
         for(auto it: someItem.getIt()){
             window.draw(it->getSprite());
         }
-
-        for(auto i: mans) {
+        //window.draw(play.mans[0].getSprite());
+        for(auto i: play.mans) {
             window.draw(i.getSprite());
             //objectMap.update((int)i.getSprite()etPosition().x/32 , (int)i.getSprite()etPosition().y/32 ,true);
         }
 
-        for(auto i: evils) {
+        for(auto i: play.evils) {
             window.draw(i.getSprite());
             //objectMap.update((int)i.getSprite()etPosition().x/32 , (int)i.getSprite()etPosition().y/32 ,true);
             // }
 
-            //for(auto i: evils){
-            if(cursor.getPosition().x == i.getSprite().getPosition().x && cursor.getPosition().y == i.getSprite().getPosition().y ){
+            //for(auto i: play.evils){
+           //// cursor.getPosition().x == i.getSprite().getPosition().x && cursor.getPosition().y == i.getSprite().getPosition().y
+            if(cursor.getPosition().x == i.getCordX() && cursor.getPosition().y == i.getCordY() ){
                 tableEnemyDraw(tableInfoEnemy,enemyInfo1,enemyInfo2,cursor.getPosition().x,cursor.getPosition().y,&i);
 
             }else{
@@ -433,30 +407,30 @@ int main(int argc,char *argv[]) {
             window.draw(enemyInfo2);
         }
 
-        if(mans[0].getStep() <= 0 && mans[1].getStep() <= 0) {
+        if(play.mans[0].getStep() <= 0 && play.mans[1].getStep() <= 0) {
             numbOfRound++;
             roundOver.setString("Round Over");
             roundOver.setPosition(overview.getCenter());
-            mans[0].setStep(2);
-            mans[1].setStep(2);
+            play.mans[0].setStep(2);
+            play.mans[1].setStep(2);
             if(countOfMove > 4) countOfMove = 1;
-            moveAI(evils,&mans, countOfMove);
-            //heroIsNear(evils,&mans);
+            moveAI(play.evils,&play.mans, countOfMove);
+            //heroIsNear(play.evils,&play.mans);
             countOfMove++;
         }else roundOver.setString("");
 
-        if(evils.empty() || mans.empty()){
+        if(play.evils.empty() || play.mans.empty()){
             window.draw(gameOver);
         }
 
-        if(!stash[choiseMan].getIt().empty() && flagTableHide){
-            stash[choiseMan].getItOne(countOfInventorySlot)->drawInventory(tableInventory,inventoryInfo1,inventoryInfo2,inventoryInfo3,overview.getCenter().x,overview.getCenter().y);
+        if(!play.mans[choiseMan].rukzak.getIt().empty() && flagTableHide){
+            play.mans[choiseMan].rukzak.getItOne(countOfInventorySlot)->drawInventory(tableInventory,inventoryInfo1,inventoryInfo2,inventoryInfo3,overview.getCenter().x,overview.getCenter().y);
 
             window.draw(tableInventory);
             window.draw(inventoryInfo1);
             window.draw(inventoryInfo2);
             window.draw(inventoryInfo3);
-            window.draw(stash[choiseMan].getItOne(countOfInventorySlot)->getSprite());
+            window.draw(play.mans[choiseMan].rukzak.getItOne(countOfInventorySlot)->getSprite());
         }
 
         if(flagTableHide){

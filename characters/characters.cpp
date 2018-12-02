@@ -5,7 +5,7 @@
 #include "characters.h"
 #include <iostream>
 #include <random>
-
+#include "../Game/preload.h"
 
 
 Hero::Hero(sf::String F, float X, float Y, float W, float H) {
@@ -60,6 +60,41 @@ bool Hero::characterMove(float X, float Y,int range) {
 
 }
 
+
+std::string Hero::Attack(int countOfInventorySlot, float X, float Y, std::vector<Enemy>& evils) {
+
+    if(this->characterMove(X,Y,2)) {
+        if(ammoCheck( this->rukzak,0)) {
+            if (damageCorrect(X, Y, evils,( this->getAccuracy() + this->rukzak.getItOne(countOfInventorySlot)->getAccuracy() )/2,
+                              this->rukzak.getItOne(countOfInventorySlot)->getHpChange())) {
+                this->setStep(-1);
+                return ("Damage is" + std::to_string(this->rukzak.getItOne(countOfInventorySlot)->getHpChange()));
+            } else {
+                this->setStep(-1);
+                return ("Miss...");
+            }
+
+        } else{
+            return ("Not enough ammo...");
+        }
+    }else {
+        return ("Too far...");
+    }
+
+
+}
+
+bool Hero::reload() {
+
+    if(ammoCheck( this->rukzak,1)){
+        this->setStep(-1);
+        return true;
+    }else {
+        return false;
+    }
+
+}
+
 void Hero::update(float time)
 {
 //    switch (direction)
@@ -77,10 +112,4 @@ void Hero::update(float time)
     //sprite.setPosition(x, y);
 }
 
-float Hero::getplayercoordinateX(){	//этим методом будем забирать координату Х
-    return this->cordY;
-}
-float Hero::getplayercoordinateY(){	//этим методом будем забирать координату Y
-    return this->cordY;
-}
 

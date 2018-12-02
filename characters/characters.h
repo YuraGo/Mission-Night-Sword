@@ -11,8 +11,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "../items/items.h"
 
-
+class Enemy;
 class Hero {
 
 protected:
@@ -33,7 +34,7 @@ protected:
     float cordX, cordY, w,h;
 public:
 
-
+    Inventory rukzak;
 
     Hero(){};
 
@@ -69,14 +70,17 @@ public:
 
     void setPlayerCordinate(float X , float Y){this->cordX = X; this->cordY = Y;};
 
-    float getplayercoordinateX();
+    float getCordX(){return this->cordX;};
 
-    float getplayercoordinateY();
+    float getCordY(){return this->cordY;};
 
     void update(float);
 
-
     bool characterMove(float  , float,int range=0 );
+
+    std::string Attack(int countOfInventorySlot, float X, float Y,std::vector<Enemy>& );
+
+    bool reload();
 };
 
 class SmartEnemy: public Hero {
