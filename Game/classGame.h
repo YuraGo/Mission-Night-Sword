@@ -61,15 +61,11 @@ public:
 
     void makeItemSprite(const sf::String&,const std::string&);
 
-    //void makeEnemySprite(const sf::String& , float , float , float , float );
 };
 
 class Pictures{
-private:
-
 public:
 
-    ///sf::Sprite& getSprite(){return this->sprite;};
 
     std::vector<AllForSprite*> heroSprite;
 

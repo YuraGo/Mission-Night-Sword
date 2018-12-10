@@ -80,6 +80,7 @@ bool damageCorrect(float X, float Y,std::vector<Enemy>& mans,int Ac,int damage) 
     for(auto it = 0; it != mans.size(); it++){
         if(X == mans[it].getCordX() && Y == mans[it].getCordY()) {
             mans[it].setHP(damage);
+            mans[it].setAgr(true);
             if(mans[it].getCurrentHP() <= 0){
                 mans[it].setStep(-1000);
                 mans.erase(mans.begin() + it);
@@ -376,7 +377,7 @@ bool startGame(sf::RenderWindow &window){
     play.someItem.setIt(&bullets3);
 
     Pictures pictures;
-    AllForSprite slp,slt,spt;
+    AllForSprite slp,slt,spt,pr1,pr2,pr3,pr4,pr5,pr6,pr7,pr8;
     std::vector<AllForSprite> spr;
     slp.makeSprite("solder.png",32,32,50,70);
 
@@ -390,36 +391,30 @@ bool startGame(sf::RenderWindow &window){
     pictures.enemySprite.push_back(&slt);
 
 
-    spt.makeItemSprite("Items/ArrowSteel.PNG","arrow");
-    spr.push_back(spt);
+    pr1.makeItemSprite("Items/ArrowSteel.PNG","arrow");
+    pictures.itemSprite.push_back(&pr1);
 
-    spt.makeItemSprite("Items/CoinsGold.PNG","7.62");
-    spr.push_back(spt);
+    pr2.makeItemSprite("Items/CoinsGold.PNG","7.62");
+    pictures.itemSprite.push_back(&pr2);
 
-    spt.makeItemSprite("Items/CoinsTeal.PNG","5.56");
-    spr.push_back(spt);
+    pr3.makeItemSprite("Items/CoinsTeal.PNG","5.56");
+    pictures.itemSprite.push_back(&pr3);
 
-    spt.makeItemSprite("Items/PotionTriangularRuby.PNG","PotionTriangularRuby");
-    spr.push_back(spt);
+    pr4.makeItemSprite("Items/PotionTriangularRuby.PNG","PotionTriangularRuby");
+    pictures.itemSprite.push_back(&pr4);
 
-    spt.makeItemSprite("Items/PotionTallYellow2.PNG","PotionTallYellow2");
-    spr.push_back(spt);
+    pr5.makeItemSprite("Items/PotionTallYellow2.PNG","PotionTallYellow2");
+    pictures.itemSprite.push_back(&pr5);
 
-    spt.makeItemSprite("Items/Axe02.PNG","bow");
-    spr.push_back(spt);
+    pr6.makeItemSprite("Items/Axe02.PNG","bow");
+    pictures.itemSprite.push_back(&pr6);
 
-    spt.makeItemSprite("Items/Bow09.PNG","axe");
-    spr.push_back(spt);
+    pr7.makeItemSprite("Items/Bow09.PNG","axe");
+    pictures.itemSprite.push_back(&pr7);
 
-    spt.makeItemSprite("Items/PotionTallRuby.PNG", "PotionTallRuby");
-    spr.push_back(spt);
+    pr8.makeItemSprite("Items/PotionTallRuby.PNG", "PotionTallRuby");
+    pictures.itemSprite.push_back(&pr8);
 
-
-    std::cout<< spr.size()<<std::endl;
-    for(int i =0; i != spr.size(); i++ ) {
-        pictures.itemSprite.push_back(&spr[i]);
-        std::cout<<i<<" - " <<pictures.itemSprite[i]->name<<std::endl;
-    }
 
     //////////////////////////
 
@@ -477,7 +472,7 @@ bool startGame(sf::RenderWindow &window){
 
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) { return true; }//если таб, то перезагружаем игру
+        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) { return true; }//если таб, то перезагружаем игру
 
 
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right){
@@ -641,9 +636,7 @@ bool startGame(sf::RenderWindow &window){
 
         //loc.clearMap();
         for(int it = 0; it < play.someItem.getIt().size() ; it++ ){
-            //std::cout<<"x:" << play.someItem.getItOne(it)->getCordX()<<std::endl;
-            //play.someItem.getItOne(it)->getSprite().setPosition(play.someItem.getItOne(it)->getCrdX(),play.someItem.getItOne(it)->getCrdY());
-            //window.draw(play.someItem.getItOne(it)->getSprite());
+
             for(int iter = 0; iter != pictures.itemSprite.size(); iter++){
 
                 if(play.someItem.getItOne(it)->getName() == pictures.itemSprite[iter]->name){
@@ -656,13 +649,15 @@ bool startGame(sf::RenderWindow &window){
 
         }
 
-//        window.draw(play.mans[0].getSprite());
-//        window.draw(play.mans[1].getSprite());
         for(int it = 0; it < play.mans.size() ; it++ ) {
+
+            if(play.mans[it].getCurrentHP() <= 0){
+                play.mans[it].setStep(-1000);
+                pictures.heroSprite[it]->sprite.setColor(sf::Color(0,0,0,0));
+            }
 
             pictures.heroSprite[it]->sprite.setPosition(play.mans[it].getCordX(),play.mans[it].getCordY());
             window.draw(pictures.heroSprite[it]->sprite);
-
         }
 
         for(int it = 0; it < play.evils.size() ; it++ ) {
@@ -673,7 +668,7 @@ bool startGame(sf::RenderWindow &window){
         }
 
             for(auto i: play.evils){
-            //// cursor.getPosition().x == i.getSprite().getPosition().x && cursor.getPosition().y == i.getSprite().getPosition().y
+
             if(cursor.getPosition().x == i.getCordX() && cursor.getPosition().y == i.getCordY() ){
                 tableEnemyDraw(tableInfoEnemy,enemyInfo1,enemyInfo2,cursor.getPosition().x,cursor.getPosition().y,&i);
 
@@ -681,7 +676,6 @@ bool startGame(sf::RenderWindow &window){
                 tableInfoEnemy.setFillColor(sf::Color(0,0,0,0));
                 enemyInfo1.setFillColor(sf::Color(0,0,0,0));
                 enemyInfo2.setFillColor(sf::Color(0,0,0,0));
-
             }
             window.draw(tableInfoEnemy);
             window.draw(enemyInfo1);
@@ -696,13 +690,14 @@ bool startGame(sf::RenderWindow &window){
             play.mans[1].setStep(2);
             if(countOfMove > 4) countOfMove = 1;
             moveAI(play.evils,&play.mans, countOfMove);
-            //heroIsNear(play.evils,&play.mans);
+            heroIsNear(play.evils,play.mans);
             countOfMove++;
         }else roundOver.setString("");
 
-        if(play.evils.empty() || play.mans.empty()){
-            window.draw(gameOver);
-        }
+//        if(play.evils.empty() || play.mans.empty()){
+//            window.draw(gameOver);
+//            return true;
+//        }
 
         if(!play.mans[choiseMan].rukzak.getIt().empty() && flagTableHide){
             play.mans[choiseMan].rukzak.getItOne(countOfInventorySlot)->drawInventory(tableInventory,inventoryInfo1,inventoryInfo2,inventoryInfo3,overview.getCenter().x,overview.getCenter().y);
@@ -729,10 +724,7 @@ bool startGame(sf::RenderWindow &window){
             window.draw(heroInfo3);
         }
 
-        pictures.itemSprite[6]->sprite.setPosition(96,96);
-        window.draw(pictures.itemSprite[6]->sprite);
         window.draw(countOfRound);
-
         window.draw(roundOver);
         window.draw(message);
         window.draw(cursor);

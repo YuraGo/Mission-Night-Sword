@@ -95,12 +95,15 @@ public:
 class Enemy: public Hero {
 private:
     bool agressive = false;
+    int damage = 20;
     //link for texture
 public:
 
     bool getAgr(){return this->agressive;};
 
     void setAgr(bool agr){this->agressive = agr;};
+
+    int getDamage(){return this->damage;};
 };
 
 

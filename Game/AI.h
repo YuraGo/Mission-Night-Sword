@@ -28,39 +28,17 @@ bool tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* ev
                 return false;
         }}
 
-//
-    if(Y/32 <= 0)
-        return false;
-    if(X/32 <= 0)
-        return false;
-    if(X/32 >= 42-1)// W
-        return false;
-    if(Y/32 >= 16-1)//H
+    int Xi, Yi;
+
+    Xi = (int)X/32;
+    Yi = (int)Y/32;
+
+    if(Xi > 40 || Yi > 14 || Xi < 0 || Yi < 0)
         return false;
 
-    // for(int p = 0; p < 42 ;p ++) {//25
-    if (Y / 32 == 6 && X / 32 != 25)
+
+    if(TileMap[Yi][Xi] == '0')
         return false;
-    // }
-    for(int p = 1; p < 4 ;p ++) {
-        if (Y / 32 == p && X / 32 == 18)
-            return false;
-    }
-
-    for(int p = 30; p < 35 ;p ++) {
-        if (Y / 32 == 6 && X / 32 == p)
-            return false;
-    }
-
-    for(int p = 25; p < 31 ;p ++) {
-        if (Y / 32 == 9 && X / 32 == p)
-            return false;
-    }
-    for(int p = 7; p < 11 ;p ++) {
-        if (Y / 32 == p && X / 32 == 8)
-            return false;
-    }
-//
 
     return check;
 }
@@ -72,7 +50,7 @@ void moveAI(std::vector<Enemy>& evils,std::vector<Hero>* mans,int countOfMove) {
     int demension;
 
     for (auto it = 0; it != evils.size(); it++) {
-        if(evils[it].getAgr()) it++;
+        if(evils[it].getAgr()) continue;
         correct = false;
         another = false;
         demension = 2;
@@ -207,26 +185,71 @@ void moveAI(std::vector<Enemy>& evils,std::vector<Hero>* mans,int countOfMove) {
     }
 }
 
-void heroIsNear(std::vector<Enemy>& evils,std::vector<Hero>* mans){
+float rangeOfMove(float X,float Y,float anX,float anY){
+    return ((X - anX)*(X - anX) + (Y - anY) * (Y - anY) );
+}
+
+void heroIsNear(std::vector<Enemy>& evils,std::vector<Hero>& mans){
  float enemyX,enemyY,heroX,heroY;
+
+
     for (auto it = 0; it != evils.size(); it++) {
 
-        if(evils[it].getAgr())
+        if(!evils[it].getAgr())
             continue;
 
         enemyX = evils[it].getCordX();
         enemyY = evils[it].getCordY();
 
-        for(auto j: *mans){
-            heroX = j.getCordX();
-            heroY = j.getCordY();
-            //if(rangeOfAct( enemyX/32,enemyY/32, heroX/32, heroY/32, ((float)evils[it].getView()) )){
-              //  evils[it].setAgr(true);
-            }
+        for(auto i = 0; i != mans.size(); i++) {
+            heroX = mans[i].getCordX();
+            heroY = mans[i].getCordY();
+
+            if (mans[i].getCurrentHP() <= 0) continue;
+
+                if (rangeOfMove(heroX, heroY, enemyX, enemyY) > 4096 &&
+                    rangeOfMove(heroX, heroY, enemyX, enemyY) < 65536) {
+
+                    if (tileInfo(heroX - 32, heroY, &mans, &evils)) {
+                        evils[it].setPlayerCordinate(heroX - 32, heroY);
+                        mans[i].setHP(evils[it].getDamage());
+                        break;
+                    }
+                    if (tileInfo(heroX + 32, heroY, &mans, &evils)) {
+                        evils[it].setPlayerCordinate(heroX + 32, heroY);
+                        mans[i].setHP(evils[it].getDamage());
+                        break;
+                    }
+                    if (tileInfo(heroX, heroY - 32, &mans, &evils)) {
+                        evils[it].setPlayerCordinate(heroX, heroY - 32);
+                        mans[i].setHP(evils[it].getDamage());
+                        break;
+                    }
+                    if (tileInfo(heroX, heroY + 32, &mans, &evils)) {
+                        evils[it].setPlayerCordinate(heroX, heroY + 32);
+                        mans[i].setHP(evils[it].getDamage());
+                        break;
+                    }
+                    if (tileInfo(heroX - 32, heroY + 32, &mans, &evils)) {
+                        evils[it].setPlayerCordinate(heroX - 32, heroY + 32);
+                        mans[i].setHP(evils[it].getDamage());
+                        break;
+                    }
+                    if (tileInfo(heroX + 32, heroY - 32, &mans, &evils)) {
+                        evils[it].setPlayerCordinate(heroX + 32, heroY - 32);
+                        mans[i].setHP(evils[it].getDamage());
+                        break;
+                    }
+                } else if (rangeOfMove(heroX, heroY, enemyX, enemyY) <= 4096) {
+
+                    mans[i].setHP(evils[it].getDamage());
+                    break;
+                } else continue;
 
         }
-
     }
+
+}
 
 
 
