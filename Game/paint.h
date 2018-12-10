@@ -6,6 +6,34 @@
 #include <SFML/Graphics.hpp>
 #include "../characters/characters.h"
 
+//class PaintSprite{
+//private:
+//    sf::String File;
+//    sf::Image image;
+//    sf::Texture texture;
+//    sf::Sprite sprite;
+//    float w,h;
+//public:
+//    std::vector<sf::Sprite> herosSp;
+//    std::vector<sf::Sprite> evilsSp;
+//    std::vector<sf::Sprite> itemsSp;
+//
+//    PaintSprite(const sf::String& F, float X, float Y, float W, float H) {
+//        File = F;
+//        w = W;
+//        h = H;
+//        image.loadFromFile(File);
+//        texture.loadFromImage(image);
+//        sprite.setTexture(texture);
+//        sprite.setPosition(X,Y);
+//        sprite.setTextureRect(sf::IntRect(0, 0, (int)w,(int)h));
+//        };
+//
+//
+//
+//};
+
+
 void tableEnemyDraw(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2, float X,float Y, Enemy* player) {
     table.setPosition(X+40,Y) ;//-270
     text1.setPosition(X+45,Y+5);

@@ -27,22 +27,20 @@ protected:
     int view;
     int accuracy;
     int step;
-    sf::String File;
-    sf::Image image;//сфмл изображение
-    sf::Texture texture;//сфмл текстура
-    sf::Sprite sprite;//сфмл
+//    sf::String File;
+//    sf::Image image;//сфмл изображение
+//    sf::Texture texture;//сфмл текстура
+//    sf::Sprite sprite;//сфмл
     float cordX, cordY, w,h;
 public:
 
     Inventory rukzak;
 
-    Hero(){};
+    //sf::Sprite& getSprite(){return this->sprite;};
 
-    sf::Sprite& getSprite(){return this->sprite;};
+    //Hero(const sf::String& , float , float , float , float );
 
-    Hero(sf::String , float , float , float , float );
-
-    void setHero(const std::string&,int ,int ,int ,int ,int );
+    void setHero(const std::string&,int ,int ,int ,int ,int , float, float);
 
     void setHP(int damage){ this->currentHP -= damage; };
 
@@ -81,6 +79,8 @@ public:
     std::string Attack(int countOfInventorySlot, float X, float Y,std::vector<Enemy>& );
 
     bool reload();
+
+    bool heal(int countOfInventorySlot);
 };
 
 class SmartEnemy: public Hero {
@@ -88,7 +88,6 @@ private:
 //link for texture
 public:
 
-    SmartEnemy(sf::String F, float X, float Y, float W, float H): Hero( F,  X,  Y,  W,  H){};
 
 };
 
@@ -98,7 +97,6 @@ private:
     bool agressive = false;
     //link for texture
 public:
-    Enemy(sf::String F, float X, float Y, float W, float H): Hero( F,  X,  Y,  W,  H){};
 
     bool getAgr(){return this->agressive;};
 

@@ -11,7 +11,6 @@
 #include "../characters/characters.h"
 #include "../items/items.h"
 //#include "../Graphics/graphics.h"
-
 //#include "AI.h"
 #include <vector>
 #include <string>
@@ -21,22 +20,65 @@ public:
     std::vector<Hero> mans;
     std::vector<Enemy> evils;
 
-    std::vector<Inventory> stash;
-    std::vector<Inventory> someItem;
-
-    void createHero(std::string);
-
-    void createEnemy();
+    Inventory someItem;
 
     bool moveHero(int,float, float);
 
-
    // void createItems();
 
+};
+
+class Location{
+private:
+    bool cellInfo[16][42];
+public:
+
+    std::string karta[16];
+    //std::string karta;
+
+    Location();
+
+    bool getCellInfo(int x, int y){return cellInfo[x][y];}
+
+    void clearMap();
+
+    void minIpdate(int prevX, int prevY, int X, int Y){ cellInfo[X][Y]=true; cellInfo[prevX][prevY] = false;};
+
+    void updateMap(int x,int y){cellInfo[x][y] = true;}
+};
+
+
+
+class AllForSprite{
+public:
+    sf::String File;
+    sf::Image image;
+    sf::Texture texture;
+    sf::Sprite sprite;
+    std::string name;
+
+    void makeSprite(const sf::String& , float , float , float , float );
+
+    void makeItemSprite(const sf::String&,const std::string&);
+
+    //void makeEnemySprite(const sf::String& , float , float , float , float );
+};
+
+class Pictures{
+private:
+
+public:
+
+    ///sf::Sprite& getSprite(){return this->sprite;};
+
+    std::vector<AllForSprite*> heroSprite;
+
+    std::vector<AllForSprite*> itemSprite;
+
+    std::vector<AllForSprite*> enemySprite;
 
 
 
 };
-
 
 #endif //NIGHTSWORD_CLASSGAME_H

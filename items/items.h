@@ -18,18 +18,21 @@
 
 class Item{
 protected:
+    float crdX, crdY;
     std::string name;
     int HPchange;
     int mass;
-    sf::String File;
-    sf::Image image;//сфмл изображение
-    sf::Texture texture;//сфмл текстура
-    sf::Sprite sprite;
+
 
 public:
-    virtual void getInfo(){std::cout<<"nothing"<<std::endl;};
 
-    sf::Sprite& getSprite(){return this->sprite;};
+    float getCrdX(){return this->crdX;};
+
+    float getCrdY(){return this->crdY;};
+
+    void setCrd(float X, float Y){this->crdX = X;this->crdY=Y;}
+
+    virtual void getInfo(){std::cout<<"nothing"<<std::endl;};
 
     virtual void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float,float){};
 
@@ -72,9 +75,9 @@ protected:
     int capacity;
     int currentCapacity;
 public:
-    //sf::Sprite& getSprite()override{ return this->sprite;};
 
-    Weapon(int,int,int,int ,const std::string&,int,const std::string&,sf::String);
+
+    Weapon(int,int,int,int ,const std::string&,int,const std::string&);
 
     int getAccuracy()override{return this->accuracy;};
 
@@ -100,7 +103,7 @@ class Ammo : public Item{
 protected:
     int size;
 public:
-    Ammo(const std::string&, int, int,sf::String);
+    Ammo(const std::string&, int, int);
 
     void setSize(int change);
 
@@ -118,7 +121,7 @@ protected:
     int step;
 
 public:
-    Medkit(int,int,int,sf::String);
+    Medkit(int,int,const std::string&,int);
 
     void getInfo()override;
 

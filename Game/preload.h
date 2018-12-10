@@ -17,8 +17,9 @@
 #include <algorithm>
 #include <sstream>
 #include <random>
+#include "../Game/classGame.h"
 
-
+void createHero(std::vector<Hero>& mans);
 
 bool tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* evils);
 
@@ -33,6 +34,10 @@ bool rangeOfAct (float X, float Y,float anX, float anY,float plus=32.f ) ;
 bool openDoor(float X, float Y, float plX, float plY);
 
 void startCord(std::vector<Enemy> &evils,Inventory& item);
+
+bool startGame(sf::RenderWindow &window);
+
+void createAll(classGame&);
 
 
 

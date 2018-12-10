@@ -1,25 +1,23 @@
 #include "items.h"
 #include <random>
+#include "../Game/preload.h"
 
 
 
 
-Weapon::Weapon(int Damage,int bullets,int Accuracy, int cap,const std::string& TypeOfAmmo,int Mass,const std::string& Name,sf::String File){
+
+Weapon::Weapon(int Damage,int bullets,int Accuracy, int cap,const std::string& TypeOfAmmo,int Mass,const std::string& Name){
 
     this->HPchange = Damage;
     this->accuracy = Accuracy;
     this->name = Name;
     this->mass = Mass;
     this->typeOfAmmo = TypeOfAmmo;
-    image.loadFromFile(File);
-    image.createMaskFromColor(sf::Color(255,0,255,255));
-    texture.loadFromImage(image);
-    this->sprite.setTexture(texture);
-   // this->sprite.setPosition(X,Y);
-    this->sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
+
     this->bulletsPerShoot = bullets;
     this->capacity = cap;
     this->currentCapacity = cap;
+
 };
 
 void Weapon::getInfo() {
@@ -31,16 +29,12 @@ void Weapon::getInfo() {
     std::cout<<"typeOfAmmo: " <<this->typeOfAmmo <<std::endl;
 }
 
-Ammo::Ammo(const std::string& Type,int Size,int Mass,sf::String File) {
+Ammo::Ammo(const std::string& Type,int Size,int Mass) {
     this->name = Type;
     this->size = Size;
     this->mass = Mass;
-    image.loadFromFile(File);
-    image.createMaskFromColor(sf::Color(255,0,255,255));
-    texture.loadFromImage(image);
-    this->sprite.setTexture(texture);
-    //this->sprite.setPosition(X,Y);
-    this->sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
+    this->HPchange = 0;
+
 }
 
 void Ammo::getInfo() {
@@ -54,17 +48,12 @@ void Ammo::setSize(int change) {
     this->size += change;
 }
 
-Medkit::Medkit(int Step, int Regen, int Mass,sf::String File) {
+Medkit::Medkit(int Step, int Regen, const std::string& Name,int Mass) {
+    this->name = Name;
     this->step = Step;
     this->HPchange = Regen;
     this->mass = Mass;
-    image.loadFromFile(File);
-    image.createMaskFromColor(sf::Color(255,0,255,255));
-    texture.loadFromImage(image);
-    this->sprite.setTexture(texture);
 
-    //this->sprite.setPosition(X,Y);
-    this->sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
 }
 void Medkit::getInfo() {
     std::cout<<"MEDKIT-----"<<std::endl;
@@ -76,7 +65,6 @@ void Medkit::getInfo() {
 void Weapon::drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float X,float Y){
 
     table.setPosition(X-90,Y+120);
-    this->sprite.setPosition(X-85,Y+140);
     text1.setPosition(X - 50, Y + 125 );
     text2.setPosition(X - 50, Y + 145);
     text3.setPosition(X - 50, Y + 165);
@@ -90,7 +78,6 @@ void Weapon::drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& 
 void Medkit::drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3, float X,float Y){
 
     table.setPosition(X-90,Y+120);
-    this->sprite.setPosition(X-85,Y+140);
     text1.setPosition(X - 50, Y + 125 );
     text2.setPosition(X - 50, Y + 145);
     text3.setPosition(X - 50, Y + 165);
@@ -104,7 +91,6 @@ void Ammo::drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& te
 
 
     table.setPosition(X-90,Y+120);
-    this->sprite.setPosition(X-85,Y+140);
     text1.setPosition(X - 50, Y + 125 );
     text2.setPosition(X - 50, Y + 145);
     text3.setPosition(X - 50, Y + 165);

@@ -4,26 +4,10 @@
 
 #include "classGame.h"
 #include "preload.h"
+#include <fstream>
+#include <random>
 
-void classGame::createHero(std::string file) {
-    sf::String f;
-    f = "solder.png";
-    Hero player1("solder.png",32,32,50,70);
-    Hero player2("solder.png",64,64,55,55);
-    player1.setHero("Bob",100,30,5,8,80);
-    player2.setHero("Silver",100,30,6,10,40);
-    mans.push_back(player1);
-    mans.push_back(player2);
-}
 
-void classGame::createEnemy() {
-    Enemy evil("warrior1.png",64,64,55,55);
-    evil.setHero("demon",60,0,5,8,100);
-    evils.push_back(evil);
-    evils.push_back(evil);
-    evils.push_back(evil);
-    evils.push_back(evil);
-}
 
 bool classGame::moveHero(int choiseMan,float X, float Y) {
 
@@ -33,10 +17,60 @@ bool classGame::moveHero(int choiseMan,float X, float Y) {
     if( !tileFree || !lenghOfMove || mans[choiseMan].getStep() <= 0){
         return false;
     }else{
-        mans[choiseMan].getSprite().setPosition(X,Y); /////////////////////////
         mans[choiseMan].setPlayerCordinate(X, Y);
         mans[choiseMan].setStep(-1);
         return true;
+    }
+
+}
+
+void AllForSprite::makeSprite(const sf::String& F, float X, float Y, float W, float H) {
+
+    File = F;
+    image.loadFromFile(F);
+    texture.loadFromImage(image);
+    sprite.setTexture(texture);
+    sprite.setTextureRect(sf::IntRect(0, 0, (int)W,(int)H));
+
+    //heroSprite.push_back(sprite);
+    //heroSprite.push_back(sprite);
+}
+
+void AllForSprite::makeItemSprite(const sf::String &F,const std::string& Name) {
+
+    name = Name;
+    File = F;
+    image.loadFromFile(File);
+    image.createMaskFromColor(sf::Color(255,0,255,255));
+    texture.loadFromImage(image);
+    sprite.setTexture(texture);
+    sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
+
+}
+
+
+Location::Location() {
+    std::string name;
+    std::ifstream fileMap("maps.txt");
+
+    if (!fileMap)
+    {
+        std::cout << "File not found\n";
+    }
+
+    int it=0;
+    while(getline(fileMap, name)) {
+        karta[it] = name;
+        it++;
+    }
+    fileMap.close();
+}
+
+void Location::clearMap() {
+    for(int i = 0; i < 16; i++){
+        for(int j = 0; j < 42; j++){
+            cellInfo[i][j] = false;
+        }
     }
 
 }

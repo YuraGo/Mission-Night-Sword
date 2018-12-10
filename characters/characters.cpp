@@ -8,21 +8,21 @@
 #include "../Game/preload.h"
 
 
-Hero::Hero(sf::String F, float X, float Y, float W, float H) {
-    File = F;//имя файла+расширение
-    w = W;
-    h = H;//высота и ширина
-    image.loadFromFile(File);//запихиваем в image наше изображение вместо File мы передадим то, что пропишем при создании объекта. В нашем случае "hero.png" и получится запись идентичная image.loadFromFile("images/hero/png");
-    //image.createMaskFromColor(sf::Color(41, 33, 59));//убираем ненужный темно-синий цвет, эта тень мне показалась не красивой.
-    texture.loadFromImage(image);//закидываем наше изображение в текстуру
-    sprite.setTexture(texture);//заливаем спрайт текстурой
-    cordX = X;
-    cordY = Y;//координата появления спрайта
-    sprite.setPosition(cordX,cordY);
-    sprite.setTextureRect(sf::IntRect(0, 0, w, h));
-}
+//Hero::Hero(const sf::String& F, float X, float Y, float W, float H) {
+//    File = F;//имя файла+расширение
+//    //File = "solder.png";
+//    w = W;
+//    h = H;//высота и ширина
+//    image.loadFromFile(File);
+//    texture.loadFromImage(image);
+//    sprite.setTexture(texture);
+//    cordX = X;
+//    cordY = Y;
+//    sprite.setPosition(cordX,cordY);
+//    sprite.setTextureRect(sf::IntRect(0, 0, (int)w,(int)h));
+//}
 
-void Hero::setHero(const std::string &Name, int hp, int Mass, int Speed, int View,int Accuracy){
+void Hero::setHero(const std::string &Name, int hp, int Mass, int Speed, int View,int Accuracy ,float X, float Y){
     this->name = Name;
     this->HP = hp;
     this->currentHP = hp;
@@ -32,6 +32,9 @@ void Hero::setHero(const std::string &Name, int hp, int Mass, int Speed, int Vie
     this->view = View;
     this->accuracy = Accuracy;
     this->step = 2;
+
+    this->cordX = X;
+    this->cordY = Y;
 }
 
 
@@ -49,15 +52,9 @@ void Hero::getInfo() {
 
 
 bool Hero::characterMove(float X, float Y,int range) {
-
-    if( (X-this->sprite.getPosition().x)*(X - this->sprite.getPosition().x) +
-            (Y - this->sprite.getPosition().y) * (Y - this->sprite.getPosition().y)
-    <= ((this->speed+range)*32)*((this->speed+range)*32) ) {
-        this->cordX = X;
-        this->cordY = Y;
-        return true;
-    }else return false;
-
+    return ( (X-this->getCordX())*(X - this->getCordX()) +
+            (Y - this->getCordY()) * (Y - this->getCordY())
+    <= ((this->speed+range)*32)*((this->speed+range)*32) );
 }
 
 
@@ -81,7 +78,21 @@ std::string Hero::Attack(int countOfInventorySlot, float X, float Y, std::vector
         return ("Too far...");
     }
 
+}
 
+bool Hero::heal(int countOfInventorySlot) {
+
+    if( this->rukzak.getItOne(countOfInventorySlot)->getRegen() != 0 &&
+            this->getStep() >= rukzak.getItOne(countOfInventorySlot)->getAidStep() &&
+            this->getCurrentHP() != this->getHP()) {
+        this->setHP(-rukzak.getItOne(countOfInventorySlot)->getRegen());
+        this->setStep(-rukzak.getItOne(countOfInventorySlot)->getAidStep());
+        this->rukzak.throwIt(countOfInventorySlot);
+        if (this->getCurrentHP() > this->getHP())
+            this->setHP(this->getCurrentHP() - this->getHP());
+        return true;
+
+    } else return false;
 }
 
 bool Hero::reload() {
