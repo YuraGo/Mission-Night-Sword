@@ -7,7 +7,7 @@
 
 
 Weapon::Weapon(int Damage,int bullets,int Accuracy, int cap,const std::string& TypeOfAmmo,int Mass,const std::string& Name){
-
+    this->type = 1;
     this->HPchange = Damage;
     this->accuracy = Accuracy;
     this->name = Name;
@@ -30,6 +30,7 @@ void Weapon::getInfo() {
 }
 
 Ammo::Ammo(const std::string& Type,int Size,int Mass) {
+    this->type = 2;
     this->name = Type;
     this->size = Size;
     this->mass = Mass;
@@ -49,6 +50,7 @@ void Ammo::setSize(int change) {
 }
 
 Medkit::Medkit(int Step, int Regen, const std::string& Name,int Mass) {
+    this->type = 3;
     this->name = Name;
     this->step = Step;
     this->HPchange = Regen;
@@ -60,45 +62,6 @@ void Medkit::getInfo() {
     std::cout<<"Mass: " <<this->mass <<std::endl;
     std::cout<<"Regen: " <<this->HPchange<<std::endl;
     std::cout<<"Step: " <<this->step <<std::endl;
-}
-
-void Weapon::drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float X,float Y){
-
-    table.setPosition(X-90,Y+120);
-    text1.setPosition(X - 50, Y + 125 );
-    text2.setPosition(X - 50, Y + 145);
-    text3.setPosition(X - 50, Y + 165);
-
-    text1.setString("Name: " + this->name + " Damage: " + std::to_string(this->HPchange));
-    text2.setString("Type of ammo: "+ this->typeOfAmmo);
-    text3.setString("Weight: " + std::to_string(this->mass) + " Clip: " + std::to_string(this->currentCapacity)+ "/" +std::to_string(this->capacity) );
-
-}
-
-void Medkit::drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3, float X,float Y){
-
-    table.setPosition(X-90,Y+120);
-    text1.setPosition(X - 50, Y + 125 );
-    text2.setPosition(X - 50, Y + 145);
-    text3.setPosition(X - 50, Y + 165);
-
-    text1.setString("Regen: " + std::to_string(this->HPchange));
-    text2.setString("Weight: " + std::to_string(this->mass));
-    text3.setString("Step: " + std::to_string(this->step));
-}
-
-void Ammo::drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3, float X,float Y){
-
-
-    table.setPosition(X-90,Y+120);
-    text1.setPosition(X - 50, Y + 125 );
-    text2.setPosition(X - 50, Y + 145);
-    text3.setPosition(X - 50, Y + 165);
-
-    text1.setString("Type of ammo: " + this->name );
-    text2.setString("Weight: " + std::to_string(this->mass));
-    text3.setString("Size: " + std::to_string(this->size));
-
 }
 
 

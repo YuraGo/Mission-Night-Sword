@@ -13,12 +13,17 @@
 #include <vector>
 #include "../items/items.h"
 
+
+
 class Enemy;
+
+bool damageCorrect(float , float ,std::vector<Enemy>& ,int ,int );
+bool ammoCheck(Inventory& , int );
+
 class Hero {
 
 protected:
     std::string name;
-    //std::vector<int> inventory;
     int HP;
     int mass;
     int currentMass;
@@ -27,18 +32,10 @@ protected:
     int view;
     int accuracy;
     int step;
-//    sf::String File;
-//    sf::Image image;//сфмл изображение
-//    sf::Texture texture;//сфмл текстура
-//    sf::Sprite sprite;//сфмл
     float cordX, cordY, w,h;
 public:
 
     Inventory rukzak;
-
-    //sf::Sprite& getSprite(){return this->sprite;};
-
-    //Hero(const sf::String& , float , float , float , float );
 
     void setHero(const std::string&,int ,int ,int ,int ,int , float, float);
 
@@ -85,9 +82,12 @@ public:
 
 class SmartEnemy: public Hero {
 private:
-//link for texture
+    bool agressive = false;
 public:
 
+    bool getAgr(){return this->agressive;};
+
+    void setAgr(bool agr){this->agressive = agr;};
 
 };
 

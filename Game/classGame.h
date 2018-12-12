@@ -10,21 +10,26 @@
 #include <iostream>
 #include "../characters/characters.h"
 #include "../items/items.h"
-//#include "../Graphics/graphics.h"
-//#include "AI.h"
 #include <vector>
 #include <string>
+
+
+
+class Location;
 
 class classGame {
 public:
     std::vector<Hero> mans;
     std::vector<Enemy> evils;
-
     Inventory someItem;
 
-    bool moveHero(int,float, float);
+    bool moveHero(int,float, float,Location&);
 
-   // void createItems();
+    void heroIsNear();
+
+    void moveAI(int);
+
+    bool endGameCheck();
 
 };
 
@@ -33,18 +38,13 @@ private:
     bool cellInfo[16][42];
 public:
 
-    std::string karta[16];
-    //std::string karta;
-
-    Location();
-
-    bool getCellInfo(int x, int y){return cellInfo[x][y];}
+    bool getCellInfo(float x,float y){int X = (int)x/32;int Y = (int)y/32; return cellInfo[Y][X];}
 
     void clearMap();
 
-    void minIpdate(int prevX, int prevY, int X, int Y){ cellInfo[X][Y]=true; cellInfo[prevX][prevY] = false;};
+    void miniUpdate(float ,float ,float , float );
 
-    void updateMap(int x,int y){cellInfo[x][y] = true;}
+    void updateMap(float x,float y){int X = (int)x/32;int Y = (int)y/32;  cellInfo[Y][X] = true;}
 };
 
 
@@ -67,14 +67,17 @@ class Pictures{
 public:
 
 
-    std::vector<AllForSprite*> heroSprite;
+    std::vector<AllForSprite> heroSprite;
 
-    std::vector<AllForSprite*> itemSprite;
+    std::vector<AllForSprite> itemSprite;
 
-    std::vector<AllForSprite*> enemySprite;
+    std::vector<AllForSprite> enemySprite;
 
 
 
 };
+
+
+
 
 #endif //NIGHTSWORD_CLASSGAME_H

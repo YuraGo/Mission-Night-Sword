@@ -12,132 +12,64 @@
 #include "../Game/classGame.h"
 #include "../Graphics/graphics.h"
 #include "preload.h"
-#include "AI.h"
 #include "classGame.h"
 #include "paint.h"
+#include <fstream>
 
 
-//bool tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* evils){
-//    bool check = true;
-//
-//    if(mans != nullptr){
-//        for(auto it : *mans){
-//            if(X == it.getCordX() && Y == it.getCordY())
-//                check = false;
-//        }}
-//
-//    if(evils != nullptr){
-//        for(auto it : *evils){
-//            if(X == it.getCordX() && Y == it.getCordY())
-//                check = false;
-//        }}
-//
-////
-//    if(Y/32 <= 0)
-//        return false;
-//    if(X/32 <= 0)
-//        return false;
-//    if(X/32 >= 42-1)// W
-//        return false;
-//    if(Y/32 >= 16-1)//H
-//        return false;
-//
-//    // for(int p = 0; p < 42 ;p ++) {//25
-//    if (Y / 32 == 6 && X / 32 != 25)
-//        return false;
-//    // }
-//    for(int p = 1; p < 4 ;p ++) {
-//        if (Y / 32 == p && X / 32 == 18)
-//            return false;
-//    }
-//
-//    for(int p = 30; p < 35 ;p ++) {
-//        if (Y / 32 == 6 && X / 32 == p)
-//            return false;
-//    }
-//
-//    for(int p = 25; p < 31 ;p ++) {
-//        if (Y / 32 == 9 && X / 32 == p)
-//            return false;
-//    }
-//    for(int p = 7; p < 11 ;p ++) {
-//        if (Y / 32 == p && X / 32 == 8)
-//            return false;
-//    }
-////
-//
-//    return check;
-//}
-
-bool damageCorrect(float X, float Y,std::vector<Enemy>& mans,int Ac,int damage) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(1, 100);
-
-    if (dist(gen) >= Ac) return false;
-
-
-    for(auto it = 0; it != mans.size(); it++){
-        if(X == mans[it].getCordX() && Y == mans[it].getCordY()) {
-            mans[it].setHP(damage);
-            mans[it].setAgr(true);
-            if(mans[it].getCurrentHP() <= 0){
-                mans[it].setStep(-1000);
-                mans.erase(mans.begin() + it);
-            }
-            break;
-        }
-    }
-    return true;
+float rangeOfMove(float X,float Y,float anX,float anY){
+    return ((X - anX)*(X - anX) + (Y - anY) * (Y - anY) );
 }
-////////play.mans[choiseMan].rukzak
-bool ammoCheck(Inventory& items, int clip){
-    int i=0;
-    std::string type;
-    //////// search type
-    while(i <= items.getIt().size()) {
 
-        if(items.getItOne(i)->getTypeOfAmmo() != " ") {
-            type = items.getItOne(i)->getTypeOfAmmo();
-            break;
-        }else i++;
-    }
+bool tileCheck(float X , float Y, Location* location){
+bool check = true;
 
-    for(auto it: items.getIt() ){
-        if( it->getName() == type){
+    if(location->getCellInfo(X,Y))
+        return false;
 
-            //// SHOOT
-            if(clip == 0 && items.getItOne(i)->getBullets() <= items.getItOne(i)->getCurrentCapacity() ) {
-                //it->setCurrentSize(items[index].getItOne(i)->getBullets());
-                items.getItOne(i)->setCurrentCapacity(items.getItOne(i)->getBullets());
-                return true;
-            }
-            //// RELOAD
-            if(clip != 0 && it->getAmmoSize() > 0 ){
+    int Xi, Yi;
+    Xi = (int)X/32;
+    Yi = (int)Y/32;
 
-                if(items.getItOne(i)->getCurrentCapacity() > 0)
-                    return false;
+    if(Xi > 40 || Yi > 14 || Xi < 0 || Yi < 0)
+        return false;
 
-                if( it->getAmmoSize() >= items.getItOne(i)->getCapacity() ) {
-                    items.getItOne(i)->setCapacity(items.getItOne(i)->getCapacity());
-                    it->setCurrentSize(items.getItOne(i)->getCapacity());
-                }
-                else {
+    if(TileMap[Yi][Xi] == '0')
+        return false;
 
-                    items.getItOne(i)->setCapacity( it->getAmmoSize() );
+    return check;
+}
 
-                    it->setCurrentSize(it->getAmmoSize());
-                }
+bool tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* evils){
+    bool check = true;
 
-                return true;
-            } else{
+    if(mans != nullptr){
+        for(auto it : *mans){
+            if(X == it.getCordX() && Y == it.getCordY())
                 return false;
-            }
+        }}
 
-        }
-    }
-    return false;
+    if(evils != nullptr){
+        for(auto it : *evils){
+            if(X == it.getCordX() && Y == it.getCordY())
+                return false;
+        }}
+
+    int Xi, Yi;
+
+    Xi = (int)X/32;
+    Yi = (int)Y/32;
+
+    if(Xi > 40 || Yi > 14 || Xi < 0 || Yi < 0)
+        return false;
+
+
+    if(TileMap[Yi][Xi] == '0')
+        return false;
+
+    return check;
 }
+
 
 
 void whereGo(sf::CircleShape& radiusOfMove,int speed, float X, float Y){
@@ -197,8 +129,7 @@ void startCord(std::vector<Enemy> &evils,Inventory& item){
 }
 
 
-
-void createAll(classGame& play){
+void createAll(classGame& play, Pictures &pictures){
 
     Hero player1;
     Hero player2;
@@ -247,9 +178,58 @@ void createAll(classGame& play){
     play.someItem.setIt(&bullets2);
     play.someItem.setIt(&bullets3);
 
+
+    AllForSprite slp,slt,spt,pr1,pr2,pr3,pr4,pr5,pr6,pr7,pr8;
+    std::vector<AllForSprite> spr;
+    slp.makeSprite("solder.png",32,32,50,70);
+
+    pictures.heroSprite.push_back(slp);
+    pictures.heroSprite.push_back(slp);
+
+    slt.makeSprite("warrior1.png",64,64,55,55);
+    pictures.enemySprite.push_back(slt);
+    pictures.enemySprite.push_back(slt);
+    pictures.enemySprite.push_back(slt);
+    pictures.enemySprite.push_back(slt);
+
+
+    pr1.makeItemSprite("Items/ArrowSteel.PNG","arrow");
+    pictures.itemSprite.push_back(pr1);
+
+    pr2.makeItemSprite("Items/CoinsGold.PNG","7.62");
+    pictures.itemSprite.push_back(pr2);
+
+    pr3.makeItemSprite("Items/CoinsTeal.PNG","5.56");
+    pictures.itemSprite.push_back(pr3);
+
+    pr4.makeItemSprite("Items/PotionTriangularRuby.PNG","PotionTriangularRuby");
+    pictures.itemSprite.push_back(pr4);
+
+    pr5.makeItemSprite("Items/PotionTallYellow2.PNG","PotionTallYellow2");
+    pictures.itemSprite.push_back(pr5);
+
+    pr6.makeItemSprite("Items/Axe02.PNG","bow");
+    pictures.itemSprite.push_back(pr6);
+
+    pr7.makeItemSprite("Items/Bow09.PNG","axe");
+    pictures.itemSprite.push_back(pr7);
+
+    pr8.makeItemSprite("Items/PotionTallRuby.PNG", "PotionTallRuby");
+    pictures.itemSprite.push_back(pr8);
+
+
+    //////////////////////////
+
+    for(int it =0; it <  play.mans[0].rukzak.getIt().size(); it++ ) {
+        play.mans[0].setCurrentMass(  play.mans[0].rukzak.getItOne(it)->getMass());
+    }
+
+    for(int it =0; it < play.mans[1].rukzak.getIt().size(); it++ ) {
+        play.mans[1].setCurrentMass( play.mans[1].rukzak.getItOne(it)->getMass());
+    }
 }
 
-bool startGame(sf::RenderWindow &window){
+bool startGame(sf::RenderWindow &window,int numberLevel){
 
     sf::Clock clock;
 
@@ -258,8 +238,8 @@ bool startGame(sf::RenderWindow &window){
     window.setVerticalSyncEnabled(true);
 
     sf::View overview;
-    overview.setSize(sf::Vector2f(1300.f, 680.f));//540 380
-    overview.setCenter(600,360);//320, 240
+    overview.setSize(sf::Vector2f(540.f, 380.f));//540 380
+    overview.setCenter(320,240);//320, 240
 
     sf::RectangleShape pickHero(sf::Vector2f(32.f,64.f));
     sf::RectangleShape cursor(sf::Vector2f(32.f, 32.f));
@@ -312,7 +292,7 @@ bool startGame(sf::RenderWindow &window){
 
     classGame play;
 
-    //LevelMap objectMap;
+    Location location;
     bool flagTableHide=true;
     int choiseMan=0;
     bool doorOpen =false;
@@ -320,12 +300,9 @@ bool startGame(sf::RenderWindow &window){
     int countOfInventorySlot = 0;
     int numbOfRound = 1;
 
-
-    Location loc;
-
-    //loc.clearMap();
-
-    //createAll(play);
+    location.clearMap();
+    //Pictures pictures;
+    //createAll(play,pictures);
 
     //////////////////////
 
@@ -381,39 +358,39 @@ bool startGame(sf::RenderWindow &window){
     std::vector<AllForSprite> spr;
     slp.makeSprite("solder.png",32,32,50,70);
 
-    pictures.heroSprite.push_back(&slp);
-    pictures.heroSprite.push_back(&slp);
+    pictures.heroSprite.push_back(slp);
+    pictures.heroSprite.push_back(slp);
 
     slt.makeSprite("warrior1.png",64,64,55,55);
-    pictures.enemySprite.push_back(&slt);
-    pictures.enemySprite.push_back(&slt);
-    pictures.enemySprite.push_back(&slt);
-    pictures.enemySprite.push_back(&slt);
+    pictures.enemySprite.push_back(slt);
+    pictures.enemySprite.push_back(slt);
+    pictures.enemySprite.push_back(slt);
+    pictures.enemySprite.push_back(slt);
 
 
     pr1.makeItemSprite("Items/ArrowSteel.PNG","arrow");
-    pictures.itemSprite.push_back(&pr1);
+    pictures.itemSprite.push_back(pr1);
 
     pr2.makeItemSprite("Items/CoinsGold.PNG","7.62");
-    pictures.itemSprite.push_back(&pr2);
+    pictures.itemSprite.push_back(pr2);
 
     pr3.makeItemSprite("Items/CoinsTeal.PNG","5.56");
-    pictures.itemSprite.push_back(&pr3);
+    pictures.itemSprite.push_back(pr3);
 
     pr4.makeItemSprite("Items/PotionTriangularRuby.PNG","PotionTriangularRuby");
-    pictures.itemSprite.push_back(&pr4);
+    pictures.itemSprite.push_back(pr4);
 
     pr5.makeItemSprite("Items/PotionTallYellow2.PNG","PotionTallYellow2");
-    pictures.itemSprite.push_back(&pr5);
+    pictures.itemSprite.push_back(pr5);
 
     pr6.makeItemSprite("Items/Axe02.PNG","bow");
-    pictures.itemSprite.push_back(&pr6);
+    pictures.itemSprite.push_back(pr6);
 
     pr7.makeItemSprite("Items/Bow09.PNG","axe");
-    pictures.itemSprite.push_back(&pr7);
+    pictures.itemSprite.push_back(pr7);
 
     pr8.makeItemSprite("Items/PotionTallRuby.PNG", "PotionTallRuby");
-    pictures.itemSprite.push_back(&pr8);
+    pictures.itemSprite.push_back(pr8);
 
 
     //////////////////////////
@@ -428,15 +405,19 @@ bool startGame(sf::RenderWindow &window){
 
     startCord(play.evils,play.someItem);
 
+    for(auto i: play.evils){
+        location.updateMap( i.getCordX(), i.getCordY() );
+    }
 
-    // Главный цикл приложения
+    for(auto i: play.mans){
+        location.updateMap( i.getCordX(), i.getCordY() );
+    }
+
+
     while(window.isOpen()) {
 
         float time = clock.getElapsedTime().asMicroseconds();
-        time /= 800;
-        // Обрабатываем события в цикле
         sf::Event event;
-
 
         while(window.pollEvent(event)) {
 
@@ -449,8 +430,6 @@ bool startGame(sf::RenderWindow &window){
                         window.close();
                         return false;
                     }
-
-
                     if (event.key.code == sf::Keyboard::Num1 && play.mans[0].getHP() > 0) {
                         choiseMan=0;
                         countOfInventorySlot = 0;
@@ -462,17 +441,13 @@ bool startGame(sf::RenderWindow &window){
                         countOfInventorySlot = 0;
                         cursor.setPosition(play.mans[1].getCordX(), play.mans[1].getCordY());
                     }
-
-                    break;
-
                 }
                 default:
                     break;
             }
-
         }
 
-        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) { return true; }//если таб, то перезагружаем игру
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab) && play.endGameCheck()) { return true; }
 
 
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right){
@@ -578,10 +553,10 @@ bool startGame(sf::RenderWindow &window){
             }
         }
 
-
+ ///////////// MOVE//////////////
         if (event.key.code == sf::Keyboard::Space) {
 
-            if( !play.moveHero(choiseMan, cursor.getPosition().x,cursor.getPosition().y)){
+            if( !play.moveHero(choiseMan, cursor.getPosition().x,cursor.getPosition().y,location)){
                 message.setString("I cant");
                 message.setPosition( play.mans[choiseMan].getCordX() , play.mans[choiseMan].getCordY()-20 );
             }else{
@@ -590,7 +565,6 @@ bool startGame(sf::RenderWindow &window){
 
         }
 
-        // Очистка
         window.clear(sf::Color(176, 147, 60));
 
 
@@ -599,16 +573,13 @@ bool startGame(sf::RenderWindow &window){
 
                 if (TileMap[i][j] == '0'){
                     s_map.setTextureRect(sf::IntRect(384, 128, 416, 160));
-                    //objectMap.update(i,j,true);
                 } // 8W 5H
                 if (TileMap[i][j] == 'D'){
                     if(doorOpen) s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
                     else s_map.setTextureRect(sf::IntRect(160, 96, 192, 128));
-                    //objectMap.update(i,j,false);
                 }
                 if (TileMap[i][j] == ' '){
                     s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
-                    //objectMap.update(i,j,false);
                 }
 
                 s_map.setPosition(j * 32, i * 32);
@@ -619,7 +590,6 @@ bool startGame(sf::RenderWindow &window){
 
 
         bool endOfRound;
-        //play.mans[0].update(time);
         clock.restart();
 
         overview.setCenter(play.mans[choiseMan].getCordX(), play.mans[choiseMan].getCordY());
@@ -634,36 +604,33 @@ bool startGame(sf::RenderWindow &window){
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-        //loc.clearMap();
+
         for(int it = 0; it < play.someItem.getIt().size() ; it++ ){
 
             for(int iter = 0; iter != pictures.itemSprite.size(); iter++){
 
-                if(play.someItem.getItOne(it)->getName() == pictures.itemSprite[iter]->name){
-                    pictures.itemSprite[iter]->sprite.setPosition(play.someItem.getItOne(it)->getCrdX(), play.someItem.getItOne(it)->getCrdY());
-                    window.draw(pictures.itemSprite[iter]->sprite);
+                if(play.someItem.getItOne(it)->getName() == pictures.itemSprite[iter].name){
+                    pictures.itemSprite[iter].sprite.setPosition(play.someItem.getItOne(it)->getCrdX(), play.someItem.getItOne(it)->getCrdY());
+                    window.draw(pictures.itemSprite[iter].sprite);
                 }
-
             }
-
-
         }
 
         for(int it = 0; it < play.mans.size() ; it++ ) {
 
             if(play.mans[it].getCurrentHP() <= 0){
                 play.mans[it].setStep(-1000);
-                pictures.heroSprite[it]->sprite.setColor(sf::Color(0,0,0,0));
+                pictures.heroSprite[it].sprite.setColor(sf::Color(0,0,0,0));
             }
 
-            pictures.heroSprite[it]->sprite.setPosition(play.mans[it].getCordX(),play.mans[it].getCordY());
-            window.draw(pictures.heroSprite[it]->sprite);
+            pictures.heroSprite[it].sprite.setPosition(play.mans[it].getCordX(),play.mans[it].getCordY());
+            window.draw(pictures.heroSprite[it].sprite);
         }
 
         for(int it = 0; it < play.evils.size() ; it++ ) {
 
-            pictures.enemySprite[it]->sprite.setPosition(play.evils[it].getCordX(), play.evils[it].getCordY());
-            window.draw(pictures.enemySprite[it]->sprite);
+            pictures.enemySprite[it].sprite.setPosition(play.evils[it].getCordX(), play.evils[it].getCordY());
+            window.draw(pictures.enemySprite[it].sprite);
 
         }
 
@@ -684,23 +651,31 @@ bool startGame(sf::RenderWindow &window){
 
         if(play.mans[0].getStep() <= 0 && play.mans[1].getStep() <= 0) {
             numbOfRound++;
+            if (play.endGameCheck()) return false;
             roundOver.setString("Round Over");
             roundOver.setPosition(overview.getCenter());
-            play.mans[0].setStep(2);
-            play.mans[1].setStep(2);
+            if(play.mans[0].getCurrentHP() > 0) play.mans[0].setStep(2);
+            if(play.mans[1].getCurrentHP() > 0) play.mans[1].setStep(2);
             if(countOfMove > 4) countOfMove = 1;
-            moveAI(play.evils,&play.mans, countOfMove);
-            heroIsNear(play.evils,play.mans);
+            play.moveAI(countOfMove);
+            play.heroIsNear();
             countOfMove++;
+
+            location.clearMap();
+            for(auto i: play.evils){
+                location.updateMap( i.getCordX(), i.getCordY() );
+            }
+
+            for(auto i: play.mans){
+                location.updateMap( i.getCordX(), i.getCordY() );
+            }
+
         }else roundOver.setString("");
 
-//        if(play.evils.empty() || play.mans.empty()){
-//            window.draw(gameOver);
-//            return true;
-//        }
 
         if(!play.mans[choiseMan].rukzak.getIt().empty() && flagTableHide){
-            play.mans[choiseMan].rukzak.getItOne(countOfInventorySlot)->drawInventory(tableInventory,inventoryInfo1,inventoryInfo2,inventoryInfo3,overview.getCenter().x,overview.getCenter().y);
+            drawInventory(tableInventory,inventoryInfo1,inventoryInfo2,inventoryInfo3,overview.getCenter().x,overview.getCenter().y,
+                          play.mans[choiseMan].rukzak.getItOne(countOfInventorySlot));
 
             window.draw(tableInventory);
             window.draw(inventoryInfo1);
@@ -709,9 +684,9 @@ bool startGame(sf::RenderWindow &window){
             ////////////////////////////////
             for(int it = 0; it != pictures.itemSprite.size();it++) {//// X-85,Y+140
 
-                if(play.mans[choiseMan].rukzak.getItOne(countOfInventorySlot)->getName() == pictures.itemSprite[it]->name){
-                    pictures.itemSprite[it]->sprite.setPosition(overview.getCenter().x - 85,overview.getCenter().y + 140);
-                    window.draw(pictures.itemSprite[it]->sprite);
+                if(play.mans[choiseMan].rukzak.getItOne(countOfInventorySlot)->getName() == pictures.itemSprite[it].name){
+                    pictures.itemSprite[it].sprite.setPosition(overview.getCenter().x - 85,overview.getCenter().y + 140);
+                    window.draw(pictures.itemSprite[it].sprite);
                 }
 
             }
@@ -733,7 +708,7 @@ bool startGame(sf::RenderWindow &window){
     }
 
 
-    return true;
+    //return true;
 }
 
 

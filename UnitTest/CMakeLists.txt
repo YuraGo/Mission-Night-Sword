@@ -12,16 +12,16 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 #set(gtest_disable_pthreads on)
 include_directories(characters)
 include_directories(items)
+include_directories(Game)
 #include_directories(../gtest/googletest/googletest/include)
 include_directories(gtest)
 
 
+
 add_executable(UnitTest unitTest.cpp)
 
-target_link_libraries(UnitTest characters items Graphics)
-target_link_libraries(UnitTest sfml-audio sfml-network sfml-graphics sfml-window sfml-system)
 
-target_link_libraries(UnitTest gtest)
+target_link_libraries(UnitTest gtest characters items)
 
 ########
 

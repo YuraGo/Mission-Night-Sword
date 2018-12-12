@@ -19,13 +19,12 @@
 #include <random>
 #include "../Game/classGame.h"
 
-void createHero(std::vector<Hero>& mans);
 
 bool tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* evils);
 
-bool damageCorrect(float X, float Y,std::vector<Enemy>& mans,int Ac,int damage);
+bool tileCheck(float , float , Location* );
 
-bool ammoCheck(Inventory& items, int clip);
+float rangeOfMove(float X,float Y,float anX,float anY);
 
 void whereGo(sf::CircleShape& radiusOfMove,int speed, float X, float Y);
 
@@ -35,7 +34,7 @@ bool openDoor(float X, float Y, float plX, float plY);
 
 void startCord(std::vector<Enemy> &evils,Inventory& item);
 
-bool startGame(sf::RenderWindow &window);
+bool startGame(sf::RenderWindow &window, int numberLevel);
 
 void createAll(classGame&);
 

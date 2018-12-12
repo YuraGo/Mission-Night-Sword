@@ -11,6 +11,6 @@ include_directories(items)
 include_directories(Graphics)
 
 
-add_executable(Game game.cpp preload.h AI.h  game.cpp game.h classGame.cpp classGame.h paint.h preload.cpp)
+add_executable(Game game.cpp preload.h game.cpp game.h classGame.cpp classGame.h paint.h preload.cpp)
 target_link_libraries(Game characters items Graphics)
 target_link_libraries(Game sfml-audio sfml-network sfml-graphics sfml-window sfml-system)

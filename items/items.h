@@ -22,8 +22,7 @@ protected:
     std::string name;
     int HPchange;
     int mass;
-
-
+    int type;
 public:
 
     float getCrdX(){return this->crdX;};
@@ -33,8 +32,6 @@ public:
     void setCrd(float X, float Y){this->crdX = X;this->crdY=Y;}
 
     virtual void getInfo(){std::cout<<"nothing"<<std::endl;};
-
-    virtual void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float,float){};
 
     int getMass(){return this->mass;};
 
@@ -64,6 +61,10 @@ public:
 
     virtual void setCurrentCapacity(int shot){};
 
+    int getType(){return this->type;};
+
+    void modifyHP(){this->HPchange = 0;};
+
 };
 
 
@@ -76,7 +77,6 @@ protected:
     int currentCapacity;
 public:
 
-
     Weapon(int,int,int,int ,const std::string&,int,const std::string&);
 
     int getAccuracy()override{return this->accuracy;};
@@ -86,8 +86,6 @@ public:
     void getInfo()override;
 
     int getBullets()override{ return this->bulletsPerShoot;};
-
-    void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float, float)override;
 
     void setCapacity(int cap)override{this->currentCapacity = cap;};
 
@@ -103,6 +101,7 @@ class Ammo : public Item{
 protected:
     int size;
 public:
+
     Ammo(const std::string&, int, int);
 
     void setSize(int change);
@@ -113,7 +112,6 @@ public:
 
     void setCurrentSize(int count)override{this->size-=count;};
 
-    void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3,float,float)override;
 };
 
 class Medkit: public Item {
@@ -121,6 +119,7 @@ protected:
     int step;
 
 public:
+
     Medkit(int,int,const std::string&,int);
 
     void getInfo()override;
@@ -129,7 +128,6 @@ public:
 
     int getRegen()override{return this->HPchange;};
 
-    void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf::Text& text3, float ,float )override;
 };
 
 

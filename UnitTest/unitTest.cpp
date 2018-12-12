@@ -5,6 +5,8 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 #include "../items/items.h"
+#include "../Game/preload.h"
+
 
 
 
@@ -12,7 +14,16 @@ TEST(ClassHero, GetterTest){
 
 
     Hero testPlayer;
-    testPlayer.setHero("Bob",100,30,5,8,80);
+    testPlayer.setHero("Bob",100,30,5,8,80,1,1);
+
+    Weapon axe(40,5,70,15,"5.56",15,"axe");
+    Medkit aid(1,20,"PotionTallRuby",5);
+    Ammo bullets("5.56",20,5);
+
+    testPlayer.rukzak.setIt(&axe);
+    testPlayer.rukzak.setIt(&bullets);
+    testPlayer.rukzak.setIt(&aid);
+
 
     EXPECT_EQ(100 , testPlayer.getHP());
     EXPECT_EQ(30 , testPlayer.getMass());
@@ -24,7 +35,7 @@ TEST(ClassHero, GetterTest){
 
 TEST(ClassHero, SetterTest){
     Hero testPlayer;
-    testPlayer.setHero("Bob",100,30,5,8,80);
+    testPlayer.setHero("Bob",100,30,5,8,80,1,1);
 
     testPlayer.setStep(-1);
     EXPECT_EQ(1 , testPlayer.getStep());
@@ -40,7 +51,7 @@ TEST(ClassHero, SetterTest){
 
 TEST(ClassWeapon, Methods){
 
-    Weapon gun(40,5,70,15,"5.56",15,"gun","Items/Bow09.PNG");
+    Weapon gun(40,5,70,15,"5.56",15,"gun");
 
     EXPECT_EQ(70 , gun.getAccuracy());
     EXPECT_EQ(15 , gun.getMass());
@@ -57,7 +68,7 @@ TEST(ClassWeapon, Methods){
 }
 
 TEST(ClassAmmo , Methods){
-    Ammo five("5.56",10,5,"Items/ArrowSteel.PNG");
+    Ammo five("5.56",10,5);
 
     EXPECT_EQ(10, five.getAmmoSize());
 
@@ -70,12 +81,11 @@ TEST(ClassAmmo , Methods){
 
 TEST(ClassMedkit, Methods){
 
-    Medkit kit(2,50,10,"Items/PotionTriangularRuby.PNG");
+    Medkit kit(2,50,"PotionTriangularRuby.PNG",10);
 
     EXPECT_EQ(2 , kit.getAidStep());
     EXPECT_EQ(50, kit.getRegen());
     EXPECT_EQ(10, kit.getMass());
-
 
 }
 
@@ -83,9 +93,9 @@ TEST(ClassMedkit, Methods){
 
 TEST(ClassInventory, Method){
 
-    Weapon gun(40,5,70,15,"5.56",15,"gun","Items/Bow09.PNG");
-    Ammo five("5.56",10,5,"Items/ArrowSteel.PNG");
-    Medkit kit(2,50,10,"Items/PotionTriangularRuby.PNG");
+    Weapon gun(40,5,70,15,"5.56",15,"gun");
+    Ammo five("5.56",10,5);
+    Medkit kit(2,50,"PotionTriangularRuby.PNG",10);
 
     Inventory items;
 
