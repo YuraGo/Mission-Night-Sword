@@ -15,7 +15,7 @@ const int H = 16;
 const int W = 42;
 
 
-    std::string TileMap[H]={
+    std::string TileMap1[H]={
             "000000000000000000000000000000000000000000", //0
             "0                 0                      0", //1
             "0                 0                      0",//2

@@ -7,6 +7,24 @@
 #include <fstream>
 #include <random>
 
+std::string TileMap[16]={
+        "000000000000000000000000000000000000000000", //0
+        "0                 0                      0", //1
+        "0                 0                      0",//2
+        "0                 0                      0",//3
+        "0                                        0",//4
+        "0                                        0",//5
+        "0000000000000000000000000D0000000000000000",//6
+        "0       0                    0           0",//7
+        "0       0                    0           0",//8
+        "0       0                00000000        0",//9
+        "0       00000000         0               0",//10
+        "0       0                0               0",//11
+        "0       0                0               0",//12
+        "0                                        0",//13
+        "0                                        0",//14
+        "000000000000000000000000000000000000000000"//15
+};
 
 
 bool classGame::moveHero(int choiseMan,float X, float Y, Location& location) {
@@ -86,6 +104,103 @@ void classGame::heroIsNear() {
 
         }
     }
+}
+
+bool classGame::openDoor(float X, float Y, float plX, float plY){
+
+    if(X/32 == 25 && Y/32 == 6) {
+        if( rangeOfAct(X,Y,plX,plY,32))
+            return true;
+    }
+    return false;
+}
+
+bool classGame::tileCheck(float X , float Y, Location* location){
+    bool check = true;
+
+    if(location->getCellInfo(X,Y))
+        return false;
+
+    int Xi, Yi;
+    Xi = (int)X/32;
+    Yi = (int)Y/32;
+
+    if(Xi > 40 || Yi > 14 || Xi < 0 || Yi < 0)
+        return false;
+
+    if(TileMap[Yi][Xi] == '0')
+        return false;
+
+    return check;
+}
+
+
+void classGame::startCord(std::vector<Enemy> &evils,Inventory& item){
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distY(1, 15);
+    std::uniform_int_distribution<> distX(8, 38);
+    float X,Y,Xi,Yi;
+
+    for(auto it = 0;it != evils.size(); it++){
+        X = distX(gen)*32;
+        Y = distY(gen)*32;
+
+        if(tileInfo(X,Y,nullptr, &evils)) {
+            evils[it].setPlayerCordinate(X,Y);
+        }
+        else it--;
+    }
+
+    for(int it = 0;it != item.getIt().size(); it++){
+
+        Xi = distX(gen)*32;
+        Yi = distY(gen)*32;
+
+        if(tileInfo(Xi,Yi,nullptr, nullptr)) {
+            item.getItOne(it)->setCrd(Xi,Yi);
+        }
+        else it--;
+    }
+
+
+}
+
+
+bool classGame::tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* evils){
+    bool check = true;
+
+    if(mans != nullptr){
+        for(auto it : *mans){
+            if(X == it.getCordX() && Y == it.getCordY())
+                return false;
+        }}
+
+    if(evils != nullptr){
+        for(auto it : *evils){
+            if(X == it.getCordX() && Y == it.getCordY())
+                return false;
+        }}
+
+    int Xi, Yi;
+
+    Xi = (int)X/32;
+    Yi = (int)Y/32;
+
+    if(Xi > 40 || Yi > 14 || Xi < 0 || Yi < 0)
+        return false;
+
+
+    if(TileMap[Yi][Xi] == '0')
+        return false;
+
+    return check;
+}
+
+
+bool classGame::rangeOfAct(float X, float Y,float anX, float anY,float plus) {
+    return ((X - anX)*(X - anX) + (Y - anY) * (Y - anY) ) <= (plus)*(plus);
 }
 
 bool classGame::endGameCheck() {
@@ -249,30 +364,6 @@ void classGame::moveAI(int countOfMove) {
         }
 }
 
-
-void AllForSprite::makeSprite(const sf::String& F, float X, float Y, float W, float H) {
-
-    File = F;
-    image.loadFromFile(F);
-    texture.loadFromImage(image);
-    sprite.setTexture(texture);
-    sprite.setTextureRect(sf::IntRect(0, 0, (int)W,(int)H));
-
-    //heroSprite.push_back(sprite);
-    //heroSprite.push_back(sprite);
-}
-
-void AllForSprite::makeItemSprite(const sf::String &F,const std::string& Name) {
-
-    name = Name;
-    File = F;
-    image.loadFromFile(File);
-    image.createMaskFromColor(sf::Color(255,0,255,255));
-    texture.loadFromImage(image);
-    sprite.setTexture(texture);
-    sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
-
-}
 
 
 

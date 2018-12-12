@@ -6,7 +6,11 @@
 #include <SFML/Graphics.hpp>
 #include "../characters/characters.h"
 
-
+void whereGo(sf::CircleShape& radiusOfMove,int speed, float X, float Y){
+    radiusOfMove.setRadius(32*speed);
+    radiusOfMove.setPosition(X - 32*speed ,Y - 32*speed);
+    radiusOfMove.setFillColor(sf::Color(210,210,0,30));
+}
 
 
 void tableEnemyDraw(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2, float X,float Y, Enemy* player) {
@@ -85,3 +89,60 @@ void drawInventory(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf
     }
     
 }
+
+
+
+
+
+
+
+
+class AllForSprite{
+public:
+    sf::String File;
+    sf::Image image;
+    sf::Texture texture;
+    sf::Sprite sprite;
+    std::string name;
+
+    void makeSprite(const sf::String& F, float X, float Y, float W, float H) {
+
+        File = F;
+        image.loadFromFile(F);
+        texture.loadFromImage(image);
+        sprite.setTexture(texture);
+        sprite.setTextureRect(sf::IntRect(0, 0, (int)W,(int)H));
+
+        //heroSprite.push_back(sprite);
+        //heroSprite.push_back(sprite);
+    }
+
+
+    void makeItemSprite(const sf::String &F,const std::string& Name) {
+
+        name = Name;
+        File = F;
+        image.loadFromFile(File);
+        image.createMaskFromColor(sf::Color(255,0,255,255));
+        texture.loadFromImage(image);
+        sprite.setTexture(texture);
+        sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
+
+    }
+
+
+
+};
+
+class Pictures{
+public:
+
+
+    std::vector<AllForSprite> heroSprite;
+
+    std::vector<AllForSprite> itemSprite;
+
+    std::vector<AllForSprite> enemySprite;
+
+
+};

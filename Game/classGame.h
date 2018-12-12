@@ -4,13 +4,16 @@
 
 #ifndef NIGHTSWORD_CLASSGAME_H
 #define NIGHTSWORD_CLASSGAME_H
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include "../characters/characters.h"
 #include "../items/items.h"
 #include <vector>
 #include <string>
+
+
+
+
+
 
 
 
@@ -30,6 +33,17 @@ public:
 
     bool endGameCheck();
 
+    bool openDoor(float X, float Y, float plX, float plY);
+
+    bool rangeOfAct (float X, float Y,float anX, float anY,float plus);
+
+    bool tileInfo(float X , float Y, std::vector<Hero>*, std::vector<Enemy>*);
+
+    bool tileCheck(float X , float Y, Location* location);
+
+    float rangeOfMove(float X,float Y,float anX,float anY){return ((X - anX)*(X - anX) + (Y - anY) * (Y - anY) );}
+
+    void startCord(std::vector<Enemy> &evils,Inventory& item);
 };
 
 class Location{
@@ -48,33 +62,7 @@ public:
 
 
 
-class AllForSprite{
-public:
-    sf::String File;
-    sf::Image image;
-    sf::Texture texture;
-    sf::Sprite sprite;
-    std::string name;
 
-    void makeSprite(const sf::String& , float , float , float , float );
-
-    void makeItemSprite(const sf::String&,const std::string&);
-
-};
-
-class Pictures{
-public:
-
-
-    std::vector<AllForSprite> heroSprite;
-
-    std::vector<AllForSprite> itemSprite;
-
-    std::vector<AllForSprite> enemySprite;
-
-
-
-};
 
 
 

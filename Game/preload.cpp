@@ -13,217 +13,88 @@
 #include <fstream>
 
 
-float rangeOfMove(float X,float Y,float anX,float anY){
-    return ((X - anX)*(X - anX) + (Y - anY) * (Y - anY) );
-}
+//float rangeOfMove(float X,float Y,float anX,float anY){
+//    return ((X - anX)*(X - anX) + (Y - anY) * (Y - anY) );
+//}
+
+//bool tileCheck(float X , float Y, Location* location){
+//bool check = true;
+//
+//    if(location->getCellInfo(X,Y))
+//        return false;
+//
+//    int Xi, Yi;
+//    Xi = (int)X/32;
+//    Yi = (int)Y/32;
+//
+//    if(Xi > 40 || Yi > 14 || Xi < 0 || Yi < 0)
+//        return false;
+//
+//    if(TileMap[Yi][Xi] == '0')
+//        return false;
+//
+//    return check;
+//}
+
+//bool tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* evils){
+//    bool check = true;
+//
+//    if(mans != nullptr){
+//        for(auto it : *mans){
+//            if(X == it.getCordX() && Y == it.getCordY())
+//                return false;
+//        }}
+//
+//    if(evils != nullptr){
+//        for(auto it : *evils){
+//            if(X == it.getCordX() && Y == it.getCordY())
+//                return false;
+//        }}
+//
+//    int Xi, Yi;
+//
+//    Xi = (int)X/32;
+//    Yi = (int)Y/32;
+//
+//    if(Xi > 40 || Yi > 14 || Xi < 0 || Yi < 0)
+//        return false;
+//
+//
+//    if(TileMap[Yi][Xi] == '0')
+//        return false;
+//
+//    return check;
+//}
+
+
+
+//void whereGo(sf::CircleShape& radiusOfMove,int speed, float X, float Y){
+//
+//    radiusOfMove.setRadius(32*speed);
+//    radiusOfMove.setPosition(X - 32*speed ,Y - 32*speed);
+//        radiusOfMove.setFillColor(sf::Color(210,210,0,30));
+//
+//}
+//
+//bool rangeOfAct (float X, float Y,float anX, float anY,float plus) {
+//    return ((X - anX)*(X - anX) + (Y - anY) * (Y - anY) ) <= (plus)*(plus);
+//}
+//
+//bool openDoor(float X, float Y, float plX, float plY){
+//
+//    if(X/32 == 25 && Y/32 == 6) {
+//        if( rangeOfAct(X,Y,plX,plY,32))
+//            return true;
+//    }
+//    return false;
+//}
+
+
+
+//
 
-bool tileCheck(float X , float Y, Location* location){
-bool check = true;
 
-    if(location->getCellInfo(X,Y))
-        return false;
 
-    int Xi, Yi;
-    Xi = (int)X/32;
-    Yi = (int)Y/32;
-
-    if(Xi > 40 || Yi > 14 || Xi < 0 || Yi < 0)
-        return false;
-
-    if(TileMap[Yi][Xi] == '0')
-        return false;
-
-    return check;
-}
-
-bool tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* evils){
-    bool check = true;
-
-    if(mans != nullptr){
-        for(auto it : *mans){
-            if(X == it.getCordX() && Y == it.getCordY())
-                return false;
-        }}
-
-    if(evils != nullptr){
-        for(auto it : *evils){
-            if(X == it.getCordX() && Y == it.getCordY())
-                return false;
-        }}
-
-    int Xi, Yi;
-
-    Xi = (int)X/32;
-    Yi = (int)Y/32;
-
-    if(Xi > 40 || Yi > 14 || Xi < 0 || Yi < 0)
-        return false;
-
-
-    if(TileMap[Yi][Xi] == '0')
-        return false;
-
-    return check;
-}
-
-
-
-void whereGo(sf::CircleShape& radiusOfMove,int speed, float X, float Y){
-    //std::cout<<"?"<<std::endl;
-    radiusOfMove.setRadius(32*speed);
-    radiusOfMove.setPosition(X - 32*speed ,Y - 32*speed);
-    //radiusOfMove.setPosition(X  ,Y );
-    radiusOfMove.setFillColor(sf::Color(210,210,0,30));
-
-}
-
-bool rangeOfAct (float X, float Y,float anX, float anY,float plus) {
-    return ((X - anX)*(X - anX) + (Y - anY) * (Y - anY) ) <= (plus)*(plus);
-}
-
-bool openDoor(float X, float Y, float plX, float plY){
-
-    if(X/32 == 25 && Y/32 == 6) {
-        if( rangeOfAct(X,Y,plX,plY,32))
-            return true;
-    }
-    return false;
-}
-
-
-
-void startCord(std::vector<Enemy> &evils,Inventory& item){
-
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distY(1, 15);
-    std::uniform_int_distribution<> distX(8, 38);
-    float X,Y,Xi,Yi;
-
-    for(auto it = 0;it != evils.size(); it++){
-        X = distX(gen)*32;
-        Y = distY(gen)*32;
-
-        if(tileInfo(X,Y,nullptr, &evils)) {
-            evils[it].setPlayerCordinate(X,Y);
-        }
-        else it--;
-    }
-
-    for(int it = 0;it != item.getIt().size(); it++){
-
-        Xi = distX(gen)*32;
-        Yi = distY(gen)*32;
-
-        if(tileInfo(Xi,Yi,nullptr, nullptr)) {
-            item.getItOne(it)->setCrd(Xi,Yi);
-        }
-        else it--;
-    }
-
-
-}
-
-
-void createAll(classGame& play, Pictures &pictures){
-
-    Hero player1;
-    Hero player2;
-    player1.setHero("Bob",100,30,5,8,80,32,32);
-    player2.setHero("Silver",100,30,6,10,40,64,64);
-
-    Weapon bow(20,1,80,4,"arrow",15,"bow");
-    Weapon axe(40,5,70,15,"5.56",15,"axe");
-    Medkit aid(1,20,"PotionTallRuby",5);
-    Ammo bullets("5.56",20,5);
-    Ammo arrows("arrow",10,5);
-
-    player1.rukzak.setIt(&bow);
-    player1.rukzak.setIt(&arrows);
-    player1.rukzak.setIt(&aid);
-
-    player2.rukzak.setIt(&axe);
-    player2.rukzak.setIt(&bullets);
-    player2.rukzak.setIt(&aid);
-
-    play.mans.push_back(player1);
-    play.mans.push_back(player2);
-
-
-    Enemy evil;
-    evil.setHero("demon",60,0,5,8,100,96,96);
-
-    play.evils.push_back(evil);
-    play.evils.push_back(evil);
-    play.evils.push_back(evil);
-    play.evils.push_back(evil);
-
-
-    Ammo bullets1("arrow",10,5);
-    Ammo bullets2("7.62",20,10);
-    Ammo bullets3("5.56",30,5);
-
-    Medkit aid1(2,50,"PotionTriangularRuby",10);
-    Medkit aid2(2,35,"PotionTallYellow2",5);
-    Medkit aid3(1,30,"PotionTallYellow2",5);
-
-    play.someItem.setIt(&aid1);
-    play.someItem.setIt(&aid2);
-    play.someItem.setIt(&aid3);
-    play.someItem.setIt(&bullets1);
-    play.someItem.setIt(&bullets2);
-    play.someItem.setIt(&bullets3);
-
-
-    AllForSprite slp,slt,spt,pr1,pr2,pr3,pr4,pr5,pr6,pr7,pr8;
-    std::vector<AllForSprite> spr;
-    slp.makeSprite("solder.png",32,32,50,70);
-
-    pictures.heroSprite.push_back(slp);
-    pictures.heroSprite.push_back(slp);
-
-    slt.makeSprite("warrior1.png",64,64,55,55);
-    pictures.enemySprite.push_back(slt);
-    pictures.enemySprite.push_back(slt);
-    pictures.enemySprite.push_back(slt);
-    pictures.enemySprite.push_back(slt);
-
-
-    pr1.makeItemSprite("Items/ArrowSteel.PNG","arrow");
-    pictures.itemSprite.push_back(pr1);
-
-    pr2.makeItemSprite("Items/CoinsGold.PNG","7.62");
-    pictures.itemSprite.push_back(pr2);
-
-    pr3.makeItemSprite("Items/CoinsTeal.PNG","5.56");
-    pictures.itemSprite.push_back(pr3);
-
-    pr4.makeItemSprite("Items/PotionTriangularRuby.PNG","PotionTriangularRuby");
-    pictures.itemSprite.push_back(pr4);
-
-    pr5.makeItemSprite("Items/PotionTallYellow2.PNG","PotionTallYellow2");
-    pictures.itemSprite.push_back(pr5);
-
-    pr6.makeItemSprite("Items/Axe02.PNG","bow");
-    pictures.itemSprite.push_back(pr6);
-
-    pr7.makeItemSprite("Items/Bow09.PNG","axe");
-    pictures.itemSprite.push_back(pr7);
-
-    pr8.makeItemSprite("Items/PotionTallRuby.PNG", "PotionTallRuby");
-    pictures.itemSprite.push_back(pr8);
-
-
-    //////////////////////////
-
-    for(int it =0; it <  play.mans[0].rukzak.getIt().size(); it++ ) {
-        play.mans[0].setCurrentMass(  play.mans[0].rukzak.getItOne(it)->getMass());
-    }
-
-    for(int it =0; it < play.mans[1].rukzak.getIt().size(); it++ ) {
-        play.mans[1].setCurrentMass( play.mans[1].rukzak.getItOne(it)->getMass());
-    }
-}
 
 bool startGame(sf::RenderWindow &window,int numberLevel){
 
@@ -399,7 +270,7 @@ bool startGame(sf::RenderWindow &window,int numberLevel){
         play.mans[1].setCurrentMass( play.mans[1].rukzak.getItOne(it)->getMass());
     }
 
-    startCord(play.evils,play.someItem);
+    play.startCord(play.evils,play.someItem);
 
     for(auto i: play.evils){
         location.updateMap( i.getCordX(), i.getCordY() );
@@ -447,19 +318,19 @@ bool startGame(sf::RenderWindow &window,int numberLevel){
 
 
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right){
-            if( tileInfo(cursor.getPosition().x+32,cursor.getPosition().y, nullptr,nullptr) )
+            if( play.tileInfo(cursor.getPosition().x+32,cursor.getPosition().y, nullptr,nullptr) )
                 cursorMove(cursor, 'r');
         }
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left){
-            if( tileInfo(cursor.getPosition().x-32,cursor.getPosition().y, nullptr,nullptr) )
+            if( play.tileInfo(cursor.getPosition().x-32,cursor.getPosition().y, nullptr,nullptr) )
                 cursorMove(cursor, 'l');
         }
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up){
-            if( tileInfo(cursor.getPosition().x,cursor.getPosition().y-32, nullptr,nullptr) )
+            if( play.tileInfo(cursor.getPosition().x,cursor.getPosition().y-32, nullptr,nullptr) )
                 cursorMove(cursor, 'u');
         }
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down){
-            if( tileInfo(cursor.getPosition().x,cursor.getPosition().y+32, nullptr,nullptr) )
+            if( play.tileInfo(cursor.getPosition().x,cursor.getPosition().y+32, nullptr,nullptr) )
                 cursorMove(cursor, 'd');
         }
         /////////////////////////////////// Atack /////////////////////////////////////
@@ -469,7 +340,7 @@ bool startGame(sf::RenderWindow &window,int numberLevel){
         }
 /////////////// DOOR
         if (event.key.code == sf::Keyboard::D ) {
-            if(openDoor(cursor.getPosition().x,cursor.getPosition().y,
+            if(play.openDoor(cursor.getPosition().x,cursor.getPosition().y,
                         play.mans[choiseMan].getCordX(),play.mans[choiseMan].getCordY()) && play.mans[choiseMan].getStep() >0){
                 play.mans[choiseMan].setStep(-1);
                 message.setString("");
@@ -567,14 +438,14 @@ bool startGame(sf::RenderWindow &window,int numberLevel){
         for (int i = 0; i < H; i++) {
             for (int j = 0; j < W; j++) {
 
-                if (TileMap[i][j] == '0'){
+                if (TileMap1[i][j] == '0'){
                     s_map.setTextureRect(sf::IntRect(384, 128, 416, 160));
                 } // 8W 5H
-                if (TileMap[i][j] == 'D'){
+                if (TileMap1[i][j] == 'D'){
                     if(doorOpen) s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
                     else s_map.setTextureRect(sf::IntRect(160, 96, 192, 128));
                 }
-                if (TileMap[i][j] == ' '){
+                if (TileMap1[i][j] == ' '){
                     s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
                 }
 

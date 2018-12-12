@@ -6,7 +6,6 @@
 #define NIGHTSWORD_CHARACTERS_H
 
 #include <string.h>
-#include <iostream>
 #include <string>
 #include <vector>
 #include "../items/items.h"
