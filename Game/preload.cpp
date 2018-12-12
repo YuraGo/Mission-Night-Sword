@@ -2,11 +2,7 @@
 // Created by dartmoor on 02.12.18.
 //
 
-#ifndef NIGHTSWORD_PRELOAD_H
-#define NIGHTSWORD_PRELOAD_H
-
 #include "../characters/characters.h"
-#include "preload.h"
 #include "random"
 #include "../items/items.h"
 #include "../Game/classGame.h"
@@ -81,7 +77,7 @@ void whereGo(sf::CircleShape& radiusOfMove,int speed, float X, float Y){
 
 }
 
-bool rangeOfAct (float X, float Y,float anX, float anY,float plus=32.f ) {
+bool rangeOfAct (float X, float Y,float anX, float anY,float plus) {
     return ((X - anX)*(X - anX) + (Y - anY) * (Y - anY) ) <= (plus)*(plus);
 }
 
@@ -710,6 +706,3 @@ bool startGame(sf::RenderWindow &window,int numberLevel){
 
     //return true;
 }
-
-
-#endif //NIGHTSWORD_PRELOAD_H

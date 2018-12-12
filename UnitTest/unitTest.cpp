@@ -2,7 +2,6 @@
 
 #include "../characters/characters.h"
 #include <gtest/gtest.h>
-#include <SFML/Window.hpp>
 #include <iostream>
 #include "../items/items.h"
 #include "../Game/preload.h"

@@ -4,7 +4,6 @@
 
 #ifndef NIGHTSWORD_CLASSGAME_H
 #define NIGHTSWORD_CLASSGAME_H
-#include "game.h"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>

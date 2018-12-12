@@ -5,8 +5,6 @@
 #ifndef NIGHTSWORD_CHARACTERS_H
 #define NIGHTSWORD_CHARACTERS_H
 
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
 #include <string.h>
 #include <iostream>
 #include <string>

@@ -11,8 +11,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
 
 //// getSprite
 
