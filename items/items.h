@@ -130,6 +130,7 @@ public:
 
 
 
+
 class Inventory{
 protected:
     std::vector<Item*> items;
@@ -144,6 +145,9 @@ public:
     void throwIt(int index){ this->items.erase(items.begin() + index);};
 
 };
+
+
+
 
 
 #endif //NIGHTSWORD_ITEMS_H

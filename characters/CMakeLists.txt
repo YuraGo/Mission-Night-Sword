@@ -3,4 +3,4 @@ project(nightsword)
 
 
 
-add_library(characters STATIC characters.cpp)
+add_library(characters STATIC characters.cpp ../Game/MyVector.h)

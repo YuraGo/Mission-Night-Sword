@@ -13,89 +13,6 @@
 #include <fstream>
 
 
-//float rangeOfMove(float X,float Y,float anX,float anY){
-//    return ((X - anX)*(X - anX) + (Y - anY) * (Y - anY) );
-//}
-
-//bool tileCheck(float X , float Y, Location* location){
-//bool check = true;
-//
-//    if(location->getCellInfo(X,Y))
-//        return false;
-//
-//    int Xi, Yi;
-//    Xi = (int)X/32;
-//    Yi = (int)Y/32;
-//
-//    if(Xi > 40 || Yi > 14 || Xi < 0 || Yi < 0)
-//        return false;
-//
-//    if(TileMap[Yi][Xi] == '0')
-//        return false;
-//
-//    return check;
-//}
-
-//bool tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* evils){
-//    bool check = true;
-//
-//    if(mans != nullptr){
-//        for(auto it : *mans){
-//            if(X == it.getCordX() && Y == it.getCordY())
-//                return false;
-//        }}
-//
-//    if(evils != nullptr){
-//        for(auto it : *evils){
-//            if(X == it.getCordX() && Y == it.getCordY())
-//                return false;
-//        }}
-//
-//    int Xi, Yi;
-//
-//    Xi = (int)X/32;
-//    Yi = (int)Y/32;
-//
-//    if(Xi > 40 || Yi > 14 || Xi < 0 || Yi < 0)
-//        return false;
-//
-//
-//    if(TileMap[Yi][Xi] == '0')
-//        return false;
-//
-//    return check;
-//}
-
-
-
-//void whereGo(sf::CircleShape& radiusOfMove,int speed, float X, float Y){
-//
-//    radiusOfMove.setRadius(32*speed);
-//    radiusOfMove.setPosition(X - 32*speed ,Y - 32*speed);
-//        radiusOfMove.setFillColor(sf::Color(210,210,0,30));
-//
-//}
-//
-//bool rangeOfAct (float X, float Y,float anX, float anY,float plus) {
-//    return ((X - anX)*(X - anX) + (Y - anY) * (Y - anY) ) <= (plus)*(plus);
-//}
-//
-//bool openDoor(float X, float Y, float plX, float plY){
-//
-//    if(X/32 == 25 && Y/32 == 6) {
-//        if( rangeOfAct(X,Y,plX,plY,32))
-//            return true;
-//    }
-//    return false;
-//}
-
-
-
-//
-
-
-
-
 bool startGame(sf::RenderWindow &window,int numberLevel){
 
     sf::Clock clock;
@@ -262,8 +179,8 @@ bool startGame(sf::RenderWindow &window,int numberLevel){
 
     //////////////////////////
 
-    for(int it =0; it <  play.mans[0].rukzak.getIt().size(); it++ ) {
-        play.mans[0].setCurrentMass(  play.mans[0].rukzak.getItOne(it)->getMass());
+    for(int it =0; it !=  play.mans[0].rukzak.getIt().size(); it++ ) {
+        play.mans[0].setCurrentMass( play.mans[0].rukzak.getItOne(it)->getMass());
     }
 
     for(int it =0; it < play.mans[1].rukzak.getIt().size(); it++ ) {
@@ -297,13 +214,13 @@ bool startGame(sf::RenderWindow &window,int numberLevel){
                         window.close();
                         return false;
                     }
-                    if (event.key.code == sf::Keyboard::Num1 && play.mans[0].getHP() > 0) {
+                    if (event.key.code == sf::Keyboard::Num1 && play.mans[0].getCurrentHP() > 0) {
                         choiseMan=0;
                         countOfInventorySlot = 0;
                         cursor.setPosition(play.mans[0].getCordX(), play.mans[0].getCordY());
 
                     }
-                    if (event.key.code == sf::Keyboard::Num2 && play.mans[1].getHP() > 0) {
+                    if (event.key.code == sf::Keyboard::Num2 && play.mans[1].getCurrentHP() > 0) {
                         choiseMan=1;
                         countOfInventorySlot = 0;
                         cursor.setPosition(play.mans[1].getCordX(), play.mans[1].getCordY());
@@ -522,7 +439,9 @@ bool startGame(sf::RenderWindow &window,int numberLevel){
             roundOver.setString("Round Over");
             roundOver.setPosition(overview.getCenter());
             if(play.mans[0].getCurrentHP() > 0) play.mans[0].setStep(2);
+            else play.mans[0].setAlive();
             if(play.mans[1].getCurrentHP() > 0) play.mans[1].setStep(2);
+            else play.mans[1].setAlive();
             if(countOfMove > 4) countOfMove = 1;
             play.moveAI(countOfMove);
             play.heroIsNear();

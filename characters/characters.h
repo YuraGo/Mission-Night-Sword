@@ -20,6 +20,7 @@ bool ammoCheck(Inventory& , int );
 class Hero {
 
 protected:
+    bool alive = true;
     std::string name;
     int HP;
     int mass;
@@ -49,6 +50,10 @@ public:
     int getHP() { return  this->HP;};
 
     int getMass() { return  this->mass;};
+
+    bool getAlive(){return this->alive;};
+
+    void setAlive(){this->alive = false;};
 
     void setCurrentMass(int mass){this->currentMass +=mass;};
 

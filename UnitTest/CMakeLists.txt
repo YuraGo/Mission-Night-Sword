@@ -18,7 +18,7 @@ include_directories(gtest)
 
 
 
-add_executable(UnitTest unitTest.cpp)
+add_executable(UnitTest unitTest.cpp ../Game/MyVector.h)
 
 
 target_link_libraries(UnitTest gtest characters items)

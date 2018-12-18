@@ -4,8 +4,8 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include "../items/items.h"
-#include "../Game/preload.h"
-
+#include "../Game/classGame.h"
+#include "../Game/MyVector.h"
 
 
 
@@ -110,7 +110,45 @@ TEST(ClassInventory, Method){
 
     EXPECT_EQ(40 , items.getItOne(0)->getHpChange());
 
+    EXPECT_EQ(10, items.getItOne(1)->getAmmoSize());
+
 }
+
+TEST(MyClassVector, testing){
+
+    vector<int> v;
+
+    for (int i = 0; i < 10; ++i)
+        v.push_back(i);
+
+    EXPECT_EQ(10,v.size());
+    EXPECT_EQ(4,v[4]);
+
+    v.erase(v.begin() + 1);
+    v.erase(v.begin() + 1);
+    EXPECT_EQ(8,v.size());
+
+    v.insert(v.begin()+2, 12);
+    EXPECT_EQ(9,v.size());
+    EXPECT_EQ(12,v[2]);
+
+
+    v.clear();
+    EXPECT_EQ(0,v.size());
+
+
+    for (int i = 0,j=0; i < 10; ++i,j =(i + 2)*2 ) {
+        v.push_back(j);
+    }
+
+    EXPECT_EQ(10,v[3]);
+    EXPECT_EQ(0,v.front());
+    EXPECT_EQ(14,v.at(5));
+    EXPECT_EQ(22,v.back());
+
+
+}
+
 
 
 int main(int argc,char *argv[]) {

@@ -67,11 +67,18 @@ void Medkit::getInfo() {
 
 Item* Inventory::getItOne(int count){
     int i = 0;
-    for(auto it: items){
-        if(i == count)
-            return it;
-        i++;
+    for (int j = 0; j < items.size(); ++j){
+        if(j == count)
+            return items[j];
     }
+
+
+//    for(auto it: items){
+//        if(i == count)
+//            return it;
+//        i++;
+//    }
     return nullptr;
 }
+
 

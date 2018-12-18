@@ -9,7 +9,7 @@
 #include "../items/items.h"
 #include <vector>
 #include <string>
-
+#include "MyVector.h"
 
 
 
@@ -21,7 +21,7 @@ class Location;
 
 class classGame {
 public:
-    std::vector<Hero> mans;
+    vector<Hero> mans;
     std::vector<Enemy> evils;
     Inventory someItem;
 
@@ -37,7 +37,7 @@ public:
 
     bool rangeOfAct (float X, float Y,float anX, float anY,float plus);
 
-    bool tileInfo(float X , float Y, std::vector<Hero>*, std::vector<Enemy>*);
+    bool tileInfo(float X , float Y, vector<Hero>*, std::vector<Enemy>*);
 
     bool tileCheck(float X , float Y, Location* location);
 

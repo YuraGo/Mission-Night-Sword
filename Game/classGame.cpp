@@ -168,7 +168,7 @@ void classGame::startCord(std::vector<Enemy> &evils,Inventory& item){
 }
 
 
-bool classGame::tileInfo(float X , float Y, std::vector<Hero>* mans, std::vector<Enemy>* evils){
+bool classGame::tileInfo(float X , float Y, vector<Hero>* mans, std::vector<Enemy>* evils){
     bool check = true;
 
     if(mans != nullptr){
