@@ -20,7 +20,7 @@
 
 
 
-bool startGame(sf::RenderWindow &window, int numberLevel);
+bool startGame(sf::RenderWindow &window, int numberLevel,std::vector<int> whatPick);
 
 
 

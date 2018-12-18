@@ -1,0 +1,64 @@
+\hypertarget{classvector}{}\section{Шаблон класса vector$<$ Value\+Type $>$}
+\label{classvector}\index{vector$<$ Value\+Type $>$@{vector$<$ Value\+Type $>$}}
+\subsection*{Открытые типы}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classvector_a6cf53b2a874ea2441f78780cb81d6b52}\label{classvector_a6cf53b2a874ea2441f78780cb81d6b52}} 
+typedef Value\+Type {\bfseries value\+\_\+type}
+\item 
+\mbox{\Hypertarget{classvector_a8e5a1e2312cdbb2b59ddaccd4a59a872}\label{classvector_a8e5a1e2312cdbb2b59ddaccd4a59a872}} 
+typedef Value\+Type $\ast$ {\bfseries pointer}
+\item 
+\mbox{\Hypertarget{classvector_a556166b15bd2eb905c3c3de1c1a5f692}\label{classvector_a556166b15bd2eb905c3c3de1c1a5f692}} 
+typedef Value\+Type \& {\bfseries reference}
+\item 
+\mbox{\Hypertarget{classvector_a2a0886f454cf7285401b6e6baba63802}\label{classvector_a2a0886f454cf7285401b6e6baba63802}} 
+typedef pointer {\bfseries iterator}
+\end{DoxyCompactItemize}
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classvector_ac96708454c63cc77ec591a126e45d8ed}\label{classvector_ac96708454c63cc77ec591a126e45d8ed}} 
+void {\bfseries clear} ()
+\item 
+\mbox{\Hypertarget{classvector_a0816fee1ef492c548470c5e6f67a9876}\label{classvector_a0816fee1ef492c548470c5e6f67a9876}} 
+bool {\bfseries empty} () const
+\item 
+\mbox{\Hypertarget{classvector_a316268c2aaa12061dca02c32322a4e7b}\label{classvector_a316268c2aaa12061dca02c32322a4e7b}} 
+unsigned long {\bfseries size} () const
+\item 
+\mbox{\Hypertarget{classvector_a5dd07d25eeb7305a94232f90a85eee15}\label{classvector_a5dd07d25eeb7305a94232f90a85eee15}} 
+void {\bfseries reserve} (unsigned long new\+\_\+size)
+\item 
+\mbox{\Hypertarget{classvector_abae3df4e384025fa11d9ef378b51aae6}\label{classvector_abae3df4e384025fa11d9ef378b51aae6}} 
+iterator {\bfseries begin} () const
+\item 
+\mbox{\Hypertarget{classvector_a45a5f2296678f88ac748e596a7dc11f4}\label{classvector_a45a5f2296678f88ac748e596a7dc11f4}} 
+iterator {\bfseries end} () const
+\item 
+\mbox{\Hypertarget{classvector_a4391dcc0bd97e03c535e96a29c89846b}\label{classvector_a4391dcc0bd97e03c535e96a29c89846b}} 
+reference {\bfseries front} () const
+\item 
+\mbox{\Hypertarget{classvector_a936581fe884868460a9f9a0cb4d36371}\label{classvector_a936581fe884868460a9f9a0cb4d36371}} 
+reference {\bfseries back} () const
+\item 
+\mbox{\Hypertarget{classvector_a1dec97d1ec7cc96a1fb1e5d3a16f6d92}\label{classvector_a1dec97d1ec7cc96a1fb1e5d3a16f6d92}} 
+iterator {\bfseries erase} (iterator what)
+\item 
+\mbox{\Hypertarget{classvector_aaab8be14e32065a75760bf2d55b3b990}\label{classvector_aaab8be14e32065a75760bf2d55b3b990}} 
+reference {\bfseries at} (int position) const
+\item 
+\mbox{\Hypertarget{classvector_a1772fa608912300c60aa70852f0fa49e}\label{classvector_a1772fa608912300c60aa70852f0fa49e}} 
+iterator {\bfseries insert} (iterator before, const value\+\_\+type \&value)
+\item 
+\mbox{\Hypertarget{classvector_a283b5a625ff755a60d34bd4607918509}\label{classvector_a283b5a625ff755a60d34bd4607918509}} 
+iterator {\bfseries push\+\_\+back} (const value\+\_\+type \&value)
+\item 
+\mbox{\Hypertarget{classvector_a9b2e7b6715093f7c7565f5d35f7b9338}\label{classvector_a9b2e7b6715093f7c7565f5d35f7b9338}} 
+reference {\bfseries operator\mbox{[}$\,$\mbox{]}} (int position) const
+\end{DoxyCompactItemize}
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+My\+Vector.\+h\end{DoxyCompactItemize}

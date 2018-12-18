@@ -35,6 +35,8 @@ public:
 
     Inventory rukzak;
 
+    std::string getName(){return this->name;};
+
     void setHero(const std::string&,int ,int ,int ,int ,int , float, float);
 
     void setHP(int damage){ this->currentHP -= damage; };

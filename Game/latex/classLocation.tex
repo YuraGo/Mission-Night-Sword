@@ -1,0 +1,91 @@
+\hypertarget{classLocation}{}\section{Класс Location}
+\label{classLocation}\index{Location@{Location}}
+
+
+Класс карты  
+
+
+
+
+{\ttfamily \#include $<$class\+Game.\+h$>$}
+
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classLocation_a611533b2c207b0f16de0028e8273bd89}{get\+Cell\+Info} (float x, float y)
+\item 
+void \hyperlink{classLocation_a1ab603fce48cd7d27928c8c554346be7}{clear\+Map} ()
+\item 
+void \hyperlink{classLocation_a65590636116960abb1799763f011dede}{mini\+Update} (float, float, float, float)
+\item 
+void \hyperlink{classLocation_a05673358cad329e92cb189f8ec493aad}{update\+Map} (float x, float y)
+\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+Класс карты 
+
+\begin{DoxyAuthor}{Автор}
+Юрий Головушкин
+\end{DoxyAuthor}
+В данном классе содержится информация о каждой клетки уровня. 
+
+\subsection{Методы}
+\mbox{\Hypertarget{classLocation_a1ab603fce48cd7d27928c8c554346be7}\label{classLocation_a1ab603fce48cd7d27928c8c554346be7}} 
+\index{Location@{Location}!clear\+Map@{clear\+Map}}
+\index{clear\+Map@{clear\+Map}!Location@{Location}}
+\subsubsection{\texorpdfstring{clear\+Map()}{clearMap()}}
+{\footnotesize\ttfamily void Location\+::clear\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Очищает информацию о всех клетках \mbox{\Hypertarget{classLocation_a611533b2c207b0f16de0028e8273bd89}\label{classLocation_a611533b2c207b0f16de0028e8273bd89}} 
+\index{Location@{Location}!get\+Cell\+Info@{get\+Cell\+Info}}
+\index{get\+Cell\+Info@{get\+Cell\+Info}!Location@{Location}}
+\subsubsection{\texorpdfstring{get\+Cell\+Info()}{getCellInfo()}}
+{\footnotesize\ttfamily bool Location\+::get\+Cell\+Info (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Начальные координаты для врагов и преметов 
+\begin{DoxyParams}{Аргументы}
+{\em x} & координата клетки карты по X \\
+\hline
+{\em y} & координата клетки карты по Y \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Занятость клетки 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_a65590636116960abb1799763f011dede}\label{classLocation_a65590636116960abb1799763f011dede}} 
+\index{Location@{Location}!mini\+Update@{mini\+Update}}
+\index{mini\+Update@{mini\+Update}!Location@{Location}}
+\subsubsection{\texorpdfstring{mini\+Update()}{miniUpdate()}}
+{\footnotesize\ttfamily void Location\+::mini\+Update (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{prevX,  }\item[{float}]{prevY }\end{DoxyParamCaption})}
+
+Обновление информации для клетки 
+\begin{DoxyParams}{Аргументы}
+{\em X} & новая координата X \\
+\hline
+{\em Y} & новая координата Y \\
+\hline
+{\em prevY} & старая координата X \\
+\hline
+{\em prevX} & старая координата Y \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLocation_a05673358cad329e92cb189f8ec493aad}\label{classLocation_a05673358cad329e92cb189f8ec493aad}} 
+\index{Location@{Location}!update\+Map@{update\+Map}}
+\index{update\+Map@{update\+Map}!Location@{Location}}
+\subsubsection{\texorpdfstring{update\+Map()}{updateMap()}}
+{\footnotesize\ttfamily void Location\+::update\+Map (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+обновление информации карты по координатам 
+\begin{DoxyParams}{Аргументы}
+{\em X} & координата X \\
+\hline
+{\em Y} & координата Y \\
+\hline
+\end{DoxyParams}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+class\+Game.\+h\item 
+class\+Game.\+cpp\end{DoxyCompactItemize}

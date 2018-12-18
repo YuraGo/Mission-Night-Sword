@@ -1,0 +1,214 @@
+\hypertarget{classclassGame}{}\section{Класс class\+Game}
+\label{classclassGame}\index{class\+Game@{class\+Game}}
+
+
+Главный класс, отвечающий за выполнение программы.  
+
+
+
+
+{\ttfamily \#include $<$class\+Game.\+h$>$}
+
+
+
+Граф связей класса class\+Game\+:
+% FIG 0
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classclassGame_ae704c96a26d243a23f01dcc5aad4c8e0}{move\+Hero} (int, float, float, \hyperlink{classLocation}{Location} \&)
+\item 
+void \hyperlink{classclassGame_a18bab4d1e0aae946f6761093d5c64989}{hero\+Is\+Near} ()
+\item 
+void \hyperlink{classclassGame_a8f053133a58b8ad6155c18a48a07c942}{move\+AI} (int)
+\item 
+bool \hyperlink{classclassGame_a133c8c5bf02c40a351d7a42ec5764687}{end\+Game\+Check} ()
+\item 
+bool \hyperlink{classclassGame_a761f2e0ab92804973cd5ffc232347950}{open\+Door} (float X, float Y, float plX, float plY)
+\item 
+bool \hyperlink{classclassGame_a5dcc44700f097debb2a7549e8918cdf2}{range\+Of\+Act} (float X, float Y, float anX, float anY, float plus)
+\item 
+bool \hyperlink{classclassGame_a43e14ab4c037cf575d2f2099853f126b}{tile\+Info} (float X, float Y, \hyperlink{classvector}{vector}$<$ Hero $>$ $\ast$, std\+::vector$<$ Enemy $>$ $\ast$)
+\item 
+\mbox{\Hypertarget{classclassGame_a9ce004b6a667dbfef70daa34c0377365}\label{classclassGame_a9ce004b6a667dbfef70daa34c0377365}} 
+bool {\bfseries tile\+Check} (float X, float Y, \hyperlink{classLocation}{Location} $\ast$location)
+\item 
+float \hyperlink{classclassGame_ac7d2e3515589f6efb9b94ac9b5486f90}{range\+Of\+Move} (float X, float Y, float anX, float anY)
+\item 
+void \hyperlink{classclassGame_ab595cb346a80efa7b09d5175e2d7b086}{start\+Cord} (std\+::vector$<$ Enemy $>$ \&\hyperlink{classclassGame_a69581161c1ab06d2c6cccc3ea8bed5c1}{evils}, Inventory \&item)
+\end{DoxyCompactItemize}
+\subsection*{Открытые атрибуты}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classclassGame_a9b4e8c005f2dfc9761a42cadd2252500}\label{classclassGame_a9b4e8c005f2dfc9761a42cadd2252500}} 
+\hyperlink{classvector}{vector}$<$ Hero $>$ \hyperlink{classclassGame_a9b4e8c005f2dfc9761a42cadd2252500}{mans}
+\begin{DoxyCompactList}\small\item\em Группа геров \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classclassGame_a69581161c1ab06d2c6cccc3ea8bed5c1}\label{classclassGame_a69581161c1ab06d2c6cccc3ea8bed5c1}} 
+std\+::vector$<$ Enemy $>$ \hyperlink{classclassGame_a69581161c1ab06d2c6cccc3ea8bed5c1}{evils}
+\begin{DoxyCompactList}\small\item\em Группа врагов \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classclassGame_a47ced0fd084c0ac42e6c20f32e9554a9}\label{classclassGame_a47ced0fd084c0ac42e6c20f32e9554a9}} 
+Inventory \hyperlink{classclassGame_a47ced0fd084c0ac42e6c20f32e9554a9}{some\+Item}
+\begin{DoxyCompactList}\small\item\em Предметы \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+Главный класс, отвечающий за выполнение программы. 
+
+\begin{DoxyAuthor}{Автор}
+Юрий Головушкин
+\end{DoxyAuthor}
+В данном классе содержатся игровые персонажи, враги и предметы на карте. Класс управляет игровым процессом. 
+
+\subsection{Методы}
+\mbox{\Hypertarget{classclassGame_a133c8c5bf02c40a351d7a42ec5764687}\label{classclassGame_a133c8c5bf02c40a351d7a42ec5764687}} 
+\index{class\+Game@{class\+Game}!end\+Game\+Check@{end\+Game\+Check}}
+\index{end\+Game\+Check@{end\+Game\+Check}!class\+Game@{class\+Game}}
+\subsubsection{\texorpdfstring{end\+Game\+Check()}{endGameCheck()}}
+{\footnotesize\ttfamily bool class\+Game\+::end\+Game\+Check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Проверка конца игры \mbox{\Hypertarget{classclassGame_a18bab4d1e0aae946f6761093d5c64989}\label{classclassGame_a18bab4d1e0aae946f6761093d5c64989}} 
+\index{class\+Game@{class\+Game}!hero\+Is\+Near@{hero\+Is\+Near}}
+\index{hero\+Is\+Near@{hero\+Is\+Near}!class\+Game@{class\+Game}}
+\subsubsection{\texorpdfstring{hero\+Is\+Near()}{heroIsNear()}}
+{\footnotesize\ttfamily void class\+Game\+::hero\+Is\+Near (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Атака персонажей врагами если это возможно \mbox{\Hypertarget{classclassGame_a8f053133a58b8ad6155c18a48a07c942}\label{classclassGame_a8f053133a58b8ad6155c18a48a07c942}} 
+\index{class\+Game@{class\+Game}!move\+AI@{move\+AI}}
+\index{move\+AI@{move\+AI}!class\+Game@{class\+Game}}
+\subsubsection{\texorpdfstring{move\+A\+I()}{moveAI()}}
+{\footnotesize\ttfamily void class\+Game\+::move\+AI (\begin{DoxyParamCaption}\item[{int}]{count\+Of\+Move }\end{DoxyParamCaption})}
+
+Переммещение врагов по их траектории 
+\begin{DoxyParams}[1]{Аргументы}
+\mbox{\tt in}  & {\em count\+Of\+Move} & переменная отвечающая за траекторию \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classclassGame_ae704c96a26d243a23f01dcc5aad4c8e0}\label{classclassGame_ae704c96a26d243a23f01dcc5aad4c8e0}} 
+\index{class\+Game@{class\+Game}!move\+Hero@{move\+Hero}}
+\index{move\+Hero@{move\+Hero}!class\+Game@{class\+Game}}
+\subsubsection{\texorpdfstring{move\+Hero()}{moveHero()}}
+{\footnotesize\ttfamily bool class\+Game\+::move\+Hero (\begin{DoxyParamCaption}\item[{int}]{choise\+Man,  }\item[{float}]{X,  }\item[{float}]{Y,  }\item[{\hyperlink{classLocation}{Location} \&}]{location }\end{DoxyParamCaption})}
+
+Перемещение персонажей по карте в зависимости от доступности клетки 
+\begin{DoxyParams}[1]{Аргументы}
+\mbox{\tt in}  & {\em choise\+Man} & Выбранный персонаж \\
+\hline
+\mbox{\tt out}  & {\em X} & Координата цели по X \\
+\hline
+\mbox{\tt out}  & {\em Y} & Координата цели по Y \\
+\hline
+\mbox{\tt out}  & {\em location} & объект классы \hyperlink{classLocation}{Location} в котором содержится информация о карте \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Возможность переместиться на выбраную клетку 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classclassGame_a761f2e0ab92804973cd5ffc232347950}\label{classclassGame_a761f2e0ab92804973cd5ffc232347950}} 
+\index{class\+Game@{class\+Game}!open\+Door@{open\+Door}}
+\index{open\+Door@{open\+Door}!class\+Game@{class\+Game}}
+\subsubsection{\texorpdfstring{open\+Door()}{openDoor()}}
+{\footnotesize\ttfamily bool class\+Game\+::open\+Door (\begin{DoxyParamCaption}\item[{float}]{X,  }\item[{float}]{Y,  }\item[{float}]{plX,  }\item[{float}]{plY }\end{DoxyParamCaption})}
+
+Открытие двери 
+\begin{DoxyParams}[1]{Аргументы}
+\mbox{\tt in}  & {\em choise\+Man} & Выбранный персонаж \\
+\hline
+ & {\em X} & Координата цели по X \\
+\hline
+ & {\em Y} & Координата цели по Y \\
+\hline
+ & {\em plX} & Координата игрока по X \\
+\hline
+ & {\em plY} & Координата игрока по Y \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Возможность открытие двери 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classclassGame_a5dcc44700f097debb2a7549e8918cdf2}\label{classclassGame_a5dcc44700f097debb2a7549e8918cdf2}} 
+\index{class\+Game@{class\+Game}!range\+Of\+Act@{range\+Of\+Act}}
+\index{range\+Of\+Act@{range\+Of\+Act}!class\+Game@{class\+Game}}
+\subsubsection{\texorpdfstring{range\+Of\+Act()}{rangeOfAct()}}
+{\footnotesize\ttfamily bool class\+Game\+::range\+Of\+Act (\begin{DoxyParamCaption}\item[{float}]{X,  }\item[{float}]{Y,  }\item[{float}]{anX,  }\item[{float}]{anY,  }\item[{float}]{plus }\end{DoxyParamCaption})}
+
+Проверка дистанции для действия 
+\begin{DoxyParams}[1]{Аргументы}
+\mbox{\tt in}  & {\em choise\+Man} & Выбранный персонаж \\
+\hline
+ & {\em X} & Координата цели по X \\
+\hline
+ & {\em Y} & Координата цели по Y \\
+\hline
+ & {\em anX} & Координата игрока по X \\
+\hline
+ & {\em anY} & Координата игрока по Y \\
+\hline
+ & {\em plus} & параметр зависящий от действия \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Возможность выполнить действие 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classclassGame_ac7d2e3515589f6efb9b94ac9b5486f90}\label{classclassGame_ac7d2e3515589f6efb9b94ac9b5486f90}} 
+\index{class\+Game@{class\+Game}!range\+Of\+Move@{range\+Of\+Move}}
+\index{range\+Of\+Move@{range\+Of\+Move}!class\+Game@{class\+Game}}
+\subsubsection{\texorpdfstring{range\+Of\+Move()}{rangeOfMove()}}
+{\footnotesize\ttfamily float class\+Game\+::range\+Of\+Move (\begin{DoxyParamCaption}\item[{float}]{X,  }\item[{float}]{Y,  }\item[{float}]{anX,  }\item[{float}]{anY }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Проверка дистанции 
+\begin{DoxyParams}[1]{Аргументы}
+\mbox{\tt in}  & {\em choise\+Man} & Выбранный персонаж \\
+\hline
+ & {\em X} & Координата цели по X \\
+\hline
+ & {\em Y} & Координата цели по Y \\
+\hline
+ & {\em anX} & Координата объекта который вызвал метод по X \\
+\hline
+ & {\em anY} & Координата объекта который вызвал метод по Y \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Дистанцию 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classclassGame_ab595cb346a80efa7b09d5175e2d7b086}\label{classclassGame_ab595cb346a80efa7b09d5175e2d7b086}} 
+\index{class\+Game@{class\+Game}!start\+Cord@{start\+Cord}}
+\index{start\+Cord@{start\+Cord}!class\+Game@{class\+Game}}
+\subsubsection{\texorpdfstring{start\+Cord()}{startCord()}}
+{\footnotesize\ttfamily void class\+Game\+::start\+Cord (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Enemy $>$ \&}]{evils,  }\item[{Inventory \&}]{item }\end{DoxyParamCaption})}
+
+Начальные координаты для врагов и преметов 
+\begin{DoxyParams}[1]{Аргументы}
+\mbox{\tt in,out}  & {\em evils} & группа врагов \\
+\hline
+\mbox{\tt in,out}  & {\em item} & предметы \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classclassGame_a43e14ab4c037cf575d2f2099853f126b}\label{classclassGame_a43e14ab4c037cf575d2f2099853f126b}} 
+\index{class\+Game@{class\+Game}!tile\+Info@{tile\+Info}}
+\index{tile\+Info@{tile\+Info}!class\+Game@{class\+Game}}
+\subsubsection{\texorpdfstring{tile\+Info()}{tileInfo()}}
+{\footnotesize\ttfamily bool class\+Game\+::tile\+Info (\begin{DoxyParamCaption}\item[{float}]{X,  }\item[{float}]{Y,  }\item[{\hyperlink{classvector}{vector}$<$ Hero $>$ $\ast$}]{mans,  }\item[{std\+::vector$<$ Enemy $>$ $\ast$}]{evils }\end{DoxyParamCaption})}
+
+Проверка клетки карты 
+\begin{DoxyParams}[1]{Аргументы}
+\mbox{\tt in}  & {\em choise\+Man} & Выбранный персонаж \\
+\hline
+ & {\em X} & Координата цели по X \\
+\hline
+ & {\em Y} & Координата цели по Y \\
+\hline
+ & {\em mans} & группа персонажей \\
+\hline
+ & {\em evils} & группа врагов \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Свободна клетка или нет 
+\end{DoxyReturn}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+class\+Game.\+h\item 
+class\+Game.\+cpp\end{DoxyCompactItemize}

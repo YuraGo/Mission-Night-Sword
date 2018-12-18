@@ -34,11 +34,11 @@ void tableInfodraw(sf::RectangleShape& table, sf::Text& text1,sf::Text& text2,sf
     text2.setPosition(X-265,Y + 144);
     text3.setPosition(X-265,Y + 160);
 
-    text1.setString("HP: " + std::to_string(player->getCurrentHP()) + "/" + std::to_string(player->getHP()) +" " + "Speed: " + std::to_string(player->getSpeed()));
+    text1.setString(player->getName() +  " HP: " + std::to_string(player->getCurrentHP()) + "/" + std::to_string(player->getHP()));
 
     text2.setString("Step: " + std::to_string(player->getStep()) +"  " + "Mass: " + std::to_string(player->getCurrentMass()) + "/" +std::to_string(player->getMass()));
 
-    text3.setString("Accuracy: " + std::to_string(player->getAccuracy() ));
+    text3.setString("Accuracy: " + std::to_string(player->getAccuracy()) + " Speed: " + std::to_string(player->getSpeed()));
 }
 
 sf::RectangleShape& cursorMove(sf::RectangleShape& Cursor,char dir){

@@ -10,10 +10,52 @@
 #include "preload.h"
 #include "classGame.h"
 #include "paint.h"
+
 #include <fstream>
+#include <iomanip>
+#include <string>
+
+void loadMap(std::vector<std::string>& lvl,int cL){
+    std::string mps[16][42];
+    std::string tmp,pl;
+    std::vector<std::string> maps;
+    std::ifstream in("level" + std::to_string(cL));
+//    while (in >> tmp)
+//        lvl.append(tmp);
+int trr =0;
+
+    while (getline(in, tmp)) {
+        pl = tmp;
+        lvl.push_back(tmp);
+    }
+}
+
+void loadHero(vector<Hero>& mans,const std::vector<int> whatPick){
+    std::string name;
+    int HP, Mass, Speed,View,Accuracy, count=0,it=0;
+    float X;
+    float Y;
+    int choiseHero[2]={0,1};
+    int ctr=0;
+    //еще один коаунт для выбора персонажа
+    std::ifstream characterFile("characterFile");
+    while(characterFile >>name>>HP>>Mass>>Speed>>View>>Accuracy>>X>>Y){
+        if(count>=2)
+            break;
+        if(it == whatPick[count]) {
+            mans[count].setHero(name, HP, Mass, Speed, View, Accuracy,X,Y);
+            count++;
+        }
+        it++;
+    }
+    characterFile.close();
+
+}
 
 
-bool startGame(sf::RenderWindow &window,int numberLevel){
+
+
+bool startGame(sf::RenderWindow &window,int numberLevel,std::vector<int> whatPick){
 
     sf::Clock clock;
 
@@ -76,6 +118,10 @@ bool startGame(sf::RenderWindow &window,int numberLevel){
 
     classGame play;
 
+    //std::string level;
+
+    loadMap(play.lvl,numberLevel);
+
     Location location;
     bool flagTableHide=true;
     int choiseMan=0;
@@ -92,8 +138,8 @@ bool startGame(sf::RenderWindow &window,int numberLevel){
 
     Hero player1;
     Hero player2;
-    player1.setHero("Bob",100,30,5,8,80,32,32);
-    player2.setHero("Silver",100,30,6,10,40,64,64);
+    //player1.setHero("Bob",100,30,5,8,80,32,32);
+    //player2.setHero("Silver",100,30,6,10,40,64,64);
 
     Weapon bow(20,1,80,4,"arrow",15,"bow");
     Weapon axe(40,5,70,15,"5.56",15,"axe");
@@ -112,6 +158,7 @@ bool startGame(sf::RenderWindow &window,int numberLevel){
     play.mans.push_back(player1);
     play.mans.push_back(player2);
 
+    loadHero(play.mans,whatPick);
 
     Enemy evil;
     evil.setHero("demon",60,0,5,8,100,96,96);
@@ -225,13 +272,14 @@ bool startGame(sf::RenderWindow &window,int numberLevel){
                         countOfInventorySlot = 0;
                         cursor.setPosition(play.mans[1].getCordX(), play.mans[1].getCordY());
                     }
+                    if ( (event.key.code == sf::Keyboard::Tab && numberLevel < 2) || play.endGameCheck()) {
+                        return true;
+                    }
                 }
                 default:
                     break;
             }
         }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab) && play.endGameCheck()) { return true; }
 
 
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right){
@@ -355,14 +403,14 @@ bool startGame(sf::RenderWindow &window,int numberLevel){
         for (int i = 0; i < H; i++) {
             for (int j = 0; j < W; j++) {
 
-                if (TileMap1[i][j] == '0'){
+                if (play.lvl[i][j] == '0'){
                     s_map.setTextureRect(sf::IntRect(384, 128, 416, 160));
                 } // 8W 5H
-                if (TileMap1[i][j] == 'D'){
+                if (play.lvl[i][j] == 'D'){
                     if(doorOpen) s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
                     else s_map.setTextureRect(sf::IntRect(160, 96, 192, 128));
                 }
-                if (TileMap1[i][j] == ' '){
+                if (play.lvl[i][j] == ' '){
                     s_map.setTextureRect(sf::IntRect(128, 224, 160, 256));
                 }
 

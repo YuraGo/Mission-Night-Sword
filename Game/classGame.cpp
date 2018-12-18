@@ -192,7 +192,7 @@ bool classGame::tileInfo(float X , float Y, vector<Hero>* mans, std::vector<Enem
         return false;
 
 
-    if(TileMap[Yi][Xi] == '0')
+    if(lvl[Yi][Xi] == '0')
         return false;
 
     return check;
